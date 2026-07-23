@@ -1,0 +1,898 @@
+<title>HopeCareAI ヘルプサイト — システム概要ドキュメント</title>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:              #F3F6FA;
+  --surface:         #FFFFFF;
+  --surface-2:       #EBF1F9;
+  --border:          #D6E0EF;
+  --text:            #18293F;
+  --text-2:          #445A76;
+  --text-3:          #7A95B4;
+  --accent:          #2659B8;
+  --accent-soft:     #EAF0FB;
+  --code-bg:         #EDF1F8;
+  --warn-bg:         #FFF8E6;
+  --warn-border:     #C97C00;
+  --warn-text:       #6B4000;
+  --good-bg:         #EBF5F0;
+  --good-border:     #1D8A5B;
+  --good-text:       #0F4A2E;
+  --font-display:    Georgia, '游明朝', 'Yu Mincho', 'Times New Roman', serif;
+  --font-body:       system-ui, -apple-system, 'Hiragino Sans', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+  --font-code:       'Menlo', 'Monaco', Consolas, 'Courier New', monospace;
+  --radius:          6px;
+  --radius-lg:       10px;
+  --shadow:          0 1px 4px rgba(18,41,63,.07);
+  --shadow-md:       0 2px 10px rgba(18,41,63,.10);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:              #0B1827;
+    --surface:         #112033;
+    --surface-2:       #162840;
+    --border:          #1E3352;
+    --text:            #BDD3EF;
+    --text-2:          #7A9BBE;
+    --text-3:          #496784;
+    --accent:          #5B87E8;
+    --accent-soft:     #122040;
+    --code-bg:         #0A1520;
+    --warn-bg:         #201400;
+    --warn-border:     #C97C00;
+    --warn-text:       #FFD580;
+    --good-bg:         #081F14;
+    --good-border:     #1D8A5B;
+    --good-text:       #6EDCAA;
+  }
+}
+
+:root[data-theme="light"] {
+  --bg: #F3F6FA; --surface: #FFFFFF; --surface-2: #EBF1F9; --border: #D6E0EF;
+  --text: #18293F; --text-2: #445A76; --text-3: #7A95B4;
+  --accent: #2659B8; --accent-soft: #EAF0FB; --code-bg: #EDF1F8;
+  --warn-bg: #FFF8E6; --warn-border: #C97C00; --warn-text: #6B4000;
+  --good-bg: #EBF5F0; --good-border: #1D8A5B; --good-text: #0F4A2E;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0B1827; --surface: #112033; --surface-2: #162840; --border: #1E3352;
+  --text: #BDD3EF; --text-2: #7A9BBE; --text-3: #496784;
+  --accent: #5B87E8; --accent-soft: #122040; --code-bg: #0A1520;
+  --warn-bg: #201400; --warn-border: #C97C00; --warn-text: #FFD580;
+  --good-bg: #081F14; --good-border: #1D8A5B; --good-text: #6EDCAA;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.75;
+  padding: 48px 20px 96px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ─── Header ─── */
+.doc-header {
+  margin-bottom: 44px;
+  padding-bottom: 32px;
+  border-bottom: 2px solid var(--border);
+}
+
+.doc-eyebrow {
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: normal;
+  line-height: 1.25;
+  text-wrap: balance;
+  color: var(--text);
+  margin-bottom: 14px;
+  letter-spacing: -.01em;
+}
+
+h1 span {
+  display: block;
+  font-size: .62em;
+  color: var(--text-2);
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: .01em;
+  margin-top: 6px;
+}
+
+.doc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.doc-meta strong { color: var(--text-2); font-weight: 500; }
+
+/* ─── TOC ─── */
+.toc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 52px;
+  box-shadow: var(--shadow);
+}
+
+.toc-label {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-3);
+  margin-bottom: 14px;
+}
+
+.toc-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 6px 32px;
+}
+
+.toc-list li { display: flex; align-items: center; gap: 8px; }
+.toc-list li::before {
+  content: '';
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: .5;
+  flex-shrink: 0;
+}
+
+.toc-list a {
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color .15s;
+}
+.toc-list a:hover { color: var(--accent); }
+
+/* ─── Sections ─── */
+section {
+  margin-bottom: 52px;
+  scroll-margin-top: 20px;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: normal;
+  color: var(--text);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  text-wrap: balance;
+  letter-spacing: -.005em;
+}
+
+h3 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin: 28px 0 10px;
+}
+
+p {
+  color: var(--text-2);
+  margin-bottom: 14px;
+  max-width: 68ch;
+}
+
+p strong { color: var(--text); }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ─── Pipeline diagram ─── */
+.pipeline {
+  display: grid;
+  grid-template-columns: 1fr 28px 1fr 28px 1fr;
+  align-items: stretch;
+  gap: 0;
+  margin: 24px 0 32px;
+}
+
+.pipe-node {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 16px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pipe-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+
+.pipe-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.pipe-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pipe-items li {
+  font-size: 12.5px;
+  color: var(--text-2);
+  padding-left: 10px;
+  position: relative;
+}
+
+.pipe-items li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--text-3);
+}
+
+.pipe-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 18px;
+  opacity: .7;
+}
+
+@media (max-width: 580px) {
+  .pipeline {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 28px auto 28px auto;
+  }
+  .pipe-arrow { transform: rotate(90deg); }
+}
+
+/* ─── URL box ─── */
+.url-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 13px 18px;
+  margin: 16px 0 22px;
+}
+
+.url-label {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-3);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.url-value {
+  font-family: var(--font-code);
+  font-size: 13.5px;
+  color: var(--accent);
+  word-break: break-all;
+}
+
+/* ─── Tables ─── */
+.table-wrap { overflow-x: auto; margin: 12px 0 20px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); }
+
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+
+th {
+  background: var(--surface-2);
+  font-size: 10.5px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-3);
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+td {
+  padding: 10px 14px;
+  color: var(--text-2);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+tr:last-child td { border-bottom: none; }
+td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
+
+/* ─── Code ─── */
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  overflow-x: auto;
+  font-family: var(--font-code);
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 10px 0 20px;
+}
+
+code {
+  font-family: var(--font-code);
+  font-size: .875em;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--text);
+}
+
+pre code { background: none; border: none; padding: 0; font-size: inherit; }
+
+/* ─── Steps ─── */
+.steps { list-style: none; display: flex; flex-direction: column; gap: 14px; margin: 16px 0 24px; }
+
+.step { display: flex; gap: 14px; align-items: flex-start; }
+
+.step-num {
+  flex-shrink: 0;
+  width: 26px; height: 26px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.step-body { flex: 1; }
+.step-title { font-weight: 600; color: var(--text); font-size: 14px; margin-bottom: 2px; }
+.step-desc { font-size: 13.5px; color: var(--text-2); margin: 0; max-width: 100%; }
+
+/* ─── Alerts ─── */
+.alert {
+  padding: 13px 16px;
+  border-radius: var(--radius);
+  border-left: 3px solid;
+  margin: 16px 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+.alert strong { font-weight: 600; }
+
+.alert-warn {
+  background: var(--warn-bg);
+  border-color: var(--warn-border);
+  color: var(--warn-text);
+}
+
+.alert-good {
+  background: var(--good-bg);
+  border-color: var(--good-border);
+  color: var(--good-text);
+}
+
+/* ─── Priority badges ─── */
+.pri { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; letter-spacing: .04em; }
+.pri-hi  { background: #FEE2E2; color: #991B1B; }
+.pri-mid { background: #FEF3C7; color: #92400E; }
+.pri-lo  { background: #DBEAFE; color: #1E40AF; }
+
+:root[data-theme="dark"] .pri-hi  { background: #3B0000; color: #FCA5A5; }
+:root[data-theme="dark"] .pri-mid { background: #2A1800; color: #FCD34D; }
+:root[data-theme="dark"] .pri-lo  { background: #0D1F40; color: #93C5FD; }
+
+@media (prefers-color-scheme: dark) {
+  .pri-hi  { background: #3B0000; color: #FCA5A5; }
+  .pri-mid { background: #2A1800; color: #FCD34D; }
+  .pri-lo  { background: #0D1F40; color: #93C5FD; }
+}
+
+/* ─── Footer ─── */
+.doc-footer {
+  margin-top: 64px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  font-size: 12.5px;
+  color: var(--text-3);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+</style>
+
+<div class="container">
+
+  <!-- ========= HEADER ========= -->
+  <header class="doc-header">
+    <div class="doc-eyebrow">システム設計・運用ドキュメント</div>
+    <h1>
+      HopeCareAI ヘルプサイト
+      <span>構成・仕組み・運用ガイド</span>
+    </h1>
+    <div class="doc-meta">
+      <span><strong>作成:</strong> 松田</span>
+      <span><strong>作成日:</strong> 2026年7月23日</span>
+      <span><strong>共有先:</strong> masuyama@ordentier-corp.co.jp</span>
+    </div>
+  </header>
+
+  <!-- ========= TOC ========= -->
+  <nav class="toc" aria-label="目次">
+    <div class="toc-label">目次</div>
+    <ul class="toc-list">
+      <li><a href="#overview">サイト概要</a></li>
+      <li><a href="#architecture">システムアーキテクチャ</a></li>
+      <li><a href="#files">ファイル構成</a></li>
+      <li><a href="#update">記事の更新方法</a></li>
+      <li><a href="#build">自動ビルド・デプロイ</a></li>
+      <li><a href="#images">画像の処理</a></li>
+      <li><a href="#ui">UIの機能</a></li>
+      <li><a href="#secrets">認証情報・シークレット</a></li>
+      <li><a href="#todo">今後の対応事項</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========= 1. OVERVIEW ========= -->
+  <section id="overview">
+    <h2>サイト概要</h2>
+    <p>HopeCareAI の操作方法・よくある質問・トラブルシューティングをまとめた社内向けヘルプサイトです。<strong>エンジニアへの依頼なしに</strong>、Notionを操作するだけで記事を更新できる仕組みになっています。</p>
+
+    <div class="url-box">
+      <span class="url-label">公開 URL</span>
+      <a class="url-value" href="https://matsuda-orden.github.io/hopecare-help/" target="_blank">https://matsuda-orden.github.io/hopecare-help/</a>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>項目</th><th>内容</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ホスティング</td><td>GitHub Pages（無料・HTTPS自動対応）</td></tr>
+          <tr><td>コンテンツ管理</td><td>Notion（3つのデータベース）</td></tr>
+          <tr><td>更新トリガー</td><td>Notionのステータスを「公開」に変更するだけ</td></tr>
+          <tr><td>自動更新頻度</td><td>最大20分以内に自動反映（即時反映も可能）</td></tr>
+          <tr><td>サイト形式</td><td>シングルファイルHTML（検索・アコーディオン・カテゴリ表示つき）</td></tr>
+          <tr><td>GitHubリポジトリ</td><td>github.com/matsuda-orden/hopecare-help</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========= 2. ARCHITECTURE ========= -->
+  <section id="architecture">
+    <h2>システムアーキテクチャ</h2>
+    <p>Notionのコンテンツを自動でHTMLに変換してGitHub Pagesで公開する、<strong>完全自動のCI/CDパイプライン</strong>です。</p>
+
+    <div class="pipeline">
+      <div class="pipe-node">
+        <div class="pipe-tag">コンテンツ管理</div>
+        <div class="pipe-title">Notion</div>
+        <ul class="pipe-items">
+          <li>操作ガイド DB</li>
+          <li>よくある質問 DB</li>
+          <li>トラブルシューティング DB</li>
+          <li>ステータス「公開」で反映対象に</li>
+        </ul>
+      </div>
+      <div class="pipe-arrow" aria-hidden="true">&#8594;</div>
+      <div class="pipe-node">
+        <div class="pipe-tag">自動ビルド</div>
+        <div class="pipe-title">GitHub Actions</div>
+        <ul class="pipe-items">
+          <li>20分ごとにスケジュール実行</li>
+          <li>手動トリガーも可</li>
+          <li>build.js（Node.js）が変換</li>
+          <li>画像ダウンロード・余白除去</li>
+        </ul>
+      </div>
+      <div class="pipe-arrow" aria-hidden="true">&#8594;</div>
+      <div class="pipe-node">
+        <div class="pipe-tag">公開サイト</div>
+        <div class="pipe-title">GitHub Pages</div>
+        <ul class="pipe-items">
+          <li>静的HTML配信</li>
+          <li>gh-pagesブランチから公開</li>
+          <li>HTTPS自動対応・無料</li>
+          <li>matsuda-orden.github.io</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>ビルド処理の流れ（詳細）</h3>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Notion API で記事取得</div>
+          <div class="step-desc">3つのNotionデータベースに対してAPIを呼び出し、ステータスが「公開」の記事だけを取得。段落・見出し・画像などの各ブロックをHTML文字列に変換。</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">画像をダウンロード・白余白を自動除去</div>
+          <div class="step-desc">Notionに保存された画像URLからローカルに画像をダウンロード。sharp ライブラリで上下左右の白余白を自動トリミングして <code>images/</code> フォルダに保存。</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">index.html の articles 配列を置き換え</div>
+          <div class="step-desc">テンプレートの <code>index.html</code> 内にある <code>const articles = [...]</code> を、取得した記事データで丸ごと上書き。正規表現ではなくindexOf方式で確実に置換。</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">dist/ にコピーして GitHub Pages へデプロイ</div>
+          <div class="step-desc">生成した index.html と images/ を dist/ ディレクトリにコピー。peaceiris/actions-gh-pages が gh-pages ブランチに自動プッシュ。数分で公開URLに反映。</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ========= 3. FILES ========= -->
+  <section id="files">
+    <h2>ファイル構成</h2>
+
+    <pre>hopecare-help/
+├── index.html              # サイト本体（UIテンプレート）
+├── build.js                # Notion → HTML 変換スクリプト（ビルドの中核）
+├── package.json            # 依存パッケージ（@notionhq/client, sharp）
+├── package-lock.json       # ロックファイル
+├── images/                 # ビルド時に自動生成（Notionから取得した画像）
+└── .github/
+    └── workflows/
+        └── build.yml       # GitHub Actions 定義（スケジュール・シークレット参照）</pre>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>ファイル</th><th>役割</th><th>編集が必要なとき</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>index.html</td>
+            <td>サイトのUIテンプレート。検索・カテゴリカード・アコーディオンのHTML/CSS/JSを含む。ビルドで articles 配列だけが書き換えられる。</td>
+            <td>デザインや機能を変更したいとき</td>
+          </tr>
+          <tr>
+            <td>build.js</td>
+            <td>Notion APIを呼び出し、ブロックをHTMLに変換し、画像をダウンロードして余白を除去するメインスクリプト。</td>
+            <td>Notionのフィールド構造変更や画像処理仕様を変えるとき</td>
+          </tr>
+          <tr>
+            <td>build.yml</td>
+            <td>GitHub Actionsのワークフロー定義。20分スケジュール・NOTION_TOKENの参照先・デプロイ先を指定。</td>
+            <td>更新頻度やデプロイ先を変えるとき</td>
+          </tr>
+          <tr>
+            <td>package.json</td>
+            <td>依存パッケージの定義。<code>@notionhq/client</code>（API呼び出し）と <code>sharp</code>（画像処理）を使用。</td>
+            <td>ライブラリを追加・変更するとき</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========= 4. UPDATE ========= -->
+  <section id="update">
+    <h2>記事の更新方法（Notion操作）</h2>
+    <p>コードの変更は不要です。Notionを操作するだけで、最大20分以内にヘルプサイトへ反映されます。</p>
+
+    <div class="alert alert-good">
+      <strong>ポイント：</strong>記事の新規作成・編集・非公開化もすべてNotionのステータス変更だけで完結します。
+    </div>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Notionの該当データベースを開く</div>
+          <div class="step-desc">「操作ガイド」「よくある質問」「トラブルシューティング」の3つのDBのいずれかを開く。</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">記事を作成または編集する</div>
+          <div class="step-desc">タイトル・本文・カテゴリを設定。画像はGoogleスライドでスクリーンショットを加工後、JPEGエクスポートして画像ブロックとして貼り付ける（詳細は「画像の処理」セクション参照）。</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">ステータスを「公開」に変更</div>
+          <div class="step-desc">これだけで完了。次の自動ビルド（最大20分後）でサイトに反映される。すぐに反映したい場合はGitHubのActionsタブから手動で「Run workflow」を実行。</div>
+        </div>
+      </li>
+    </ol>
+
+    <h3>Notion データベース一覧</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>データベース名</th><th>掲載内容</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>操作ガイド</td><td>各機能の使い方を説明するハウツー記事</td></tr>
+          <tr><td>よくある質問</td><td>Q&amp;A形式の疑問・回答</td></tr>
+          <tr><td>トラブルシューティング</td><td>エラーや問題の原因と解決方法</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========= 5. BUILD ========= -->
+  <section id="build">
+    <h2>自動ビルド・デプロイ（GitHub Actions）</h2>
+    <p>ビルドは完全自動化されています。通常は何も操作不要です。以下が実際のワークフロー設定です。</p>
+
+    <pre>name: ヘルプサイト ビルド &amp; デプロイ
+
+on:
+  schedule:
+    - cron: '*/20 * * * *'   # 20分ごとに自動実行
+  workflow_dispatch:          # Actionsタブから手動実行も可能
+
+permissions:
+  contents: write             # gh-pagesへのプッシュ権限
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci
+      - run: npm run build     # build.js 実行
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist  # index.html + images/ をデプロイ</pre>
+
+    <h3>手動でビルドを即時実行する手順</h3>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">GitHubリポジトリを開く</div>
+          <div class="step-desc"><a href="https://github.com/matsuda-orden/hopecare-help" target="_blank">github.com/matsuda-orden/hopecare-help</a> にアクセス。</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">「Actions」タブを開く</div>
+          <div class="step-desc">上部ナビゲーションの「Actions」をクリック。左側に「ヘルプサイト ビルド &amp; デプロイ」が表示される。</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">「Run workflow」をクリック</div>
+          <div class="step-desc">右側の「Run workflow」ボタンをクリックしてブランチ「main」のまま実行。2〜3分で公開URLに反映される。</div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ========= 6. IMAGES ========= -->
+  <section id="images">
+    <h2>画像の処理</h2>
+    <p>Notionの記事に貼り付けた画像は、ビルド実行時に自動でサーバーからダウンロードされ、<code>images/</code> フォルダに保存されてから公開されます。</p>
+
+    <h3>白余白の自動除去（sharp）</h3>
+    <p>Googleスライドで加工してJPEGエクスポートした画像には、スライドの白い余白が残ります。ビルドスクリプトが <code>sharp</code> ライブラリを使って自動的に除去します。</p>
+
+    <pre>// build.js — 画像の余白トリミング処理
+const before  = await sharp(filepath).metadata();
+const trimmed = await sharp(filepath).trim({ threshold: 50 }).toBuffer();
+const after   = await sharp(trimmed).metadata();
+fs.writeFileSync(filepath, trimmed);
+
+// ビルドログに変化を記録
+if (before.width !== after.width || before.height !== after.height) {
+  console.log(`✂️  余白削除: ${before.width}×${before.height} → ${after.width}×${after.height}`);
+}</pre>
+
+    <h3>画像の作り方（推奨手順）</h3>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">対象画面のスクリーンショットを撮る</div>
+          <div class="step-desc">PCまたはスマートフォンで操作画面をキャプチャ。</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Googleスライドに貼り付けて加工</div>
+          <div class="step-desc">スクリーンショットをGoogleスライドに配置。グレーアウト・強調枠・矢印などを追加。<strong>スライドサイズは横長（16:9）推奨</strong>。縦長スマートフォン画面の場合は、スライド上でトリミングして不要な余白を取り除いておく。</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">スライドをJPEGでダウンロード</div>
+          <div class="step-desc">Googleスライドの「ファイル」→「ダウンロード」→「JPEG画像（.jpg）」。白余白はビルド時に自動除去される。</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Notionの記事に画像ブロックとして貼り付ける</div>
+          <div class="step-desc">Notionの記事内でJPEGファイルをドラッグ＆ドロップ。次のビルドで自動的に取得・処理される。</div>
+        </div>
+      </li>
+    </ol>
+
+    <div class="alert alert-warn">
+      <strong>注意：</strong>ピンク・青など白以外の背景色を含む画像は自動トリミングが効きません（sharpは左上ピクセルの色を基準に余白を検出するため）。この場合はGoogleスライド上でトリミングしてからエクスポートしてください。
+    </div>
+  </section>
+
+  <!-- ========= 7. UI ========= -->
+  <section id="ui">
+    <h2>UIの機能</h2>
+    <p>freee・SmartHR・MoneyForward などの企業ヘルプサイトを参考に、ゼロからリデザインしました。シングルHTMLファイルで動作し、外部CDNへの依存はありません。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>機能</th><th>説明</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>全文検索</td>
+            <td>検索ボックスにキーワードを入力すると、記事タイトル・本文をリアルタイムで絞り込み。JavaScriptのみで実装（サーバー不要）。</td>
+          </tr>
+          <tr>
+            <td>カテゴリカードグリッド</td>
+            <td>ページ上部にカテゴリ一覧をカードグリッドで表示。クリックするとそのカテゴリのセクションにスムーズスクロール。</td>
+          </tr>
+          <tr>
+            <td>アコーディオン記事</td>
+            <td>各記事は折りたたみ式。タイトルをクリックで展開・閉じる。別の記事を開くと前の記事は自動で閉じる。</td>
+          </tr>
+          <tr>
+            <td>記事内「閉じる」ボタン</td>
+            <td>記事を読み終えた後、本文末尾のボタンで記事を閉じられる。スクロールバックなしで次の記事に進める。</td>
+          </tr>
+          <tr>
+            <td>スクロール制御</td>
+            <td>記事を開くと自動的にその記事の先頭にスクロール。ヘッダーの高さ分だけオフセット補正済み。</td>
+          </tr>
+          <tr>
+            <td>レスポンシブ対応</td>
+            <td>スマートフォン・タブレット・PCに対応。カテゴリグリッドはauto-fillで自動調整。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========= 8. SECRETS ========= -->
+  <section id="secrets">
+    <h2>認証情報・シークレット</h2>
+    <p>すべての認証情報はGitHub Secretsに保管されています。コードにはハードコードされておらず、外部から参照できません。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>シークレット名</th><th>内容</th><th>管理場所</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>NOTION_TOKEN</code></td>
+            <td>Notion Integration のAPIトークン（<code>ntn_xxx</code> 形式）。NotionのデータベースAPIアクセスに使用。</td>
+            <td>GitHubリポジトリ → Settings → Secrets and variables → Actions</td>
+          </tr>
+          <tr>
+            <td><code>GITHUB_TOKEN</code></td>
+            <td>GitHub Pagesへのデプロイに使用。GitHub Actionsが実行ごとに自動生成・付与するため、手動設定不要。</td>
+            <td>GitHub Actions が自動管理（変更不要）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Notion Integration の設定場所</h3>
+    <p>NotionのシークレットトークンはNotion側の設定から確認・再発行できます。</p>
+    <p>Notion → 「設定」→「インテグレーション」→「HopeCareAI ヘルプサイト」→ トークンを確認</p>
+    <p>GitHubのSecrets更新: リポジトリ → Settings → Secrets → <code>NOTION_TOKEN</code> → Update</p>
+
+    <div class="alert alert-warn">
+      <strong>注意：</strong>Notion Integration のトークンには有効期限があります。期限切れになるとビルドが失敗し、サイトが更新されなくなります。期限が近づいたらNotion側でトークンを再発行し、GitHubのSecretsを更新してください（コードの変更は不要です）。
+    </div>
+  </section>
+
+  <!-- ========= 9. TODO ========= -->
+  <section id="todo">
+    <h2>今後の対応事項</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>対応項目</th><th>詳細</th><th>優先度</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Notionトークンの期限確認・再発行</td>
+            <td>現行のIntegrationトークンの有効期限を確認。切れる前にNotionで再発行し、GitHubのSecretsを更新する。切れるとサイトが自動更新されなくなる。</td>
+            <td><span class="pri pri-hi">高</span></td>
+          </tr>
+          <tr>
+            <td>不要なPersonal Access Tokenの削除</td>
+            <td>作業中に一時使用したGitHub PATが残っている可能性あり。GitHub → Settings → Developer Settings → Personal access tokens で確認・削除。</td>
+            <td><span class="pri pri-hi">高</span></td>
+          </tr>
+          <tr>
+            <td>操作動画コンテンツの掲載</td>
+            <td>3分程度の操作動画を掲載予定。GitHubのファイルサイズ上限（100MB）を考慮し、<strong>YouTube限定公開 + iframe埋め込み</strong>を推奨。Notionへの動画直貼りはファイルサイズによっては問題が生じる可能性あり。</td>
+            <td><span class="pri pri-mid">中</span></td>
+          </tr>
+          <tr>
+            <td>カスタムドメインの設定（任意）</td>
+            <td>現在のURLは <code>matsuda-orden.github.io/hopecare-help/</code>。独自ドメイン（例: help.hopecare.ai）への変更はGitHub Pages の Custom domain 設定から可能。</td>
+            <td><span class="pri pri-lo">低</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="doc-footer">
+    <span>HopeCareAI ヘルプサイト — システム概要ドキュメント</span>
+    <span>2026年7月23日 / 松田 作成</span>
+  </footer>
+
+</div>
