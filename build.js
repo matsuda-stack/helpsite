@@ -6,7 +6,7 @@
  *   NOTION_TOKEN  - Notion インテグレーションのシークレットキー
  *
  * 処理の流れ:
- *   1. Notion の3DBから「公開」記事を全件取得
+ *   1. Notion の4DBから「公開」記事を全件取得
  *   2. 各ページのブロックを HTML に変換
  *   3. 画像ブロックは images/ フォルダにダウンロード
  *   4. index.html の articles 配列を置き換え
@@ -29,9 +29,10 @@ if (!NOTION_TOKEN) {
 }
 
 // Notion DB ID（環境変数で上書き可能）
-const DB_GUIDE   = process.env.DB_GUIDE   || 'e357eaa3-2b46-480c-bad5-87b38cc0f2aa';
-const DB_QA      = process.env.DB_QA      || '9989558f-d86a-46b3-88f7-eef62b7114e4';
-const DB_TROUBLE = process.env.DB_TROUBLE || '621131f7-5b8a-4c3b-9aa0-42d332179166';
+const DB_GUIDE     = process.env.DB_GUIDE     || 'e357eaa3-2b46-480c-bad5-87b38cc0f2aa';
+const DB_QA        = process.env.DB_QA        || '9989558f-d86a-46b3-88f7-eef62b7114e4';
+const DB_TROUBLE   = process.env.DB_TROUBLE   || '621131f7-5b8a-4c3b-9aa0-42d332179166';
+const DB_KNOWLEDGE = process.env.DB_KNOWLEDGE || '433a9080-4b72-48b9-9a3a-5d004eede463';
 
 const IMAGES_DIR  = path.join(__dirname, 'images');
 const INDEX_HTML  = path.join(__dirname, 'index.html');
@@ -340,7 +341,7 @@ function articlesToJs(articles) {
       `  tab:${JSON.stringify(a.tab)}`,
       `  category:${JSON.stringify(a.category)}`,
     ];
-    if (a.tab === 'guide') {
+    if (a.tab === 'guide' || a.tab === 'knowledge') {
       lines.push(`  order:${a.order}`);
       lines.push(`  target:${JSON.stringify(a.target)}`);
     }
@@ -407,6 +408,25 @@ async function build() {
     articles.push({ tab: 'trouble', category, title, body });
   }
 
+  // --- 活用ナレッジ ---
+  console.log('\n🟩 活用ナレッジを取得中...');
+  const knowledgePages = await queryPublished(DB_KNOWLEDGE);
+  console.log(`  ${knowledgePages.length} 件の公開記事を発見`);
+  for (const page of knowledgePages) {
+    const title    = getProp(page, 'タイトル');
+    const category = getProp(page, 'カテゴリ');
+    const order    = getProp(page, '表示順') ?? 999;
+    const target   = getProp(page, '対象者') ?? '全員';
+    if (!title || !category) continue;
+    console.log(`  → [${category}] ${title}`);
+    const blocks = await getBlockChildren(page.id);
+    const body   = await blocksToHtml(blocks);
+    articles.push({ tab: 'knowledge', category, order, target, title, body });
+  }
+  // カテゴリ内で表示順にソート
+  const knowledgeItems = articles.filter(a => a.tab === 'knowledge');
+  knowledgeItems.sort((a, b) => a.order - b.order);
+
   // --- index.html の articles を置き換え ---
   console.log('\n📝 index.html を更新中...');
   let html = fs.readFileSync(INDEX_HTML, 'utf8');
@@ -435,9 +455,10 @@ async function build() {
   const gc = articles.filter(a => a.tab === 'guide').length;
   const qc = articles.filter(a => a.tab === 'qa').length;
   const tc = articles.filter(a => a.tab === 'trouble').length;
+  const kc = articles.filter(a => a.tab === 'knowledge').length;
 
   console.log(`\n✅ ビルド完了！`);
-  console.log(`   操作ガイド ${gc} 件・よくある質問 ${qc} 件・トラブルシューティング ${tc} 件`);
+  console.log(`   操作ガイド ${gc} 件・よくある質問 ${qc} 件・トラブルシューティング ${tc} 件・活用ナレッジ ${kc} 件`);
 }
 
 build().catch(err => {
