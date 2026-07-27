@@ -1,0 +1,3435 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hope Care AI ヘルプ</title>
+<style>
+  :root{
+    --blue:#3a7bc4;
+    --blue-strong:#2f6fb3;
+    --blue-light:#eaf2fb;
+    --yellow:#e0a32e;
+    --yellow-light:#fdf6e7;
+    --red:#cf5a4e;
+    --red-light:#fbeceb;
+    --green:#3a8c5f;
+    --green-light:#e8f5ee;
+    --ink:#2b3440;
+    --gray:#697586;
+    --line:#e8ebef;
+    --bg:#f5f7f9;
+    --card:#ffffff;
+    --radius:16px;
+    --shadow:0 1px 2px rgba(16,24,40,.04),0 4px 14px rgba(16,24,40,.05);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    font-size:18px;
+    line-height:1.85;
+    -webkit-text-size-adjust:100%;
+  }
+
+  /* ===== アプリ風トップバー ===== */
+  header.appbar{
+    position:sticky;
+    top:0;
+    z-index:30;
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 1px 3px rgba(16,24,40,.05);
+  }
+  .appbar-inner{
+    max-width:980px;
+    margin:0 auto;
+    padding:14px 20px 0;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-logo{
+    width:34px;height:34px;flex:0 0 auto;
+    border-radius:10px;
+    background:linear-gradient(135deg,#57c79f,#3a7bc4);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(58,123,196,.3);
+  }
+  .brand-logo::after{content:"🌿";font-size:1rem;}
+  .brand-name{font-size:1.3rem;font-weight:800;letter-spacing:.01em;}
+  .brand-sub{
+    font-size:.8rem;font-weight:700;color:var(--blue-strong);
+    background:var(--blue-light);padding:3px 10px;border-radius:999px;
+  }
+  .brand-tag{margin-left:auto;font-size:.92rem;color:var(--gray);}
+
+  /* ===== セグメント型タブ ===== */
+  .tabbar{
+    max-width:980px;
+    margin:0 auto;
+    padding:12px 20px 14px;
+  }
+  nav.tabs{
+    display:flex;
+    gap:4px;
+    background:#eef1f4;
+    border-radius:14px;
+    padding:5px;
+  }
+  nav.tabs button{
+    flex:1 1 0;
+    min-width:0;
+    border:none;
+    background:transparent;
+    color:var(--gray);
+    font-size:1rem;
+    font-weight:700;
+    padding:11px 8px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.15s;
+    font-family:inherit;
+    white-space:nowrap;
+  }
+  nav.tabs button:hover{color:var(--blue-strong);}
+  nav.tabs button.active{
+    background:var(--card);
+    color:var(--blue-strong);
+    box-shadow:0 1px 3px rgba(16,24,40,.14);
+  }
+
+  /* ===== ヒーロー（大きなキャッチ） ===== */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    padding:56px 20px 50px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(900px 300px at 82% -50%, #e8f5ee 0%, rgba(232,245,238,0) 62%),
+      radial-gradient(900px 320px at 12% -40%, #eaf2fb 0%, rgba(234,242,251,0) 62%),
+      linear-gradient(180deg,#fbfdff,#f5f7f9);
+  }
+  .hero-inner{max-width:760px;margin:0 auto;position:relative;z-index:1;}
+  .hero .eyebrow{
+    display:inline-block;
+    font-size:.85rem;font-weight:700;
+    color:var(--blue-strong);
+    background:var(--blue-light);
+    padding:5px 14px;border-radius:999px;
+    margin-bottom:18px;
+  }
+  .hero h2{
+    margin:0 0 14px;
+    font-size:2.3rem;
+    line-height:1.5;
+    font-weight:800;
+    letter-spacing:.01em;
+  }
+  .hero h2 .accent{
+    background:linear-gradient(135deg,#3a8c5f,#3a7bc4);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{
+    margin:0 auto 26px;
+    max-width:600px;
+    color:var(--gray);
+    font-size:1.05rem;
+  }
+  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+  .hero-chip{
+    display:inline-flex;align-items:center;gap:8px;
+    background:#fff;border:1px solid var(--line);
+    color:var(--ink);font-weight:700;font-size:1rem;
+    padding:12px 20px;border-radius:12px;cursor:pointer;
+    box-shadow:var(--shadow);font-family:inherit;transition:.15s;
+  }
+  .hero-chip:hover{transform:translateY(-2px);border-color:#cfe2f4;color:var(--blue-strong);}
+
+  main{
+    max-width:980px;
+    margin:0 auto;
+    padding:26px 20px 60px;
+  }
+
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  /* ===== 対象者フィルター ===== */
+  .filter-bar{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:8px;
+    margin-bottom:20px;
+    padding:14px 16px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+  .filter-bar .filter-label{
+    width:100%;
+    font-size:.9rem;
+    color:var(--gray);
+    font-weight:700;
+    margin-bottom:2px;
+  }
+  .filter-bar button{
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--gray);
+    font-size:.98rem;
+    font-weight:700;
+    padding:9px 18px;
+    border-radius:999px;
+    cursor:pointer;
+    font-family:inherit;
+    transition:.15s;
+  }
+  .filter-bar button:hover{background:var(--blue-light);color:var(--blue-strong);border-color:#cfe2f4;}
+  .filter-bar button.active{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 2px 6px rgba(58,123,196,.3);}
+
+  /* ===== 番号付きカテゴリ見出し ===== */
+  .cat-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:10px 2px 16px;
+  }
+  .cat-head + .cat-head,
+  .article + .cat-head{margin-top:34px;}
+  .cat-num{
+    flex:0 0 auto;
+    min-width:48px;height:48px;padding:0 9px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#3f86cf,#2f6fb3);
+    color:#fff;font-weight:800;font-size:1.15rem;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 3px 8px rgba(47,111,179,.28);
+  }
+  .panel-qa .cat-num{background:linear-gradient(135deg,#e6b34a,#d8962a);box-shadow:0 3px 8px rgba(216,150,42,.28);}
+  .panel-trouble .cat-num{background:linear-gradient(135deg,#dd6f63,#c85146);box-shadow:0 3px 8px rgba(200,81,70,.28);}
+  .panel-knowledge .cat-num{background:linear-gradient(135deg,#57c79f,#3a8c5f);box-shadow:0 3px 8px rgba(58,140,95,.28);}
+  .cat-title{font-size:1.3rem;font-weight:800;color:var(--ink);}
+
+  /* ===== 記事カード（アコーディオン） ===== */
+  .article{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    margin-bottom:14px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    transition:.18s;
+  }
+  .article:hover{box-shadow:0 2px 4px rgba(16,24,40,.06),0 8px 22px rgba(16,24,40,.08);transform:translateY(-1px);}
+  .article > summary{
+    list-style:none;
+    cursor:pointer;
+    padding:18px 20px;
+    font-size:1.12rem;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    user-select:none;
+  }
+  .article > summary::-webkit-details-marker{display:none;}
+  .article > summary .chev{
+    margin-left:auto;
+    flex:0 0 auto;
+    width:28px;height:28px;
+    border-radius:8px;
+    background:var(--bg);
+    color:var(--gray);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1rem;
+    transition:.2s;
+  }
+  .article[open] > summary .chev{transform:rotate(180deg);background:var(--blue-light);color:var(--blue-strong);}
+  .article > summary .badge{
+    flex:0 0 auto;
+    font-size:.74rem;
+    font-weight:700;
+    padding:4px 10px;
+    border-radius:7px;
+    background:var(--blue-light);
+    color:var(--blue-strong);
+  }
+  .badge.t-all{background:var(--blue-light);color:var(--blue-strong);}
+  .badge.t-staff{background:var(--green-light);color:var(--green);}
+  .badge.t-admin{background:var(--red-light);color:var(--red);}
+
+  .article-body{
+    padding:4px 22px 24px;
+    border-top:1px solid var(--line);
+  }
+  .article-body h2{
+    font-size:1.18rem;
+    color:var(--blue);
+    margin:26px 0 10px;
+    padding-bottom:6px;
+    border-bottom:2px solid var(--blue-light);
+  }
+  .article-body h3{
+    font-size:1.06rem;
+    margin:20px 0 8px;
+    color:#33506e;
+  }
+  .article-body p{margin:10px 0;}
+  .article-body ul,.article-body ol{margin:10px 0;padding-left:1.6em;}
+  .article-body li{margin:8px 0;}
+  .article-body hr{border:none;border-top:1px dashed var(--line);margin:22px 0;}
+  .article-body .ref{
+    color:var(--blue);
+    font-weight:700;
+    background:var(--blue-light);
+    padding:8px 12px;
+    border-radius:8px;
+  }
+
+  /* 補足ボックス */
+  .callout{
+    background:var(--blue-light);
+    border:1px solid #cfe2f4;
+    border-radius:12px;
+    padding:14px 18px;
+    margin:16px 0;
+  }
+  .callout ol{margin:8px 0 0;}
+  .note{
+    background:var(--yellow-light);
+    border:1px solid #f0dca6;
+    border-left:6px solid var(--yellow);
+    border-radius:10px;
+    padding:12px 16px;
+    margin:16px 0;
+    color:#5b4a24;
+  }
+
+  /* スクショ・実画像 */
+  .shot{
+    margin:18px 0;
+    text-align:center;
+  }
+  /* 実画像：幅を統一し中央揃え */
+  .shot img{
+    display:block;
+    width:auto;
+    height:auto;
+    max-width:min(100%,560px);
+    max-height:380px;
+    margin:0 auto;
+    border-radius:10px;
+    border:1px solid var(--line);
+    box-shadow:0 2px 8px rgba(10,20,40,.08);
+    background:#f8fafc;
+  }
+  /* プレースホルダー枠 */
+  .shot-box{
+    border:1.5px dashed #b9c7d6;
+    background:linear-gradient(135deg,#f4f8fd,#edf3fa);
+    border-radius:10px;
+    min-height:80px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:14px 18px;
+    text-align:left;
+    color:#7a8fa3;
+    max-width:680px;
+    margin:0 auto;
+  }
+  .shot-box .shot-icon{font-size:1.4rem;flex:0 0 auto;}
+  .shot-box .shot-text{font-weight:700;font-size:.88rem;color:#5c7a96;}
+  .shot-box code{
+    font-size:.78rem;
+    background:#fff;
+    border:1px solid var(--line);
+    padding:2px 7px;
+    border-radius:5px;
+    color:var(--gray);
+    word-break:break-all;
+    margin-left:4px;
+  }
+  .shot figcaption{
+    text-align:center;
+    font-size:.82rem;
+    color:var(--gray);
+    margin-top:6px;
+    font-style:italic;
+  }
+
+  /* テーブル */
+  .article-body table{
+    width:100%;
+    border-collapse:collapse;
+    margin:16px 0;
+    font-size:.95rem;
+    background:#fff;
+  }
+  .article-body th,.article-body td{
+    border:1px solid var(--line);
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+  .article-body thead th{background:var(--blue-light);color:var(--blue);}
+  .article-body tbody td:first-child{background:#f7f9fb;font-weight:700;}
+
+  /* 空状態 */
+  .empty{
+    text-align:center;
+    padding:50px 20px;
+    color:var(--gray);
+    background:var(--card);
+    border:1px dashed var(--line);
+    border-radius:var(--radius);
+  }
+  .empty .big{font-size:2.4rem;display:block;margin-bottom:10px;}
+
+  /* お問い合わせ */
+  .contact-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 22px;
+    text-align:center;
+  }
+  .contact-card h2{color:var(--blue);margin-top:0;}
+  .contact-btn{
+    display:inline-block;
+    margin:18px 0 6px;
+    background:linear-gradient(135deg,#3f86cf,#2f6fb3);
+    color:#fff;
+    font-size:1.12rem;
+    font-weight:700;
+    text-decoration:none;
+    padding:15px 34px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(47,111,179,.32);
+    transition:.15s;
+  }
+  .contact-btn:hover{filter:brightness(1.05);transform:translateY(-1px);box-shadow:0 6px 16px rgba(47,111,179,.38);}
+  .contact-note{font-size:.9rem;color:var(--gray);margin-top:14px;}
+
+  footer.site{
+    text-align:center;
+    font-size:.85rem;
+    color:var(--gray);
+    padding:26px 16px 40px;
+    border-top:1px solid var(--line);
+    background:var(--card);
+  }
+
+  /* ===== 検索バー ===== */
+  .search-wrap{
+    position:relative;
+    margin-bottom:12px;
+  }
+  .search-wrap::before{
+    content:"🔍";
+    position:absolute;
+    left:14px;top:50%;transform:translateY(-50%);
+    font-size:1rem;pointer-events:none;
+  }
+  .search-input{
+    width:100%;
+    padding:13px 16px 13px 42px;
+    font-size:1rem;font-family:inherit;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--card);color:var(--ink);
+    box-shadow:var(--shadow);
+    outline:none;transition:.15s;
+    -webkit-appearance:none;
+  }
+  .search-input:focus{
+    border-color:var(--blue);
+    box-shadow:0 0 0 3px rgba(58,123,196,.12);
+  }
+  .search-input::placeholder{color:var(--gray);}
+
+  /* ===== カテゴリジャンプパネル ===== */
+  .cat-jump{
+    display:flex;flex-wrap:wrap;gap:8px;
+    margin-bottom:20px;
+    padding:14px 16px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+  .cat-jump-chip{
+    border:1px solid var(--line);
+    background:#fff;color:var(--ink);
+    font-size:.88rem;font-weight:700;
+    padding:7px 14px;
+    border-radius:999px;
+    cursor:pointer;font-family:inherit;
+    transition:.15s;white-space:nowrap;
+  }
+  .cat-jump-chip:hover{background:var(--blue-light);color:var(--blue-strong);border-color:#cfe2f4;}
+  .panel-qa .cat-jump-chip:hover{background:var(--yellow-light);color:#a07820;border-color:#f0dca6;}
+  .panel-trouble .cat-jump-chip:hover{background:var(--red-light);color:var(--red);border-color:#f5c5c2;}
+  .panel-knowledge .cat-jump-chip:hover{background:var(--green-light);color:var(--green);border-color:#a8d5bc;}
+
+  /* ===== カテゴリセクション折りたたみ ===== */
+  details.cat-section{margin-bottom:6px;}
+  details.cat-section > summary.cat-head{
+    list-style:none;
+    cursor:pointer;
+    user-select:none;
+    margin-bottom:4px;
+    border-radius:var(--radius);
+    padding:6px 10px 6px 4px;
+    transition:.15s;
+  }
+  details.cat-section > summary.cat-head::-webkit-details-marker{display:none;}
+  details.cat-section > summary.cat-head:hover{background:var(--blue-light);}
+  .panel-qa details.cat-section > summary.cat-head:hover{background:var(--yellow-light);}
+  .panel-trouble details.cat-section > summary.cat-head:hover{background:var(--red-light);}
+  .panel-knowledge details.cat-section > summary.cat-head:hover{background:var(--green-light);}
+  .cat-head .cat-count{
+    font-size:.78rem;color:var(--gray);font-weight:600;
+    background:var(--bg);padding:2px 8px;border-radius:999px;
+  }
+  .cat-head .cat-chev{
+    margin-left:auto;flex:0 0 auto;
+    width:26px;height:26px;
+    border-radius:7px;background:var(--bg);color:var(--gray);
+    display:flex;align-items:center;justify-content:center;
+    font-size:.9rem;transition:.2s;
+  }
+  details.cat-section[open] > summary .cat-chev{
+    transform:rotate(180deg);
+    background:var(--blue-light);color:var(--blue-strong);
+  }
+  .panel-qa details.cat-section[open] > summary .cat-chev{background:var(--yellow-light);color:#a07820;}
+  .panel-trouble details.cat-section[open] > summary .cat-chev{background:var(--red-light);color:var(--red);}
+  .panel-knowledge details.cat-section[open] > summary .cat-chev{background:var(--green-light);color:var(--green);}
+  .cat-articles{padding:0 0 10px;}
+
+  /* ===== カテゴリカードグリッド ===== */
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:12px;
+    margin-bottom:24px;
+  }
+  .cat-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 12px 14px;
+    cursor:pointer;text-align:center;
+    box-shadow:var(--shadow);transition:.15s;
+    font-family:inherit;
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+  }
+  .cat-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(16,24,40,.1);border-color:#cfe2f4;}
+  .panel-qa .cat-card:hover{border-color:#f0dca6;}
+  .panel-trouble .cat-card:hover{border-color:#f5c5c2;}
+  .panel-knowledge .cat-card:hover{border-color:#a8d5bc;}
+  .cat-card .card-num{font-size:1.6rem;font-weight:800;color:var(--blue);line-height:1;}
+  .panel-qa .cat-card .card-num{color:var(--yellow);}
+  .panel-trouble .cat-card .card-num{color:var(--red);}
+  .panel-knowledge .cat-card .card-num{color:var(--green);}
+  .cat-card .card-title{font-size:.9rem;font-weight:700;color:var(--ink);line-height:1.3;}
+  .cat-card .card-count{font-size:.76rem;color:var(--gray);}
+
+  /* ===== 記事の「閉じる」ボタン ===== */
+  .article-close-wrap{
+    display:flex;justify-content:flex-end;
+    margin-top:16px;padding-top:12px;
+    border-top:1px solid var(--line);
+  }
+  .article-close-btn{
+    border:1px solid var(--line);background:var(--bg);color:var(--gray);
+    font-size:.88rem;font-weight:700;
+    padding:7px 18px;border-radius:999px;
+    cursor:pointer;font-family:inherit;transition:.15s;
+  }
+  .article-close-btn:hover{background:var(--blue-light);color:var(--blue-strong);border-color:#cfe2f4;}
+
+  @media(max-width:600px){
+    body{font-size:17px;}
+    .appbar-inner{padding:12px 14px 0;}
+    .brand-name{font-size:1.15rem;}
+    .brand-tag{display:none;}
+    .tabbar{padding:10px 12px 12px;}
+    .hero{padding:38px 16px 34px;}
+    .hero h2{font-size:1.6rem;line-height:1.5;}
+    .hero p{font-size:1rem;}
+    .hero-chip{font-size:.95rem;padding:11px 16px;}
+    .cat-title{font-size:1.15rem;}
+    .cat-num{min-width:42px;height:42px;font-size:1.05rem;}
+    /* タブはセグメントのまま横スクロール（アプリ風） */
+    nav.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    nav.tabs::-webkit-scrollbar{display:none;}
+    nav.tabs button{flex:0 0 auto;font-size:.92rem;padding:10px 16px;}
+    .article > summary{font-size:1.02rem;padding:16px;}
+    .article-body{padding:4px 16px 20px;}
+    main{padding:16px 12px 50px;}
+    .cat-jump-chip{font-size:.82rem;padding:6px 11px;}
+    .cat-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;}
+    .cat-card{padding:14px 10px 12px;}
+    .cat-card .card-num{font-size:1.3rem;}
+    .cat-card .card-title{font-size:.82rem;}
+  }
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <div class="appbar-inner">
+    <div class="brand">
+      <span class="brand-logo" aria-hidden="true"></span>
+      <span class="brand-name">Hope Care AI</span>
+      <span class="brand-sub">ヘルプ</span>
+    </div>
+    <div class="brand-tag">困ったときは、ここから探してください</div>
+  </div>
+  <div class="tabbar">
+    <nav class="tabs" id="tabs">
+      <button data-tab="guide" class="active">操作ガイド</button>
+      <button data-tab="qa">よくある質問</button>
+      <button data-tab="trouble">トラブルシューティング</button>
+      <button data-tab="knowledge">活用ナレッジ</button>
+      <button data-tab="contact">お問い合わせ</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">📕 Hope Care AI ヘルプ</span>
+    <h2>困ったときは、<span class="accent">ここで解決</span>。</h2>
+    <p>Hope Care AI の使い方や、よくある質問をわかりやすくまとめました。<br>知りたいことを、下のボタンから選んでください。</p>
+    <div class="hero-chips">
+      <button class="hero-chip" data-jump="guide">📘 操作ガイド</button>
+      <button class="hero-chip" data-jump="qa">❓ よくある質問</button>
+      <button class="hero-chip" data-jump="trouble">🛠️ トラブルシューティング</button>
+      <button class="hero-chip" data-jump="knowledge">🟩 活用ナレッジ</button>
+      <button class="hero-chip" data-jump="contact">✉️ お問い合わせ</button>
+    </div>
+  </div>
+</section>
+
+<main>
+  <!-- 操作ガイド -->
+  <section class="panel active" id="panel-guide">
+    <div class="search-wrap">
+      <input type="search" class="search-input" id="guide-search" placeholder="ガイドをキーワードで絞り込む…">
+    </div>
+    <div class="filter-bar" id="guide-filter">
+      <span class="filter-label">対象者でしぼり込む</span>
+      <button data-target="all" class="active">すべて</button>
+      <button data-target="全員">全員むけ</button>
+      <button data-target="現場スタッフ">現場スタッフむけ</button>
+      <button data-target="管理者">管理者むけ</button>
+    </div>
+    <div id="guide-cat-jump"></div>
+    <div id="guide-list"></div>
+  </section>
+
+  <!-- よくある質問 -->
+  <section class="panel panel-qa" id="panel-qa">
+    <div class="search-wrap">
+      <input type="search" class="search-input" id="qa-search" placeholder="質問をキーワードで絞り込む…">
+    </div>
+    <div id="qa-cat-jump"></div>
+    <div id="qa-list"></div>
+  </section>
+
+  <!-- トラブルシューティング -->
+  <section class="panel panel-trouble" id="panel-trouble">
+    <div class="search-wrap">
+      <input type="search" class="search-input" id="trouble-search" placeholder="トラブルをキーワードで絞り込む…">
+    </div>
+    <div id="trouble-cat-jump"></div>
+    <div id="trouble-list"></div>
+  </section>
+
+  <!-- 活用ナレッジ -->
+  <section class="panel panel-knowledge" id="panel-knowledge">
+    <div class="search-wrap">
+      <input type="search" class="search-input" id="knowledge-search" placeholder="ナレッジをキーワードで絞り込む…">
+    </div>
+    <div id="knowledge-cat-jump"></div>
+    <div id="knowledge-list"></div>
+  </section>
+
+  <!-- お問い合わせ -->
+  <section class="panel" id="panel-contact">
+    <div class="contact-card">
+      <h2>お問い合わせ</h2>
+      <p>ヘルプを見ても解決しないときは、下のボタンから<br>お問い合わせフォームへお進みください。</p>
+      <p>わかる範囲で、次のことを教えていただけると、よりスムーズです。</p>
+      <ul style="text-align:left;max-width:420px;margin:14px auto;">
+        <li>どの画面で困っているか（例：録音、チャット）</li>
+        <li>どんな操作をしたか</li>
+        <li>どんな表示・エラーが出たか</li>
+      </ul>
+      <!-- ↓ フォームURLは後で差し込んでください（現在はダミー） -->
+      <a class="contact-btn" href="#" target="_blank" rel="noopener">お問い合わせフォームを開く</a>
+      <p class="contact-note">※ フォームのリンクは準備中です。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  ※掲載している画像は実際の画面と一部異なる場合があります。
+</footer>
+
+<script>
+/* =========================================================
+   記事データ
+   - Notionの「公開」記事だけをここに反映しています。
+   - 「下書き」記事は含めていません。
+   - 再生成時は、このデータ部分を作り直してください。
+   ========================================================= */
+const articles = [
+{
+  tab:"guide",
+  category:"07利用者管理",
+  order:72,
+  target:"管理者",
+  title:"利用者のAI利用同意を確認・登録する",
+  body:`
+<p>HopeCareAI では、利用者の個人データ（音声・チャット内容）をAIサービスに送信する前に、<strong>利用者本人または家族からの同意</strong>を取得・記録できます。同意を取得しておくことで、コンプライアンス対応と記録の透明性が確保されます。</p>
+<h2>AI同意が必要なサービス</h2>
+<p>同意の取得が必要なAIサービスは以下の4種類です。</p>
+<table>
+<tr><th>サービス</th><th>用途</th><th>サーバー所在地</th></tr>
+<tr><td>AIチャット (Gemini)</td><td>チャット機能</td><td>東京（日本国内）</td></tr>
+<tr><td>音声文字起こし (Chirp)</td><td>録音の文字起こし（主回路）</td><td>シンガポール</td></tr>
+<tr><td>音声文字起こし (Deepgram)</td><td>文字起こし予備2</td><td>米国</td></tr>
+<tr><td>音声文字起こし (Whisper)</td><td>文字起こし予備3</td><td>米国</td></tr>
+</table>
+<p>⚠️ いずれのサービスも、入力データがAIの学習に使われることはありません。</p>
+<h2>同意状況の確認方法</h2>
+<ol>
+<li>利用者一覧（メニュー：利用者）から対象の利用者を開く</li>
+<li>利用者詳細ページの左下に <strong>「AI 同意」</strong> セクションがある</li>
+<li>「有効な同意: ○件」と表示されれば同意済み</li>
+<li><strong>「同意状況・控え」</strong> ボタンを押すと同意の詳細を確認できる</li>
+</ol>
+<h3>同意未取得の利用者を探す</h3>
+<p>利用者一覧の左側フィルター <strong>「AI同意」</strong> 欄から絞り込みができます。</p>
+<ul>
+<li><strong>未取得あり（録音）</strong>: 音声文字起こし系の同意が未取得の利用者</li>
+<li><strong>未取得あり（チャット）</strong>: AIチャットの同意が未取得の利用者</li>
+<li><strong>いずれか未取得</strong>: どちらかが未取得の利用者</li>
+</ul>
+<p>また、利用者カードに <strong>⚠️ アイコン</strong> が表示されている場合は同意が未取得です。</p>
+<h2>同意の取得・登録方法</h2>
+<ol>
+<li>利用者詳細ページの「同意状況・控え」を開く</li>
+<li>各サービスの右側にある <strong>「同意」ボタン</strong>（✓アイコン）をクリック</li>
+<li>同意者（本人 / 家族 など）を選択して登録する</li>
+</ol>
+<h2>同意控えの保存・送付</h2>
+<ul>
+<li><strong>控えをPDFダウンロード</strong>: 同意書の控えをPDFで保存できます</li>
+<li><strong>控えをメール送信</strong>: 利用者や家族へメールで控えを送付できます</li>
+</ul>
+<p>💡 初回の利用開始前に全員分の同意を取得しておくことを推奨します。</p>
+`
+},
+{
+  tab:"guide",
+  category:"02録音で記録",
+  order:24,
+  target:"現場スタッフ",
+  title:"PC音声とマイクを同時に録音する",
+  body:`
+<p>録音画面（メニュー：録音）では、<strong>マイクのみ</strong> での録音のほかに、<strong>PC音声＋マイク</strong> を同時に録音するモードが選べます。オンライン面談やZoomなどのPC上の音声もまとめて文字起こしできます。</p>
+<h2>録音モードの選び方</h2>
+<p>録音画面の右上に切り替えボタンがあります。</p>
+<table>
+<tr><th>モード</th><th>用途</th></tr>
+<tr><td>🎙️ <strong>マイクのみ</strong></td><td>対面での面談・会議（標準）</td></tr>
+<tr><td>🖥️ <strong>PC音声＋マイク</strong></td><td>Zoom・Teams などオンライン会議</td></tr>
+</table>
+<h2>PC音声＋マイクの使い方</h2>
+<ol>
+<li>録音画面を開く</li>
+<li>右上の「PC音声＋マイク」をクリックして選択する（青くなればON）</li>
+<li>ブラウザから「このタブの音声を共有する」などの許可を求められたら許可する</li>
+<li>通常どおり録音ボタンを押して開始する</li>
+</ol>
+<p>録音後は通常の録音と同様に文字起こしと整形が行われます。</p>
+<h2>注意事項</h2>
+<ul>
+<li>PC音声＋マイクモードは、PCのブラウザ（Chrome推奨）でのみ利用できます</li>
+<li>スマートフォンでは「マイクのみ」のみ対応しています</li>
+<li>会議の参加者全員の音声を録音することになるため、事前に参加者の同意を得てください</li>
+</ul>
+<p>⚠️ PC音声の共有を許可しないと、マイクのみの録音になります。許可ダイアログが出たら「共有」を選んでください。</p>
+`
+},
+{
+  tab:"guide",
+  category:"04AIチャット",
+  order:43,
+  target:"現場スタッフ",
+  title:"FASTモードで素早くチャットする",
+  body:`
+<p>チャット画面の右上には <strong>FAST / SMART</strong> の切り替えボタンがあります。用途に合わせて使い分けることで、より快適にAIを活用できます。</p>
+<h2>FASTモードとSMARTモードの違い</h2>
+<table>
+<tr><th></th><th>FASTモード</th><th>SMARTモード</th></tr>
+<tr><td>速度</td><td>⚡ 速い</td><td>通常</td></tr>
+<tr><td>回答の深さ</td><td>シンプル・簡潔</td><td>詳細・丁寧</td></tr>
+<tr><td>向いている用途</td><td>素早い確認・簡単な質問</td><td>複雑な質問・詳しい回答が欲しいとき</td></tr>
+</table>
+<h2>切り替え方法</h2>
+<p>チャット画面の右上にある <strong>「⚡ FAST」</strong> ボタンをクリックするとFASTモードになります。もう一度クリックするとSMARTモードに戻ります。</p>
+<ul>
+<li>⚡ <strong>FAST</strong>（青色）：FASTモードが有効</li>
+<li>SMART（通常）：SMARTモードが有効</li>
+</ul>
+<h2>こんな場面で使い分ける</h2>
+<p><strong>FASTモードが向いているとき</strong></p>
+<ul>
+<li>「この利用者の最新の記録は？」など短い確認をしたいとき</li>
+<li>テンプレートを素早く呼び出したいとき</li>
+<li>回答の速さを優先したいとき</li>
+</ul>
+<p><strong>SMARTモードが向いているとき</strong></p>
+<ul>
+<li>ケアプランの文案を詳しく作成してほしいとき</li>
+<li>複数の情報を整理・比較してほしいとき</li>
+<li>長文の説明や要約が必要なとき</li>
+</ul>
+<p>💡 迷ったときはFASTモードで試して、物足りなければSMARTモードに切り替えるのがおすすめです。</p>
+`
+},
+{
+  tab:"guide",
+  category:"06記録管理",
+  order:62,
+  target:"現場スタッフ",
+  title:"音声記録の整形結果を正式な記録に割り当てる",
+  body:`
+<p>「音声記録アシスタント」でメモを入力してAI整形した後、<strong>「記録マスタに割り当て」</strong> ボタンを使うと、整形済みの内容を事業所の記録様式（フォーム）に合わせた正式な記録として保存できます。</p>
+<h2>操作の流れ</h2>
+<ol>
+<li>メニュー「音声記録」を開く</li>
+<li>音声入力またはテキストでメモを入力する</li>
+<li><strong>「AI リライト」</strong> ボタンを押して内容を整形する</li>
+<li>整形結果が表示されたら、右上の <strong>「記録マスタに割り当て」</strong> ボタンをクリックする</li>
+</ol>
+<figure class="shot"><img src="images/39ff8c48-7db6-80bc-8712-c902fe6d3684.png" alt=""></figure>
+<h2>記録様式を選ぶ</h2>
+<p>「どの記録様式に割り当てますか？」のダイアログが表示されます。</p>
+<ul>
+<li><strong>✦ AIのおすすめ</strong>: 整形内容をもとにAIが適した様式を提案します</li>
+<li><strong>記録様式ドロップダウン</strong>: 手動で様式を選択することもできます</li>
+</ul>
+<p>様式を確認したら <strong>「この様式で割り当て」</strong> ボタンを押します。</p>
+<figure class="shot"><img src="images/39ff8c48-7db6-80e9-9db5-e2ddfbd7f630.png" alt=""></figure>
+<h2>フォームで詳細を入力して保存</h2>
+<p>記録作成画面が開き、選んだ様式のフォームが表示されます。</p>
+<figure class="shot"><img src="images/39ff8c48-7db6-80b7-838f-ebfdf666b6c0.png" alt=""></figure>
+<ul>
+<li><strong>記録区分</strong>: 事例記録・個別支援など（様式に応じて自動設定）</li>
+<li><strong>利用者</strong>: 対象の利用者を選択または確認</li>
+<li><strong>記録日時</strong>: 日時を確認・修正</li>
+<li><strong>記録種別</strong>: 使用する様式（種別が見つからない場合は「＋新規追加」でその場に作成可能）</li>
+<li><strong>入力項目</strong>: 様式ごとのフォーム（支援種別・バイタルなど）を入力</li>
+</ul>
+<p>入力が終わったら <strong>「保存」</strong> または <strong>「保存して続けて作成」</strong> を押します。</p>
+<p>💡 <strong>「保存して続けて作成」</strong> を使うと、同じ利用者・同じ様式で連続して記録を作成できます。複数の項目を続けて記録したいときに便利です。</p>
+`
+},
+{
+  tab:"guide",
+  category:"06記録管理",
+  order:65,
+  target:"管理者",
+  title:"記録の状況を分析する",
+  body:`
+<p>記録画面の右上にある「分析」ボタンを押すと、事業所の記録状況をグラフで確認できます。記録が適切に行われているか、対応が必要な利用者がいないか、素早く把握するのに役立ちます。</p>
+<figure class="shot"><img src="images/39ff8c48-7db6-80ae-b6db-d16548472338.png" alt=""></figure>
+<h2>分析を開く</h2>
+<p>記録画面（メニュー「記録」）の右上にある <strong>「分析」ボタン</strong> をクリックします。</p>
+<p>分析ダッシュボードがポップアップで表示されます。</p>
+<h2>表示される情報</h2>
+<h3>記録数 推移</h3>
+<p>直近14日間の記録件数をグラフで確認できます。前期比（増減率）も表示されるため、記録が減っていないかを把握できます。</p>
+<h3>区分別分布</h3>
+<p>過去30日間の記録を種別ごとに円グラフで表示します。事例記録・個別支援・チーム支援・AIクイック記録など、どの種別の記録が多いかを確認できます。</p>
+<h3>リスク分析</h3>
+<p>過去30日間の記録をもとに、リスク関連のキーワードが多く含まれる利用者を自動でピックアップします。</p>
+<ul>
+<li><strong>中リスク</strong>（要対応）: リスク関連の記録が複数件ある利用者</li>
+<li><strong>低（注視）</strong>: リスク関連の記録が1件ある利用者</li>
+</ul>
+<p>⚠️ リスク判定はAIによる目安です。必ず記録の内容を確認し、実際の状況に基づいて判断してください。</p>
+<h3>利用者別 記録数</h3>
+<p>過去30日間で記録の多い利用者 Top5 を表示します。記録が少ない利用者の把握にも活用できます。</p>
+<h2>こんなときに便利</h2>
+<ul>
+<li>月末に記録の偏りや漏れをチェックしたいとき</li>
+<li>リスクのある利用者に早めに気づきたいとき</li>
+<li>スタッフごとの記録状況を把握したいとき（利用者を絞り込んで使用）</li>
+</ul>
+`
+},
+{
+  tab:"guide",
+  category:"01ログイン",
+  order:13,
+  target:"全員",
+  title:"ログアウトする",
+  body:`
+<h2>このページでできること</h2>
+<p>Hope Care AI からログアウトします。</p>
+<h2>手順</h2>
+<ol>
+<li>画面右上のメニュー（三本線）をタップします。</li>
+<li>画面下部の<strong>「ログアウト」</strong>をタップします。</li>
+<li>確認画面が出たら「ログアウト」をタップします。</li>
+</ol>
+<figure class="shot"><img src="images/383f8c48-7db6-8034-8f67-d296b38fc5c7.jpg" alt=""></figure>
+<h2>こうなれば成功です</h2>
+<p>ログイン画面に戻れば成功です。</p>
+`
+},
+{
+  tab:"guide",
+  category:"01ログイン",
+  order:14,
+  target:"全員",
+  title:"パスワードを忘れたとき（Googleアカウントを再設定する）",
+  body:`
+<h2>このページでできること</h2>
+<p>Googleアカウントのパスワードを再設定します。</p>
+<div class="note">ℹ️ HopeCareAIは<strong>Googleアカウントでログイン</strong>します。パスワードの再設定はGoogle側で行います。HopeCareAI内にパスワード変更の機能はありません。</div>
+<h2>手順</h2>
+<ol>
+<li>ログインに使っているGoogleアカウントのメールアドレスを入力し、画面の「パスワードをお忘れの場合」へに進みます。</li>
+<li>画面の案内に沿って本人確認を行い、新しいパスワードを設定します。</li>
+<li>再設定完了後、HopeCareAIのログイン画面からGoogleアカウントでログインします。</li>
+</ol>
+<figure class="shot"><img src="images/383f8c48-7db6-804b-80b5-e76470d6eb96.jpg" alt=""></figure>
+<h2>メールアドレスも忘れた・アカウントにアクセスできないとき</h2>
+<p>Googleアカウントにアクセスできない場合は、Googleのサポートページをご確認ください。</p>
+<p><a href="https://support.google.com/accounts/answer/41078" target="_blank" rel="noopener"><strong>https://support.google.com/accounts/answer/41078</strong></a></p>
+<h2>こうなれば成功です</h2>
+<p>新しいパスワードでGoogleアカウントにログインでき、HopeCareAIにも入れれば成功です。</p>
+`
+},
+{
+  tab:"guide",
+  category:"05テンプレート",
+  order:50,
+  target:"現場スタッフ",
+  title:"テンプレートを確認・編集する",
+  body:`
+<h2>このページでできること</h2>
+<p>AIチャットで使う質問テンプレートを一覧で確認し、内容を編集します。</p>
+<h2>テンプレートとは</h2>
+<p>AIチャット画面の右側に並んでいる<strong>よく使う質問のひな形</strong>です。タップするだけで、決まった形の質問をすぐに送れます（例：「直近の申し送り事項をまとめて」「今月のモニタリング要点を教えて」など）。</p>
+<h2>テンプレート一覧を開く</h2>
+<ol>
+<li>左メニューから<strong>「テンプレ」</strong>を開きます。登録されているテンプレートの一覧が表示されます。</li>
+<li><strong>「全て／チャット／個人／標準」</strong>のタブで種類を絞り込めます。検索欄でキーワード検索もできます。</li>
+</ol>
+<div class="note">📷 スクリーンショット挿入位置：テンプレート一覧画面</div>
+<h2>テンプレートを編集する</h2>
+<ol>
+<li>編集したいテンプレートを選びます。</li>
+<li>テンプレートカード右下の<strong>「編集」</strong>ボタンを押します。</li>
+<li>タイトルや質問文を書き直して保存します。</li>
+</ol>
+<div class="note">⚠️ <strong>標準テンプレート</strong>（あらかじめ用意されているもの）は編集・削除できません。コピーして「個人」テンプレートとして保存すると、自由に変えられます。</div>
+<div class="note">ℹ️ 編集画面の左下に<strong>「テスト実行」</strong>ボタンが表示されていますが、現在は開発中の機能です。今後非表示になる場合があります。</div>
+<h2>テンプレートを使う</h2>
+<p>AIチャット画面でテンプレートを使いたいときは、「AIチャットで質問する」ページをご覧ください。</p>
+<p class="ref">👉 詳しくは「AIチャットで質問する」ページをご覧ください。</p>
+<h2>こうなれば成功です</h2>
+<p>テンプレートの内容が保存され、AIチャット画面の右側に表示されれば成功です。</p>
+`
+},
+{
+  tab:"guide",
+  category:"02録音で記録",
+  order:23,
+  target:"現場スタッフ",
+  title:"AIに上手に録音・文字起こしさせるコツ",
+  body:`
+<h2>このページでできること</h2>
+<p>録音や音声記録が、思ったような文章にならないときに、精度を上げるコツをまとめました。</p>
+<h2>録音・吹き込みのコツ</h2>
+<ul>
+<li><strong>いつ・誰が・何をしたかを声に出す</strong> … 「6月14日、○○さん、午前は体温36度3分で落ち着いている」のように、項目を口に出すと整いやすくなります。</li>
+<li><strong>はっきり、ゆっくり話す</strong> … 早口や小声は、文字起こしの精度が下がります。</li>
+<li><strong>固有名詞は丁寧に</strong> … 利用者名や薬の名前など、大事な言葉は特にはっきり話してください。</li>
+<li><strong>静かな場所で</strong> … 周りの雑音が多いと、聞き取りの精度が下がります。</li>
+</ul>
+<h2>それでも思った形にならないとき</h2>
+<ul>
+<li><strong>整形プロンプト（テンプレート）を選ぶ</strong> … 目的にあったテンプレートを選ぶと、決まった形に整います。</li>
+<li><strong>音声記録の「修正指示」を使う</strong> … 音声記録では、整形後に「もっと簡潔に」「敬体で」などの修正指示を出せます。</li>
+<li><strong>手で直す</strong> … できあがった文章は、あとから手で修正できます。</li>
+</ul>
+<h2>AIの回答が「思ったのと違う」とき</h2>
+<p>AIチャットで回答が物足りないときは、<strong>「蓄積参照」をオン</strong>にすると、その利用者の過去の記録をふまえた、より具体的な回答になります。</p>
+<figure class="shot"><img src="images/382f8c48-7db6-807e-a5f1-d5222b5cfa2e.jpg" alt=""></figure>
+`
+},
+{
+  tab:"guide",
+  category:"02録音で記録",
+  order:22,
+  target:"現場スタッフ",
+  title:"個別モードと会議モードを使い分ける",
+  body:`
+<h2>このページでできること</h2>
+<p>録音するときに選ぶ「個別モード」と「会議モード」の違いを説明します。</p>
+<h2>2つのモードの違い</h2>
+<ul>
+<li><strong>個別モード</strong> … 利用者おひとりとの面談を録音するときに使います。ひとりの声を記録する想定です。</li>
+<li><strong>会議モード</strong> … 複数人が参加する会議やカンファレンスを録音するときに使います。複数の話者がいる想定です。</li>
+</ul>
+<h2>選び方の目安</h2>
+<ul>
+<li>利用者やご家族との1対1の面談 → <strong>個別モード</strong></li>
+<li>サービス担当者会議・チームでの話し合い → <strong>会議モード</strong></li>
+</ul>
+<figure class="shot"><img src="images/382f8c48-7db6-80ad-bb14-eccc71a3c3b8.jpg" alt=""></figure>
+<h2>補足</h2>
+<p>録音履歴の画面では、録音モード（全て／個別／会議）で絞り込んで過去の録音を探すこともできます。</p>
+<figure class="shot"><img src="images/382f8c48-7db6-807c-b064-f78d9f720f6a.jpg" alt=""></figure>
+`
+},
+{
+  tab:"guide",
+  category:"02録音で記録",
+  order:19,
+  target:"現場スタッフ",
+  title:"音声記録で短いメモを清書する",
+  body:`
+<h2>このページでできること</h2>
+<p>面談のあとの移動中などに、<strong>短いメモを声で吹き込む（または直接入力する）</strong>と、AIが整った記録に清書してくれます。職員のメモ書き向けの機能です。</p>
+<div class="note">💡 面談まるごとを長く録音したいときは、「録音」メニューを使ってください。
+違いは「画面の見方」ページの比較表をご覧ください。</div>
+<h2>手順</h2>
+<ol>
+<li>左メニューから<strong>「音声記録」</strong>を開きます。「音声記録アシスタント」という画面が出ます。</li>
+</ol>
+<figure class="shot"><img src="images/382f8c48-7db6-8072-9c77-e8034f667e15.jpg" alt=""></figure>
+<ol>
+<li>上部で<strong>事業所</strong>や<strong>利用者（任意）</strong>を選びます。
+選んでおくと、利用者の情報に結び付きます。利用者を指定しなくても使えます。</li>
+</ol>
+<p>3.<strong>　タイトル（必須）</strong>を入力します（20字程度の短い見出し）。</p>
+<ol>
+<li>左側の<strong>「入力メモ」</strong>欄に、内容を入れます。入れ方は2通りです。<ul>
+<li>欄の下にある<strong>マイクボタン</strong>を押して、声で吹き込む</li>
+<li>欄に直接キーボードで入力する</li>
+</ul>
+</li>
+</ol>
+<p>例：「○○さんと面談。体調は良さそうだったが、就労の件で少し不安がある様子。」</p>
+<ol>
+<li><strong>「AI リライト」</strong>ボタンを押します。</li>
+<li>右側の<strong>「AI 整形後」</strong>欄に、整えられた文章が表示されます。</li>
+</ol>
+<figure class="shot"><img src="images/382f8c48-7db6-8024-a865-e435fbb32155.jpg" alt=""></figure>
+<h2>仕上がりを直したいとき</h2>
+<p>整形後の文章を直したいときは、<strong>「修正指示」</strong>ボタンから「もっと簡潔に」「敬体にして」などの指示を出すと、AIが直してくれます。</p>
+<h2>保存する</h2>
+<p>仕上がったら、画面右下の<strong>「保存」</strong>を押します。やり直したいときは「クリア」で入力をリセットできます。</p>
+<hr>
+<h2>さらに一歩：記録マスタに割り当てる（任意）</h2>
+<p>AI整形後の画面右上に<strong>「記録マスタに割り当て」</strong>というリンクがあります。</p>
+<p>これは、清書した内容を<strong>記録様式（記録マスタ）に入れる</strong>ための機能です。
+移動中など時間がないときはそのまま保存するだけでOKです。落ち着いたタイミングで使ってください。</p>
+<h3>割り当ての手順</h3>
+<p>1.　「AI リライト」後、右上の<strong>「記録マスタに割り当て」</strong>を押します。</p>
+<figure class="shot"><img src="images/382f8c48-7db6-80ca-b2b4-ce6b8a14d150.jpg" alt=""></figure>
+<p>2.<strong>　「どの記録様式に割り当てますか？」</strong>というダイアログが開きます。
+ドロップダウンから様式を選びます。<strong>「この様式で割り当て」</strong>を押します。</p>
+<figure class="shot"><img src="images/382f8c48-7db6-80f0-a24d-cb1ffeeef163.jpg" alt=""></figure>
+<p>4.　選んだ様式の記録入力画面が開き、清書した内容が自動で入力項目に入ります。
+赤い<strong>「＊」の付いた必須項目</strong>を入力し、内容を確認・修正して「保存」します。
+
+</p>
+<figure class="shot"><img src="images/382f8c48-7db6-80b7-ad73-da0a3996dfb0.jpg" alt=""></figure>
+<h2>こうなれば成功です</h2>
+<p>保存した内容は「記録」メニューから確認できます。
+記録様式に割り当てた場合は、その記録も「記録」メニューに追加されます。</p>
+`
+},
+{
+  tab:"guide",
+  category:"08管理者設定",
+  order:85,
+  target:"管理者",
+  title:"支払い方法を確認・変更する",
+  body:`
+<h2>このページでできること</h2>
+<p>支払い方法や請求先を確認・変更します。</p>
+<div class="note">🔑 この操作には <strong>管理者権限</strong> が必要です。</div>
+<h2>手順</h2>
+<ol>
+<li>画面の<strong>管理メニュー（設定）</strong>から、<strong>「請求（オーナー）」</strong>の画面を開きます。</li>
+<li>お支払い管理画面（カスタマーポータル）のリンクから、<strong>支払い方法・請求先</strong> を更新できます。</li>
+</ol>
+<figure class="shot"><img src="images/381f8c48-7db6-80d3-91d9-d8fb91e80f76.jpg" alt=""></figure>
+<h2>こうなれば成功です</h2>
+<p>新しいお支払い方法・請求先が保存され、請求・お支払い画面に反映されていれば成功です。</p>
+<h2>うまくいかないときは</h2>
+<ul>
+<li>カスタマーポータルが開かないときは、ブラウザの<strong>ポップアップブロックを解除</strong>してください。</li>
+<li>請求金額・契約内容に関するご不明点は、サポートまでご連絡ください。</li>
+</ul>
+`
+},
+{
+  tab:"guide",
+  category:"08管理者設定",
+  order:81,
+  target:"管理者",
+  title:"Drive連携を設定する",
+  body:`
+<h2>このページでできること</h2>
+<p>アプリのデータ保管先となる Google Drive を連携します。</p>
+<div class="note">🔑 この操作には <strong>管理者（組織オーナー）権限</strong> が必要です。</div>
+<div class="callout">アプリのデータは、組織情報を登録された管理者の Google Drive に保管されます。連携が完了するまで一部の機能は利用できません（画面右上の「後でやる（24h）」で一時的に後回しにもできます）。</div>
+<h2>STEP1：Drive にフォルダを作成する</h2>
+<div class="callout"><ol>
+<li><strong>「Drive を開く」</strong> を押して Google Drive（マイドライブ）を開きます。</li>
+<li>推奨名 <strong>「hopecareAI」</strong> で新規フォルダを作成します。</li>
+</ol>
+</div>
+<figure class="shot"><img src="images/381f8c48-7db6-80e6-80f3-f736485ef94c.jpg" alt=""></figure>
+<h2>STEP2：サービスアカウントに編集権限を共有する</h2>
+<p>作成したフォルダを、下記のアドレスに <strong>「編集者」</strong> として共有します。</p>
+<div class="callout">📧 <strong>共有先アドレス：</strong><a href="mailto:share@hope-care.tech" target="_blank" rel="noopener"><strong>share@hope-care.tech</strong></a></div>
+<figure class="shot"><img src="images/381f8c48-7db6-80b1-b243-f0aff55a1bbf.jpg" alt=""></figure>
+<ol>
+<li>Google Drive で作成したフォルダを右クリックします。</li>
+<li>「共有」をクリックします。</li>
+<li>入力欄に <a href="mailto:share@hope-care.tech" target="_blank" rel="noopener">share@hope-care.tech</a> を貼り付け、送信を押します。</li>
+</ol>
+<div class="note">⚠️ 権限を「編集者」として必ず設定してください。</div>
+<figure class="shot"><img src="images/381f8c48-7db6-805f-848f-e76224b58fb2.jpg" alt=""></figure>
+<h2>STEP3：フォルダURLを貼り付けて検証する</h2>
+<ol>
+<li>作成したフォルダを右クリックし、「共有」→「リンクをコピー」をクリックします。</li>
+<li>Hope Care AI の画面に戻り、「フォルダURLを貼り付け」欄にコピーしたURLを貼り付けます。</li>
+<li><strong>「検証して確定」</strong> を押します。</li>
+<li><strong>「接続済み」</strong> と表示されれば、このステップは完了です。</li>
+</ol>
+<figure class="shot"><img src="images/381f8c48-7db6-80b5-bb56-e1e6e21eaf88.jpg" alt=""></figure>
+<h2>STEP4：フォルダ階層を生成して接続を確認する</h2>
+<ol>
+<li><strong>「フォルダ階層を自動生成しますか？」</strong> と表示されたら、<strong>「許可して生成」</strong> を押します。事業所・利用者のフォルダがまとめて作成されます。</li>
+<li><strong>「接続テスト実行」</strong> を押します（テストファイルの作成・削除で、書き込みできるかを確認します）。</li>
+<li><strong>「接続を確認しました」</strong> と表示されたら、<strong>「ホームへ」</strong> を押して完了です。</li>
+</ol>
+<figure class="shot"><img src="images/381f8c48-7db6-804f-a8d7-f2ad2b44a64c.jpg" alt=""></figure>
+<figure class="shot"><img src="images/381f8c48-7db6-80db-a860-d3463469a8c0.jpg" alt=""></figure>
+<div class="note">⚠️ 既存データの自動移行は行われません。録音・チャット履歴などの過去データは、新しいフォルダへ自動では移動されません。必要な場合は、生成後に表示されるリンクから Drive を開き、手動で移してください。</div>
+`
+},
+{
+  tab:"guide",
+  category:"08管理者設定",
+  order:82,
+  target:"管理者",
+  title:"組織情報を編集する",
+  body:`
+<h2>このページでできること</h2>
+<p>組織名・事業所・Drive連携の設定を編集します。</p>
+<div class="note">🔑 この操作は <strong>組織オーナーのみ</strong> 表示されます。</div>
+<h2>開き方</h2>
+<div class="callout">画面左上のロゴエリアにある <strong>⚙ 編集ボタン</strong> をクリックすると、「組織の編集」画面が開きます。<strong>組織情報／事業所／Drive</strong> の3つのタブで管理します。編集後は <strong>「保存」</strong> を押してください。</div>
+<h2>タブ1：組織情報</h2>
+<p>組織の基本情報を登録・編集します。</p>
+<div class="callout"><ul>
+<li>組織名</li>
+<li>郵便番号（7桁）・都道府県コード・市区町村・番地・建物名・部屋番号</li>
+<li>電話番号・メールアドレス・ウェブサイトURL</li>
+<li><strong>組織ロゴ</strong>（jpg／png、2MB まで）</li>
+</ul>
+</div>
+<figure class="shot"><img src="images/387f8c48-7db6-8030-aa9c-f09a60677a75.png" alt=""></figure>
+<h2>タブ2：事業所</h2>
+<ul>
+<li>各事業所カードを、その場で編集できます。</li>
+<li><strong>「＋事業所を追加」</strong> から新しい事業所を追加します。</li>
+</ul>
+<figure class="shot"><img src="images/387f8c48-7db6-8019-a94c-d2cf737721cd.png" alt=""></figure>
+<div class="note">⚠️ 利用者が紐づいている事業所は削除できません。先に利用者の所属を変更してから削除してください。</div>
+<h2>タブ3：Drive</h2>
+<p>組織と Google Drive の連携状態を確認できます。連携先フォルダの確認や、未連携・再設定が必要な場合の入口になります。</p>
+<ul>
+<li>現在の<strong>連携状態</strong>（連携済み／未連携）と、連携先フォルダを確認できます。</li>
+<li>連携の新規設定・やり直しは、<strong>「Drive連携を設定する」</strong>ページの手順に沿って行ってください。</li>
+</ul>
+<figure class="shot"><img src="images/387f8c48-7db6-804d-be36-c44783b5504c.png" alt=""></figure>
+<p class="ref">👉 詳しい手順は「Drive連携を設定する」ページをご覧ください。</p>
+<h2>こうなれば成功です</h2>
+<p>編集した組織名・事業所・Drive連携の内容が保存され、画面に反映されていれば成功です。</p>
+`
+},
+{
+  tab:"guide",
+  category:"08管理者設定",
+  order:80,
+  target:"管理者",
+  title:"はじめてログインして組織を登録する",
+  body:`
+<h2>このページでできること</h2>
+<p>はじめてご利用になる際の、ログインから組織登録までの手順です。</p>
+<div class="note">🔑 この操作には <strong>管理者（組織オーナー）権限</strong> が必要です。</div>
+<div class="callout">初期設定は <strong>ログイン → 組織登録 → Drive 連携</strong> の順で設定します。Drive 連携まで完了すると、すべての機能が使えるようになります。</div>
+<h2>STEP1：ログインする</h2>
+<p>ログイン画面で <strong>「Google でログイン」</strong> を選び、組織で案内されたアカウントでログインします（メールアドレスとパスワードでのログインも利用できます）。</p>
+<figure class="shot"><img src="images/381f8c48-7db6-8093-bf86-e2aa289403ac.png" alt=""></figure>
+<h2>STEP2：組織登録へ進む</h2>
+<div class="callout">運営による事前のご案内が済んでいる場合、<strong>「組織登録へ進む」</strong> が表示されます。ボタンを押して登録を開始します。</div>
+<h2>STEP3：組織情報を登録する</h2>
+<p>画面の案内に沿って、4つのステップで入力します。</p>
+<div class="callout"><ol>
+<li><strong>組織基本情報</strong>：組織名（法人格を含めた正式名称）・業種を入力します。</li>
+<li><strong>法人情報</strong> を入力します〔要確認：実際の入力項目〕。法人番号・設立年月日・本部所在地など、登記上の情報を入力します。</li>
+<li><strong>組織代表者</strong> を入力します〔要確認：実際の入力項目〕。代表者の氏名・役職・連絡先（メール／電話）などを入力します。</li>
+<li><strong>確認＋同意</strong>：内容を確認し、利用規約・プライバシーポリシーに同意します。</li>
+</ol>
+</div>
+<figure class="shot"><img src="images/381f8c48-7db6-8037-b966-d96d982bd71e.png" alt=""></figure>
+<h2>STEP4：組織登録の完了</h2>
+<p><strong>「組織登録が完了しました」</strong> と表示されます。続いて <strong>「Drive 連携を完了してください」</strong> に進みます。</p>
+<figure class="shot"><img src="images/381f8c48-7db6-804a-ae89-c4cb93ee1e7f.png" alt=""></figure>
+<figure class="shot"><img src="images/381f8c48-7db6-8037-8b0b-d32723e3cdb0.jpg" alt=""></figure>
+<h2>次にやること</h2>
+<p class="ref">👉 続けて「Drive連携を設定する」ページに進んでください。</p>
+`
+},
+{
+  tab:"guide",
+  category:"08管理者設定",
+  order:84,
+  target:"管理者",
+  title:"メンバーを招待する",
+  body:`
+<h2>このページでできること</h2>
+<p>組織にメンバー（職員）を招待します。</p>
+<div class="note">🔑 この操作には <strong>管理者権限</strong> が必要です。</div>
+<h2>手順</h2>
+<p>メンバーの管理は <strong>「ユーザー管理」画面</strong> で行います。画面上部で、<strong>契約席数・利用中・招待中・残りの席数</strong> を確認できます。</p>
+<div class="callout"><ol>
+<li>画面右上のメニュー（三本線）を押します。</li>
+<li>「ユーザー管理（招待）」から <strong>「招待を送る」</strong> を押します。</li>
+<li>招待する方の <strong>メールアドレス・役割（ロール）・所属事業所</strong> を指定し、招待送信を押します。</li>
+<li>招待メールが送信されます。受け取った方は、メール内のリンクから招待を承諾します。</li>
+</ol>
+</div>
+<div class="note">ℹ️ <strong>役割（ロール）について</strong>：
+<strong>「管理者」</strong>（組織・メンバー・契約の管理ができる）と<strong>「一般メンバー」</strong>（日々の記録・録音・チャットを行う）から選びます。管理者は必要最小限にとどめると安全です。</div>
+<div class="callout">💡 承諾が済むと「メンバー」一覧に追加されます。招待中の方は「招待」タブ、期限切れ・取消は専用のタブで確認できます。</div>
+<figure class="shot"><img src="images/381f8c48-7db6-8001-ac62-c8df600f4c23.jpg" alt=""></figure>
+<p>画面右上のメニュー（三本線）を押します。</p>
+<figure class="shot"><img src="images/381f8c48-7db6-8003-bbc9-f5d615d3d772.jpg" alt=""></figure>
+<figure class="shot"><img src="images/381f8c48-7db6-80c9-98be-eb8b583ac7fd.jpg" alt=""></figure>
+<p>「ユーザー管理（招待）」から<strong>「招待を送る」</strong>を押します。</p>
+<figure class="shot"><img src="images/381f8c48-7db6-80cd-a872-de3580122d79.jpg" alt=""></figure>
+<p>招待する方の <strong>メールアドレス・役割（ロール）・所属事業所</strong> を指定し、招待送信を押します。</p>
+<h2>招待メールが届かないとき</h2>
+<ol>
+<li><strong>迷惑メールフォルダ</strong>を確認してください。</li>
+<li>入力したメールアドレスにタイプミスがないか確認してください。</li>
+<li>招待画面から再度送信できます。</li>
+<li>招待には有効期限があります。期限切れの場合は、再度招待し直してください。</li>
+</ol>
+<h2>うまくいかないときは</h2>
+<p>招待したメンバーがログインできないときは、招待メール内のリンクから承諾が完了しているか、案内したメールアドレスでログインしているかを確認してください。</p>
+`
+},
+{
+  tab:"guide",
+  category:"04AIチャット",
+  order:41,
+  target:"現場スタッフ",
+  title:"蓄積参照を使ってAIの回答を改善する",
+  body:`
+<h2>このページでできること</h2>
+<p>AIチャットで、これまでに蓄積された情報を参照した回答を得ます。</p>
+<h2>手順</h2>
+<ol>
+<li>左メニューから<strong>「チャット」</strong>を開き、対象の利用者を選びます。利用者を選ぶと、その方の蓄積情報を参照できるようになります。</li>
+<li>画面上部にある<strong>「蓄積参照」のトグル</strong>をタップして<strong>オン</strong>にします（初期状態はオフです）。</li>
+<li>オンの状態で質問を送ると、AIがその利用者の<strong>過去の記録・録音</strong>の内容をもとに回答します。</li>
+<li>一般的な相談など、過去の情報をふまえる必要がないときは<strong>オフ</strong>のままでかまいません。回答が「思ったのと違う」ときは、まずこのオン・オフを見直してください。</li>
+</ol>
+<div class="note">ℹ️ <strong>蓄積参照とは</strong>：その利用者についてこれまでに記録・録音された情報をAIが読み込み、文脈をふまえて回答する機能です。オフのときは、いま送った質問文だけをもとに回答します。</div>
+<div class="note">💡 「蓄積参照」をオンにすると、その利用者の過去の記録・録音をもとに回答します。AIの回答が「思ったのと違う」ときは、このオン・オフを見直してみてください。</div>
+<figure class="shot"><img src="images/382f8c48-7db6-80bc-8916-d23e7e9257c5.jpg" alt=""></figure>
+<h2>こうなれば成功です</h2>
+<p>蓄積参照をオンにすると、過去の記録を踏まえた、より具体的な回答が得られます。</p>
+`
+},
+{
+  tab:"guide",
+  category:"06記録管理",
+  order:61,
+  target:"現場スタッフ",
+  title:"記録にファイルを添付する",
+  body:`
+<h2>このページでできること</h2>
+<p>記録にファイル（写真や書類）を添付します。</p>
+<h2>手順</h2>
+<ol>
+<li>記録の詳細画面を開きます。</li>
+<li><strong>「添付」</strong>セクション右の <strong>「＋ファイル追加」</strong> を押します。</li>
+<li>添付したいファイルを選びます。</li>
+</ol>
+<div class="note">📄 添付できるファイル：1ファイル 10MB 以内（jpg／png／pdf／docx／xlsx／heic／webp／txt／csv）</div>
+<figure class="shot"><img src="images/383f8c48-7db6-80ea-a781-e3f9331e84ce.jpg" alt=""></figure>
+<figure class="shot"><img src="images/383f8c48-7db6-80a6-b1c0-d5ef75006f08.jpg" alt=""></figure>
+<h2>こうなれば成功です</h2>
+<p>添付したファイルが記録の詳細画面に表示されれば成功です。</p>
+`
+},
+{
+  tab:"guide",
+  category:"04AIチャット",
+  order:40,
+  target:"現場スタッフ",
+  title:"AIチャットで質問する",
+  body:`
+<h2>このページでできること</h2>
+<p>利用者ごとに会話スレッドを作成し、過去の記録や録音を踏まえた回答を得ます。</p>
+<h2>手順</h2>
+<ol>
+<li>左メニューから<strong>「チャット」</strong>を開きます。必要に応じて、上部で<strong>対象の利用者</strong>を選びます。</li>
+<li>画面下部の<strong>入力欄に質問・相談したい内容を入力</strong>し、<strong>送信ボタン</strong>を押します。AIが回答を返します。</li>
+<li>よく使う質問は、右側の<strong>テンプレートカード</strong>をクリックして選べます（複数選択可）。
+選んだテンプレートが回答の形になります。各カード右下の✏マークの<strong>「編集」</strong>から、テンプレートの編集・テスト実行・削除ができます。</li>
+</ol>
+<p>4.<strong>　「直近30日傾向」</strong>のチップをクリックすると、内容がポップアップで表示されます。</p>
+<figure class="shot"><img src="images/382f8c48-7db6-80ce-9892-d73fa70545cb.jpg" alt=""></figure>
+<figure class="shot"><img src="images/382f8c48-7db6-805e-8857-c261c0116756.png" alt=""></figure>
+<div class="note">💡 その利用者の過去の記録・録音をふまえて回答してほしいときは、画面上部の<strong>「蓄積参照」</strong>をオンにします（→「蓄積参照を使ってAIの回答を改善する」を参照）。</div>
+<div class="note">💡 入力欄の下に<strong>「直前の入力に戻す」</strong>ボタンがあります。押すと、ひとつ前に送信した質問文が入力欄に再度セットされます。同じ質問を少し変えて再度送るときに便利です。</div>
+<div class="note">💡 テンプレートは<strong>ドラッグで並び替え</strong>できます。</div>
+<hr>
+<h2>会話履歴・テンプレートの絞り込み</h2>
+<ul>
+<li><strong>会話履歴</strong>：上部の検索欄（topic／メッセージ）で過去の会話を探せます。<strong>「すべて／お気に入り／記録化済」</strong>で絞り込めます。</li>
+<li><strong>テンプレート</strong>：<strong>「全て／チャット／個人／標準」</strong>の分類と、検索欄から探せます。</li>
+</ul>
+<figure class="shot"><img src="images/382f8c48-7db6-80eb-9aee-e4ecaa734f69.jpg" alt=""></figure>
+<h2>こうなれば成功です</h2>
+<p>質問を送るとAIが回答を返し、そのやりとりがスレッドとして残ります。あとから<strong>「会話履歴」</strong>で見返せます。</p>
+`
+},
+{
+  tab:"guide",
+  category:"06記録管理",
+  order:60,
+  target:"現場スタッフ",
+  title:"記録を作成する",
+  body:`
+<h2>このページでできること</h2>
+<p>ℹ️ ここでいう「記録」は、<strong>HopeCareAIアプリ内に保存されるデータ</strong>です。
+録音の文字起こし・AIの整形結果などを整理・保存する場所として使います。
+各法人で使用しているExcelや帳票に反映する場合は、必要なテキストをコピーして転記してください。</p>
+<h2>記録の区分</h2>
+<p>「記録」タブから、<strong>事例記録／会議／個別支援／チーム支援</strong> の4区分で記録を作成できます。</p>
+<ul>
+<li>記録項目は、組織で用意された <strong>記録マスタ</strong> に沿って入力します。</li>
+<li><strong>会議・チーム支援</strong> は、利用者を紐付けずに <strong>事業所単位</strong> で作成できます。</li>
+</ul>
+<figure class="shot"><img src="images/382f8c48-7db6-8004-8169-c008f7fb1b5d.jpg" alt=""></figure>
+<h2>新しい記録をつくる</h2>
+<ol>
+<li>左メニューから<strong>「記録」</strong>を開きます。利用者に紐づく記録は、利用者を選んでから<strong>「＋記録」</strong>を押すと、その利用者で作成できます。</li>
+<li><strong>記録の区分</strong>（事例記録／会議／個別支援／チーム支援）を選びます。</li>
+<li>各項目を入力し入力後、<strong>保存</strong>します。保存した記録は一覧に追加されます。</li>
+</ol>
+<div class="note">💡 会議・チーム支援は、利用者を紐付けずに<strong>事業所単位</strong>で作成できます。</div>
+<figure class="shot"><img src="images/382f8c48-7db6-80a1-a509-cbf4cc7e9684.jpg" alt=""></figure>
+<figure class="shot"><img src="images/382f8c48-7db6-800d-98d5-d2408e0d1820.png" alt=""></figure>
+<h2>記録の表示</h2>
+<ol>
+<li>左メニューから<strong>「記録」</strong>を開きます。</li>
+<li>ヘッダー右で <strong>リスト／カード／詳細</strong> の表示を切り替えます。</li>
+<li>リスト表示では行クリックで詳細画面に移動します。カード表示ではクリックで右側に詳細が表示されます。</li>
+</ol>
+<figure class="shot"><img src="images/382f8c48-7db6-8085-99f4-f9432d62c853.jpg" alt=""></figure>
+`
+},
+{
+  tab:"guide",
+  category:"07利用者管理",
+  order:70,
+  target:"現場スタッフ",
+  title:"利用者を探す・絞り込む",
+  body:`
+<h2>このページでできること</h2>
+<p>利用者の一覧を表示し、目的の利用者を探す・詳細を確認します。</p>
+<h2>表示の切り替え</h2>
+<ol>
+<li>左メニューから<strong>「利用者」</strong>を開きます。</li>
+<li>ヘッダー右の<strong>「リスト／カード」</strong>で表示を切り替えます。</li>
+</ol>
+<figure class="shot"><img src="images/383f8c48-7db6-80ca-9e07-c792e190a446.jpg" alt=""></figure>
+<h2>詳細の表示</h2>
+<ul>
+<li><strong>カード表示</strong>：カードをクリックすると、画面右側に詳細が表示されます（左側の一覧は残ったままです）。</li>
+<li><strong>リスト表示</strong>：行をクリックすると詳細画面に移動します。</li>
+<li>詳細画面では <strong>概要／記録／録音／チャット／添付資料</strong> のタブを切り替えられます。</li>
+</ul>
+<h2>絞り込み</h2>
+<p>左側の絞り込みメニューから、対象の利用者をしぼり込めます。</p>
+<ul>
+<li><strong>検索</strong>（氏名・カナ）</li>
+<li><strong>アーカイブ</strong>（利用中のみ／アーカイブ済のみ／すべて）</li>
+<li><strong>声紋登録</strong>（登録済／未登録）</li>
+<li><strong>Drive 状態</strong>（フォルダあり／未生成）</li>
+<li><strong>事業所</strong></li>
+<li><strong>お気に入りのみ／MY担当のみ</strong></li>
+</ul>
+<h2>カードのクイック操作</h2>
+<p>各利用者カードの下部のボタンから、その利用者の作業にすぐ移動できます。</p>
+<ul>
+<li><strong>Drive</strong>：関連する Drive フォルダを開きます。</li>
+<li><strong>資料 Up</strong>：資料をアップロードします。</li>
+<li><strong>録音</strong>：録音画面を開きます。</li>
+<li><strong>チャット</strong>：AIチャットを開きます。</li>
+<li><strong>＋記録</strong>：新しい記録を作成します。</li>
+</ul>
+<figure class="shot"><img src="images/383f8c48-7db6-80d0-9a4d-d5251f9c6145.jpg" alt=""></figure>
+<figure class="shot"><img src="images/383f8c48-7db6-807b-b062-cd4c6ee892d5.jpg" alt=""></figure>
+<div class="note">⚠️ 同姓同名の利用者がいる場合は、名前の右に ⚠ マークが付き、各画面の上端に赤い帯で警告が表示されます。選択前に区分や事業所を確認してください。</div>
+<h2>並び替え（ソート）</h2>
+<p>ヘッダーの<strong>「ソート」</strong>ボタンを押すと、複数条件で並び替えの設定ができます。</p>
+<ul>
+<li><strong>プリセット</strong>からよく使う並び順をワンタップで選べます。</li>
+<li>「<strong>ソート条件を追加</strong>」で、条件を自由に組み合わせられます。条件は上から優先されます。</li>
+</ul>
+<figure class="shot"><img src="images/383f8c48-7db6-8061-a19e-e51e903aa8d3.jpg" alt=""></figure>
+<h2>分析</h2>
+<p>ヘッダーの<strong>「分析」</strong>ボタンを押すと、利用者分析が確認できます。</p>
+<ul>
+<li><strong>利用者層分析</strong>：介護度別・年齢層ごとの内訳（円グラフ）</li>
+<li><strong>リスク分析</strong>：リスク関連の記録がある利用者を要対応順に表示</li>
+<li><strong>担当バランス</strong>：スタッフ別の担当人数配分</li>
+</ul>
+<figure class="shot"><img src="images/383f8c48-7db6-805e-966b-d94695a028dc.jpg" alt=""></figure>
+`
+},
+{
+  tab:"guide",
+  category:"03録音履歴",
+  order:30,
+  target:"現場スタッフ",
+  title:"過去の録音を見る",
+  body:`
+<h2>このページでできること</h2>
+<p>過去の録音と文字起こしの結果をあとから確認します。</p>
+<h2>手順</h2>
+<ol>
+<li>左メニューから<strong>「録音履歴」</strong>を開きます。これまでの録音が一覧で表示されます（新しいものが上に並びます）。</li>
+<li>探している録音は、<strong>絞り込み</strong>で見つけられます
+〔並び替え・フリーワード・開始日・終了日・利用者・録音時間・録音モードなどで絞り込めます〕。</li>
+<li>目的の録音をタップすると、<strong>文字起こしの結果</strong>が表示されます。整形プロンプトを使った録音は、整形後の文章も確認できます。</li>
+</ol>
+<div class="note">💡 録音が一覧に出てこないときは、絞り込み条件がかかっていないか、別の利用者で録音していないかを確認してください。</div>
+<div class="note">💡 表示された文字起こし・整形テキストは、コピー&amp;ペースト等行い法人内の本来書類（Excelなど）に貼り付けるなど、法人・事業所の運用に応じてご活用いただけます。</div>
+<figure class="shot"><img src="images/382f8c48-7db6-8023-88f4-db2bf1b9b1e2.jpg" alt=""></figure>
+<h2>こうなれば成功です</h2>
+<p>過去に録音した一覧が表示され、それぞれの文字起こし結果を開ければ成功です。</p>
+`
+},
+{
+  tab:"guide",
+  category:"02録音で記録",
+  order:20,
+  target:"現場スタッフ",
+  title:"録音して記録を自動でつくる",
+  body:`
+<h2>このページでできること</h2>
+<p>利用者やご家族との面談を、その場で<strong>まるごと録音</strong>して、全体を文字起こしします。30分〜1時間ほどの面談の記録に向いています。</p>
+<div class="note">💡 短いメモを声で残したいだけなら、「録音」ではなく「音声記録」が便利です。</div>
+<h2>手順</h2>
+<p>1.　左メニューから<strong>「録音」</strong>を開きます。</p>
+<div class="callout">初めて使うときは<strong>「マイクを許可しますか？」</strong>と出た際は、<strong>「許可する」</strong>を選んでください（「ブロック」や「拒否」を選ぶと録音できません）。</div>
+<figure class="shot"><img src="images/382f8c48-7db6-80b4-91db-f4dbda3bb2be.jpg" alt=""></figure>
+<p>2.　必要に応じて、画面左側の<strong>「クイック整形プロンプト」</strong>から、仕上げたい形を選びます。
+複数選ぶこともできます。選ばなければ、整形なしで文字起こしだけが保存されます。</p>
+<p>3.　画面右下の<strong>赤い録音ボタン</strong>を押して、録音を開始します。</p>
+<div class="note">⏱️ 1回あたりの録音時間には上限の目安があります（画面に「上限」として表示されます）。長い面談は、区切って録音してください。</div>
+<p>4.　面談が終わったら、もう一度ボタンを押して録音を停止します。</p>
+<p>5.　録音を止めると、<strong>文字起こしが自動で始まります</strong>。</p>
+<figure class="shot"><img src="images/382f8c48-7db6-8095-a857-d5c13277fbe2.png" alt=""></figure>
+<h2>録音を停止したあとの自動処理</h2>
+<p>録音を止めると、画面右側の「文字起こしパイプライン」に沿って、次の順で自動的に処理されます。</p>
+<ol>
+<li><strong>文字起こし</strong> … 音声を文字に変換します。</li>
+<li><strong>日本語補正</strong> … 表記ゆれや固有名詞を補正します（マスタ設定を参照します）。</li>
+<li><strong>整形（任意）</strong> … 手順2で整形プロンプトを選んでいた場合のみ、その形に沿って整えます。</li>
+</ol>
+<h2>こうなれば成功です</h2>
+<p>処理が終わると、文字起こし結果が画面に表示されます。結果は「録音履歴」からあとで見直せます。</p>
+<hr>
+<h2>さらに一歩：あとから整形する</h2>
+<p>録音時に整形プロンプトを選ばなかった場合でも、あとから整形できます。</p>
+<p>1.　録音結果の画面で、画面左側の<strong>「クイック整形プロンプト」</strong>から、使いたいプロンプトを選びます（複数選択可）。</p>
+<figure class="shot"><img src="images/382f8c48-7db6-809f-b7f5-d30038de4afc.jpg" alt=""></figure>
+<p>2.<strong>　「整形を実行」</strong>を押すと、選んだ形にまとめた文章が画面中央に表示されます。</p>
+<p>3.　内容を確認して<strong>「記録へ追加」</strong>を押すと、記録に反映できます。</p>
+<figure class="shot"><img src="images/382f8c48-7db6-80b5-bee0-cb387a11082a.jpg" alt=""></figure>
+<div class="note">ℹ️ 「再整形」で内容をやり直したり、プロンプトを変えて再度実行することもできます。</div>
+<hr>
+`
+},
+{
+  tab:"guide",
+  category:"02録音で記録",
+  order:21,
+  target:"現場スタッフ",
+  title:"整形プロンプトで記録を整える",
+  body:`
+<h2>このページでできること</h2>
+<p>録音の文字起こしを、目的にあわせた形式に自動で整えます。</p>
+<h2>クイック整形プロンプトの使い方</h2>
+<p>画面右側の<strong>クイック整形プロンプト</strong>から、目的にあったテンプレートを選べます（複数選択可）。クリックした順に整形に使われます。選んだプロンプトは録音を停止したときの自動処理で適用されます（→「録音して記録を自動でつくる」を参照）。</p>
+<figure class="shot"><img src="images/382f8c48-7db6-80cc-a06f-ecc0ae5b22f2.jpg" alt=""></figure>
+<h2>選べるテンプレート</h2>
+<ul>
+<li><strong>申し送り</strong>：直近の重要事項を項目ごとに整理します。</li>
+<li><strong>モニタリング報告</strong>：月次のモニタリング報告の形式に整えます。</li>
+<li><strong>食事記録</strong>：食事内容・摂取量・水分量などを表形式に整えます。</li>
+<li><strong>排泄記録</strong>：時間・回数・性状・介助方法を所定の様式に整えます。</li>
+<li><strong>通院同行</strong>：病院名・担当医・検査内容などを整理します。</li>
+</ul>
+<div class="note">⚠️ 整形プロンプトを選ばずに録音を停止した場合は、整形なし（文字起こしのみ）の状態で保存されます。</div>
+<h2>こうなれば成功です</h2>
+<p>選んだテンプレートの形式に沿って、文章が整って表示されれば成功です。</p>
+`
+},
+{
+  tab:"guide",
+  category:"00はじめに",
+  order:1,
+  target:"全員",
+  title:"Hope Care AI を開いてログインする",
+  body:`
+<h2>このページでできること</h2>
+<p>パソコンやスマートフォンで Hope Care AI を開き、ログインするところまでを説明します。
+「どこから始めればいいか分からない」という方は、まずこのページから読んでください。</p>
+<div class="callout">💡 <strong>はじめてログインする方へ</strong>
+運営または組織の管理者から、<strong>招待メール</strong>が届きます。
+基本はこのメールからログインするのがおすすめです（下の「STEP1」）。
+なお、すでに法人内で <strong>サービスURL</strong> を共有されている場合は、そのURLから開いてもログインできます（「STEP2」）。2回目以降も STEP2 の方法で開けます。</div>
+<div class="note">⚠️ ログインには <strong>Google アカウント（Gmail など）</strong> が必要です。
+お持ちでない場合は、組織の管理者にご確認ください。</div>
+<hr>
+<h2>STEP1：はじめての方は招待メールから</h2>
+<ol>
+<li>運営または組織の管理者から届いた<strong>招待メール</strong>を開きます。</li>
+<li>メールに記載されている<strong>招待リンク</strong>をタップ（クリック）します。</li>
+</ol>
+<figure class="shot"><img src="images/380f8c48-7db6-8019-8100-cfd0700641cc.png" alt=""></figure>
+<ol>
+<li>Hope Care AI が起動し、「Google でログイン」を押します。</li>
+</ol>
+<figure class="shot"><img src="images/380f8c48-7db6-80e4-8060-fd053b4017b2.png" alt=""></figure>
+<p>4.<strong>　</strong>招待を受け取った <strong>Google アカウント（Gmail など）</strong> でログインします。</p>
+<figure class="shot"><img src="images/380f8c48-7db6-805b-aeeb-cc8105bc491f.png" alt=""></figure>
+<div class="callout">⚠️ かならず、招待メールが届いた Google アカウントでログインしてください。
+別の個人アカウントではログインできません。</div>
+<h2>STEP2：2回目以降は サービスURL から</h2>
+<p>すでに法人内で <strong>サービスURL</strong> を共有されている場合は、そのURLをブラウザで開いてもログインできます。2回目以降は、この方法が便利です。</p>
+<ol>
+<li>ブラウザの<strong>アドレスバー</strong>に、共有された<strong>サービスURL</strong>を入力して開きます（ブックマークに登録しておくと、次回からワンタップで開けます）。</li>
+<li><strong>「Google でログイン」</strong>を押し、招待を受け取ったアカウントでログインします。</li>
+</ol>
+<div class="note">💡 サービスURLが分からないときは、組織の管理者にご確認ください。</div>
+<h2>こうなれば成功です</h2>
+<p>ログイン後、画面の左上に<strong>ロゴ・組織名・事業所名</strong>が表示されていれば成功です。</p>
+<figure class="shot"><img src="images/380f8c48-7db6-8095-9cf3-d9f9547cb7ba.png" alt=""></figure>
+<h2>毎回入力しなくてよくする方法</h2>
+<p>この画面を一度「ブックマーク（お気に入り）」に登録しておくと、次回からは入力せずにボタン一つで開けます。</p>
+<p class="ref">👉 詳しくは「画面をブックマークに登録する」ページをご覧ください。</p>
+<h2>うまくいかないときは</h2>
+<p>画面が出てこない・ログインできないときは、トラブルシューティングの「ログインできない・パスワードを忘れた」をご覧ください。</p>
+`
+},
+{
+  tab:"guide",
+  category:"00はじめに",
+  order:2,
+  target:"全員",
+  title:"毎回すぐ開けるようにする（ブックマーク・ホーム画面に追加）",
+  body:`
+<h2>このページでできること</h2>
+<p>Hope Care AI を毎回URLを入力せずにすぐ開けるようにします。目的に合わせてて2つの方法から選べます。</p>
+<ul>
+<li><strong>方法① ブックマーク登録</strong>：ブラウザのお気に入りからワンタップで開く。最も簡単。</li>
+<li><strong>方法② ホーム画面に追加（インストール）</strong>：ブラウザを使わずアイコンタップで起動。アプリと同じ感覚で使える。</li>
+</ul>
+<h2>方法①：ブックマークに登録する</h2>
+<h3>パソコン（Chrome / Edge）</h3>
+<ol>
+<li>Hope Care AI の画面を開いた状態にします。</li>
+<li>画面の上のほう、アドレスバーの右端にある「☆（星マーク）」を押します。</li>
+</ol>
+<figure class="shot"><img src="images/380f8c48-7db6-80ba-9df9-f149b2d1a147.png" alt=""></figure>
+<ol>
+<li>「完了」または「保存」を押します。</li>
+</ol>
+<figure class="shot"><img src="images/380f8c48-7db6-80e0-a28d-cea57e56ce74.png" alt=""></figure>
+<h3>スマートフォン（android）</h3>
+<div class="note">ℹ️ ブックマークに登録すると、ブラウザのブックマーク一覧に入り、そこからワンタップで開けます。
+「ホーム画面に追加」（アイコンを作る）は方法②をご覧ください。</div>
+<p>1.　Hope Care AI の画面を開いた状態にします。</p>
+<p>2.　画面の下または上にある「共有」ボタン（四角から矢印が出ているマーク）を押します。
+（Androidの場合は右上の3点リーダーを押します。）</p>
+<figure class="shot"><img src="images/387f8c48-7db6-8062-b949-ee36618fcd82.png" alt=""></figure>
+<p>3.　「<strong>ブックマーク</strong>」を選びます。</p>
+<p>4.　「保存」または「追加」をタップしたら完了です。</p>
+<figure class="shot"><img src="images/387f8c48-7db6-8085-b952-c1b44d128802.png" alt=""></figure>
+<figure class="shot"><img src="images/387f8c48-7db6-8067-abc5-de5f2fba1330.png" alt=""></figure>
+<div class="callout"><strong>ホーム画面に追加する</strong><ol>
+<li>画面上の「ホーム画面に追加」を選択します。</li>
+<li>「アプリをインストールしますか？」というメッセージが表示されたら、<strong>［進む］</strong>（または［インストール］［追加］）をタップします。</li>
+<li>完了すると、スマホのホーム画面に <strong>HopeCareAI のアイコン</strong>が表示されます。</li>
+</ol>
+</div>
+<h2>方法②：ホーム画面に追加する（インストール）</h2>
+<h3>iPhone（Safariを使用）</h3>
+<p>1.　<strong>Safari</strong>（iPhoneの標準ブラウザ）でHope Care AIを開きます。</p>
+<p>2.　画面下部の<strong>3点リーダー（⋯）</strong>をタップします。</p>
+<figure class="shot"><img src="images/387f8c48-7db6-8089-aa06-d9a88d1f4c30.png" alt=""></figure>
+<p>3.　メニューから<strong>「ブックマークに追加」</strong>を選びます。</p>
+<figure class="shot"><img src="images/387f8c48-7db6-8017-a7a3-d281177153b1.png" alt=""></figure>
+<p>4.　<strong>「ホーム画面に追加」</strong>を選択し、追加ボタンを押すと画面に追加されます。</p>
+<figure class="shot"><img src="images/387f8c48-7db6-80e4-9272-f59976e5f8e8.png" alt=""></figure>
+<figure class="shot"><img src="images/387f8c48-7db6-80a7-b19b-f3a99713c0e1.png" alt=""></figure>
+<h3>Android（Chromeを使用）</h3>
+<p>1.<strong>　Chrome</strong>でHope Care AIを開きます。</p>
+<p>2.　右上のメニューボタン（<strong>⋯</strong>）をタップします。</p>
+<p>3.　<strong>「ホーム画面に追加」</strong>をタップします。</p>
+<figure class="shot"><img src="images/387f8c48-7db6-8071-9cc5-f3c1896a3300.png" alt=""></figure>
+<p>4.　<strong>「アプリをインストールしますか？」</strong>と表示されたら<strong>「インストール」</strong>をタップすると、ホーム画面にアイコンが追加されます。</p>
+<figure class="shot"><img src="images/387f8c48-7db6-805e-be6e-e32bb1c1f192.png" alt=""></figure>
+`
+},
+{
+  tab:"guide",
+  category:"00はじめに",
+  order:3,
+  target:"全員",
+  title:"画面の見方（どこに何があるか）",
+  body:`
+<h2>このページでできること</h2>
+<p>Hope Care AI の画面の、どこに何があるかを説明します。操作中に「これは何だっけ」と迷ったら、このページに戻ってきてください。</p>
+<div class="note">ℹ️ 掲載している画像は、実際の画面と一部異なる場合があります。
+最新の画面表示にしたがってご操作ください。</div>
+<h2>画面全体のつくり</h2>
+<p>画面は大きく3つに分かれています。</p>
+<ol>
+<li><strong>左側のメニュー</strong> … 「チャット」「録音」など、やりたいことを選んで切り替える場所です。</li>
+<li><strong>真ん中</strong> … 選んだメニューの作業をする場所です。</li>
+<li><strong>左上の表示</strong> … いまログインしている組織名・事業所名（例：希望の丘）が出ます。ここで自分がどの事業所で作業しているか確認できます。</li>
+</ol>
+<figure class="shot"><img src="images/380f8c48-7db6-80ed-88bb-c1e7408f9584.png" alt=""></figure>
+<h2>左メニューでできること（一覧）</h2>
+<p>左のメニューには、上から順に7つの項目があります。それぞれが何をする場所かをまとめます。</p>
+<h3>💬 チャット</h3>
+<p>AIに文章で相談・依頼等をする場所です。利用者を選んで「申し送り用にまとめて」などと指示すると、AIが整理して答えます。右側のテンプレートから、よく使う依頼を選ぶこともできます。</p>
+<p class="ref">👉 詳しくは「AIチャットで質問する」ページへ</p>
+<h3>✨ 音声記録</h3>
+<p>短いメモを、AIで整った記録に清書する場所です。
+面談のあとの移動中などに「○○さんと面談、体調は良さそう、就労に少し不安あり」と短く吹き込む（または直接入力する）と、AIが整えてくれます。職員のメモ書き向けです。</p>
+<p class="ref">👉 詳しくは「録音して記録を自動でつくる」ページへ</p>
+<h3>🎤 録音</h3>
+<p>面談まるごとを録音して、全体を文字起こしする場所です。
+利用者やご家族との30分〜1時間の面談を、その場で丸ごと録音します。
+録音を止めると、自動で「文字起こし → 日本語補正 → 整形」が行われます。
+長めの面談記録向けです。</p>
+<p class="ref">👉 詳しくは「録音して記録を自動でつくる」ページへ</p>
+<h3>🕐 録音履歴</h3>
+<p>これまでに録音・文字起こししたものの一覧です。日付・利用者・録音時間・録音モード（全て／個別／会議）で絞り込めます。「処理済み」と表示されていれば、文字起こしが終わっています。</p>
+<p class="ref">👉 詳しくは「過去の録音を見る」ページへ</p>
+<h3>📄 テンプレ</h3>
+<p>よく使う依頼（プロンプト）を、ひな形として登録しておく場所です。
+「申し送り要約」「家族向け説明」などが用意されており、選ぶだけでAIが決まった形に整えてくれます。</p>
+<p class="ref">👉 詳しくは「テンプレート」関連のページへ</p>
+<h3>📝 記録</h3>
+<p>できあがった記録の一覧・管理をする場所です。
+区分（事例記録／会議録／個別支援／チーム支援）や期間、利用者で絞り込めます。
+リスト・カード・詳細の3つの見え方を切り替えられます。</p>
+<p class="ref">👉 詳しくは「記録を作成する」ページへ</p>
+<h3>📁 利用者</h3>
+<p>利用者の一覧・管理をする場所です。
+氏名やカナで検索でき、利用中／アーカイブ済みなどで絞り込めます。
+各利用者のカードから、その人の録音・チャット・記録づくりにすぐ移れます。</p>
+<p class="ref">👉 詳しくは「利用者を探す・絞り込む」ページへ</p>
+<h2>「音声記録」と「録音」はどう違う？</h2>
+<p>名前が似ていて迷いやすい2つですが、用途がはっきり違います。</p>
+<table>
+<tr><th></th><th>✨ 音声記録</th><th>🎤 録音</th></tr>
+<tr><td>ひとことで言うと</td><td>短いメモの清書</td><td>面談まるごとの記録</td></tr>
+<tr><td>こんなとき</td><td>面談後に要点を吹き込む</td><td>面談中ずっと録る</td></tr>
+<tr><td>長さの目安</td><td>数十秒〜数分</td><td>30分〜1時間</td></tr>
+<tr><td>主に使う人</td><td>職員（メモ代わり）</td><td>職員（業務記録）</td></tr>
+<tr><td>入力のしかた</td><td>短く吹き込む／直接入力</td><td>その場の会話を丸ごと録音</td></tr>
+</table>
+<p>迷ったら、<strong>「自分の言葉でメモしたい」なら音声記録、「面談そのものを残したい」なら録音</strong>、と覚えてください。</p>
+<h2>よく使う言葉の意味</h2>
+<p>このページに出てくる言葉が分からないときは、用語集を見てください。</p>
+<p class="ref">👉 「用語集（よく使う言葉の意味）」ページへ</p>
+`
+},
+{
+  tab:"guide",
+  category:"00はじめに",
+  order:4,
+  target:"全員",
+  title:"用語集（よく使う言葉の意味）",
+  body:`
+<h2>このページでできること</h2>
+<p>Hope Care AI やパソコン・スマホでよく出てくる言葉の意味をまとめました。「この横文字、なんだろう」と思ったら、わざわざ調べなくてもここで確認できます。分からない言葉が出てきたら、まずこのページを見てください。</p>
+<div class="note">💡 言葉は「カタカナ・横文字（一般）」→「Hope Care AI の言葉」→「テンプレート編集の言葉」の順に並んでいます。</div>
+<h2>パソコン・スマホでよく出てくる言葉（カタカナ・横文字）</h2>
+<p>よく使われるパソコン・スマホ用語を、分かりやすく解説しています。</p>
+<ul>
+<li><strong>ブラウザ</strong> … インターネットを見るためのソフトです。「Chrome（クローム）」「Edge（エッジ）」「Safari（サファリ）」などがこれにあたります。</li>
+<li><strong>アドレスバー</strong> … ブラウザの上のほうにある、ホームページのアドレス（URL）を入力する白い横長の枠です。</li>
+<li><strong>URL（ユーアールエル）</strong> … ホームページの住所にあたる文字列です。「<a href="https://xn--26j7hobwfa5e9912b./" target="_blank" rel="noopener">https://」で始まります。</a></li>
+<li><strong>ログイン</strong> … IDやアカウントを使って、自分専用の画面に入ることです。</li>
+<li><strong>ログアウト</strong> … ログインした状態から出る（自分の画面を閉じる）ことです。</li>
+<li><strong>アカウント</strong> … サービスを使うための、自分専用の登録情報です。Hope Care AI では Google アカウントを使います。</li>
+<li><strong>クリック</strong> … マウスのボタンを押すことです。</li>
+<li><strong>タップ</strong> … スマホやタブレットの画面を指で軽く触れることです。</li>
+<li><strong>ドラッグ</strong> … マウスのボタンを押したまま動かすことです。並べ替えなどで使います。</li>
+<li><strong>スクロール</strong> … 画面を上下（または左右）に動かして、隠れている部分を見ることです。</li>
+<li><strong>再読み込み（リロード）</strong> … ページをもう一度読み込み直すことです。画面が固まったときに使います。</li>
+<li><strong>更新（こうしん）</strong> … 最新の状態に表示し直すことです。再読み込みとほぼ同じ意味です。</li>
+<li><strong>キャッシュ</strong> … ページを速く表示するために、一時的にためておくデータです。古い表示が残るときは「キャッシュを消す」と直ることがあります。</li>
+<li><strong>ブックマーク（お気に入り）</strong> … よく見るページを登録しておき、すぐ開けるようにする機能です。</li>
+<li><strong>ポップアップ</strong> … 画面の上に小さく出てくる別の窓やお知らせのことです。</li>
+<li><strong>アップロード</strong> … 自分のパソコン・スマホから、ファイルや写真をサービスに送ることです。</li>
+<li><strong>ダウンロード</strong> … サービスから、自分のパソコン・スマホにファイルを取り込むことです。</li>
+<li><strong>ファイル</strong> … 写真・書類・PDFなど、ひとまとまりのデータのことです。</li>
+<li><strong>フォルダ</strong> … ファイルをまとめて入れておく入れ物です。</li>
+<li><strong>アイコン</strong> … 機能を表す小さな絵（マーク）のことです。</li>
+<li><strong>メニュー</strong> … やりたいことを選ぶための一覧です。Hope Care AI では画面の左側にあります。</li>
+<li><strong>タブ</strong> … 画面の中で表示を切り替えるための見出しです。</li>
+<li><strong>トグル（スイッチ）</strong> … オン・オフを切り替える、小さなスイッチ型のボタンです。</li>
+<li><strong>フィルター（絞り込み）</strong> … たくさんある中から、条件に合うものだけを表示することです。</li>
+<li><strong>ソート（並べ替え）</strong> … 新しい順・名前順など、決めた順番に並べ直すことです。</li>
+</ul>
+<h2>Hope Care AI で使う言葉</h2>
+<ul>
+<li><strong>利用者（りようしゃ）</strong> … サービスを受けている方のことです。「利用者」メニューで情報を管理します。</li>
+<li><strong>事業所（じぎょうしょ）</strong> … サービスを提供している拠点のことです（例：希望の丘）。画面の左上に表示されます。</li>
+<li><strong>チャット</strong> … AIに文章で質問・相談ができる画面です。</li>
+<li><strong>音声記録（おんせいきろく）</strong> … 短いメモを声で吹き込み、AIが整った記録に清書する機能です。</li>
+<li><strong>録音（ろくおん）</strong> … 面談まるごとを録音して、全体を文字起こしする機能です。</li>
+<li><strong>文字起こし（もじおこし）</strong> … 録音した声を、文字（文章）に変換することです。</li>
+<li><strong>整形（せいけい）</strong> … 文字起こしした文章を、決まった形に整えることです。</li>
+<li><strong>リライト</strong> … AIが文章を書き直して、読みやすく整えることです。</li>
+<li><strong>テンプレート（テンプレ）</strong> … よく使う依頼や書類の、決まった形（ひな形）です。</li>
+<li><strong>プロンプト</strong> … AIへの「指示文」のことです。「〜してください」という、指示文章です。</li>
+<li><strong>記録（きろく）</strong> … 支援記録など、できあがった文章のことです。「記録」メニューで管理します。</li>
+<li><strong>蓄積参照（ちくせきさんしょう）</strong> … AIが回答するときに、その利用者の過去の記録も参考にする設定です。オンにすると、より具体的な回答になります。</li>
+<li><strong>声紋登録（せいもんとうろく）</strong> … 声で誰の発言かを聞き分けるために、声の特徴を登録することです。</li>
+<li><strong>Drive（ドライブ）</strong> … Google Drive のことです。録音データや記録の保管先になります。</li>
+<li><strong>アーカイブ</strong> … 使わなくなった利用者などを、消さずにしまっておくことです。</li>
+</ul>
+<h2>テンプレート編集で出てくる言葉</h2>
+<p>テンプレートを作る・編集するときの画面に出てくる、少し専門的な言葉です。</p>
+<ul>
+<li><strong>スコープ</strong> … そのテンプレートを「どの機能で使うか」を表します。「チャット」「録音整形」「記録整形」などから選びます。たとえば「チャット」を選ぶと、チャット画面で使えるテンプレートになります。</li>
+<li><strong>必要 tier（ティア）</strong> … そのテンプレートを動かすAIの「種類・性能」のことです。「FAST（ファスト）」は速さ重視、「SMART（スマート）」は賢さ重視、とイメージしてください。迷ったら、まずは初期設定のままで問題ありません。</li>
+<li><strong>カテゴリ（表示先）</strong> … そのテンプレートを、どの画面の一覧に表示するかの設定です。</li>
+<li><strong>可視範囲（かしはんい）</strong> … そのテンプレートを「誰が見られるか」の設定です。「組織共通」は同じ組織の全員が使え、「個人専用」は自分だけが使えます。</li>
+<li><strong>組織共通（そしききょうつう）</strong> … 同じ組織の全員が使えるようにすることです。みんなで使うテンプレートはこちらにします。</li>
+<li><strong>個人専用（こじんせんよう）</strong> … 自分だけが使えるようにすることです。試しに作ったものなどはこちらにしておくと、他の人に見えません。</li>
+<li><strong>{records}（レコーズ）</strong> … プロンプト本文に書いておくと、対象の記録が自動で差し込まれる「合言葉」のようなものです。基本はそのまま消さずに残しておいてください。</li>
+</ul>
+`
+},
+{
+  tab:"qa",
+  category:"データ・利用者",
+  title:"利用者の表示はカード表示とリスト表示を切り替えられますか？",
+  body:`
+<h2>回答</h2>
+<p>切り替えられます。<strong>画面上のボタン</strong>でカード表示とリスト表示を切り替えてください。</p>
+<ul>
+<li><strong>カード表示</strong>：利用者を一覧でざっと確認したいときに便利</li>
+<li><strong>リスト表示</strong>：全画面で詳細情報を確認したいときに向いている</li>
+</ul>
+<h2>関連ページ</h2>
+<p>操作ガイド「利用者を探す・絞り込む」もあわせてご覧ください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"録音・記録",
+  title:"録音は何分まで対応していますか？",
+  body:`
+<h2>回答</h2>
+<p>目安は<strong>1時間半（90分）</strong>です。それを超える場合は、一度録音を停止し、新たに録音を開始してください。</p>
+<div class="note">💡 長時間の会議や研修などは、区切りのよいところで停止・再開することをおすすめします。</div>
+`
+},
+{
+  tab:"qa",
+  category:"AIの回答",
+  title:"「蓄積参照」のオン/オフはどう使い分けますか？",
+  body:`
+<h2>回答</h2>
+<p><strong>オンにすると</strong>、その利用者のこれまでのケア記録・プロフィールなどを参照した上でAIが回答を生成します。利用者の状況に即した、より具体的な回答が得られます。</p>
+<p><strong>オフにすると</strong>、入力した質問文のみをもとに回答します。利用者を指定せず一般的な質問をするときなどに向いています。</p>
+<div class="note">💡 事業所の運用に合わせて切り替えてご活用ください。</div>
+<h2>関連ページ</h2>
+<p>操作ガイド「蓄積参照を使ってAIの回答を改善する」もあわせてご覧ください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"データ・利用者",
+  title:"全相談員が全利用者の情報を閲覧できますか？",
+  body:`
+<h2>回答</h2>
+<p>アカウントを持つ職員であれば全員が同じ情報を閲覧できます。</p>
+`
+},
+{
+  tab:"qa",
+  category:"録音・記録",
+  title:"紙の書類の情報を添付・参照させることはできますか？",
+  body:`
+<h2>回答</h2>
+<p>可能です。紙の書類を以下の方法でデータ化して添付してください。</p>
+<ul>
+<li><strong>写真撃影してJPEGで添付する</strong></li>
+<li><strong>スマホで撮影後、PDF変換アプリ等でPDF化して添付する</strong></li>
+</ul>
+<h2>関連ページ</h2>
+<p>操作ガイド「記録にファイルを添付する」もあわせてご覧ください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"録音・記録",
+  title:"複数人で話した録音の発言者はどう識別されますか？",
+  body:`
+<h2>回答</h2>
+<p>録音後に<strong>話者分析が自動で行われます</strong>。録音の中で登録済みの利用者名・職員名が会話内に出てきた場合、それと照合して誰の発言かを識別することができます。</p>
+`
+},
+{
+  tab:"qa",
+  category:"アカウント",
+  title:"ログインに使うGoogleアカウントを変更したい",
+  body:`
+<h2>回答</h2>
+<p>HopeCareAIは<strong>Googleアカウントでログインする仕様</strong>です。ログインに使うGoogleアカウントを変えたい場合、次のことをご確認ください。</p>
+<h3>変更後にログインするまでの注意点</h3>
+<ol>
+<li><strong>法人管理者に連絡する</strong>—新しいGoogleアカウントのメールアドレスで再招待してもらう必要があります。</li>
+<li>旧アカウントで保存したデータ（記録・録音履歴など）はアカウントに結び付いているため、新しいアカウントには引き継がれません。</li>
+<li>アカウントの変更そのものはGoogle側で行います（HopeCareAI内に変更機能はありません）。</li>
+</ol>
+<div class="note">⚠️ データの引き継ぎが必要な場合は、先に管理者または担当の方にご相談ください。</div>
+`
+},
+{
+  tab:"qa",
+  category:"録音・記録",
+  title:"テンプレートは自分で変更・追加できますか？",
+  body:`
+<h2>回答</h2>
+<p>できます。以下の方法で作成・編集できます。</p>
+<ul>
+<li><strong>「新規作成」ボタンから追加する</strong></li>
+<li><strong>既存テンプレートをコピーして編集する</strong></li>
+</ul>
+<p>法人の業務スタイルに合わせたテンプレートを自由に作成いただけます。</p>
+<div class="note">💡 使い始めのうちは事業所として最適なテンプレートを作成・編集し、極めたらスタッフごとの書き方や記載したい内容を反映したテンプレートを新規登録するなど、使い方はさまざまです。</div>
+<h2>関連ページ</h2>
+<p>操作ガイド「テンプレートを確認・編集する」もあわせてご覧ください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"スマホ",
+  title:"HopeCareAIはアプリストアからダウンロードできますか？",
+  body:`
+<h2>回答</h2>
+<p><strong>HopeCareAIは、App Store（iPhone）やGoogle Play（Android）からダウンロードするアプリではありません。</strong></p>
+<p>スマートフォンのブラウザ（iPhoneのSafari、AndroidのChrome）でURLにアクセスして使います。</p>
+<h3>ホーム画面に追加するとアプリ感覚で使えます</h3>
+<p>ホーム画面に追加すると、アイコンをタップするだけで起動でき、アプリのような感覚で使えます。</p>
+<div class="note">💡 詳しい追加方法は、操作ガイド「毎回すぐ開けるようにする（ブックマーク・ホーム画面に追加）」をご覧ください。</div>
+`
+},
+{
+  tab:"qa",
+  category:"AIの回答",
+  title:"蓄積参照とは何ですか？使うと何が変わりますか？",
+  body:`
+<h2>回答</h2>
+<p>蓄積参照とは、<strong>利用者ごとに蓄積された過去の記録・情報をAIが参照して回答精度を上げる機能</strong>です。</p>
+<h3>具体的に何が変わりますか？</h3>
+<p>オフの場合：AIは入力された質問文だけを元に回答します。</p>
+<p>オンの場合：AIは「この利用者のこれまでの状況」を踏まえた上で回答できるため、より具体的で精度の高い回答が得られます。</p>
+<div class="note">💡 録音や記録の蓄積が少ないうちは効果が小さいですが、使い続けるほど回答の精度が向上します。</div>
+<h2>関連ページ</h2>
+<p>操作ガイド「蓄積参照を使ってAIの回答を改善する」もあわせてご覧ください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"AIの回答",
+  title:"AIが的外れな回答をするときはどうすればいいですか？",
+  body:`
+<h2>回答</h2>
+<p>AIの回答精度は、<strong>質問の書き方と蓄積情報の量</strong>によって変わります。次の方法をお試しください。</p>
+<h3>1. 質問を具体的にする</h3>
+<p>漠然とした質問より、利用者の状況を含めた具体的な質問のほうが精度が上がります。</p>
+<ul>
+<li>❌「記録を書いて」</li>
+<li>✅「今日の訪問で〇〇さんが食事を半分残した場面の経過記録を書いて」</li>
+</ul>
+<h3>2. 蓄積参照を有効にする</h3>
+<p>利用者に関する過去の記録・情報がアプリ内に蓄積されていると、AIがその情報をもとに回答精度を上げられます。蓄積参照がオフの場合はオンにしてみてください。</p>
+<h3>3. 「直前の入力に戻す」で質問を調整する</h3>
+<p>入力欄の下にある「直前の入力に戻す」ボタンを押すと、ひとつ前の質問文を再編集して送り直せます。</p>
+<h2>関連ページ</h2>
+<p>操作ガイド「蓄積参照を使ってAIの回答を改善する」もあわせてご覧ください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"録音・記録",
+  title:"整形プロンプトはどれを選べばよいですか？",
+  body:`
+<h2>回答</h2>
+<p>整形プロンプトは、録音内容を<strong>どのような形式でまとめるか</strong>を指定するものです。用途に応じて選んでください。</p>
+<table>
+<tr><th>用途</th><th>おすすめのプロンプト</th></tr>
+<tr><td>訪問介護・個別支援の記録</td><td>「支援記録」「経過記録」系</td></tr>
+<tr><td>スタッフ間の申し送りメモ</td><td>「申し送り」系</td></tr>
+<tr><td>会議・カンファレンスの議事録</td><td>「会議メモ」系</td></tr>
+</table>
+<div class="note">💡 複数選択もできます。まずはいくつか試して、自分の業務スタイルに合うものを見つけてください。整形後に「再整形」で別のプロンプトに切り替えることもできます。</div>
+<h2>関連ページ</h2>
+<p>操作ガイド「整形プロンプトで記録を整える」もあわせてご覧ください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"録音・記録",
+  title:"「記録」はExcelや帳票と何が違いますか？",
+  body:`
+<h2>回答</h2>
+<p>HopeCareAIの<strong>「記録」は、アプリ内に保存されるデータ</strong>です。録音の文字起こし・AIの整形結果などを整理・確認する場所として使います。</p>
+<p><strong>法人で作成している介護記録書類（Excel・帳票など）が自動で完成するわけではありません。</strong></p>
+<h3>活用の流れ</h3>
+<ol>
+<li>HopeCareAIで録音 → 文字起こし・整形</li>
+<li>内容を確認・修正</li>
+<li>必要な部分をコピーし、法人のExcelや帳票に貼り付ける</li>
+</ol>
+<div class="note">ℹ️ HopeCareAIはテキスト作成を効率化するツールです。公式書類への転記は法人・事業所の運用に応じて行ってください。</div>
+`
+},
+{
+  tab:"qa",
+  category:"録音・記録",
+  title:"個別モードと会議モードの違いは何ですか？",
+  body:`
+<h2>回答</h2>
+<p><strong>個別モード</strong>と<strong>会議モード</strong>は、録音する場面に合わせて使い分けます。</p>
+<h3>個別モード</h3>
+<p>利用者おひとりとの会話（訪問介護・個別支援など）に使います。録音後、その利用者の記録に直接紐付けて保存できます。</p>
+<h3>会議モード</h3>
+<p>複数の利用者が参加するグループ活動や、スタッフ間の申し送り・会議の記録に使います。特定の利用者ではなく、「場・会議」の記録として保存されます。</p>
+<div class="note">💡 迷ったときは、<strong>利用者1人との記録なら個別モード、複数人・グループなら会議モード</strong>と覚えておくと便利です。</div>
+<h2>関連ページ</h2>
+<p>操作ガイド「個別モードと会議モードを使い分ける」もあわせてご覧ください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"アカウント",
+  title:"招待したメンバーがログインできないときは？",
+  body:`
+<p>招待メール内のリンクから承諾が完了しているか、案内したメールアドレスでログインしているかを確認してください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"データ・利用者",
+  title:"探している利用者が見つからない",
+  body:`
+<p>探している利用者が見つからないときは、区分・居宅（事業所）・担当などの絞り込みがかかっていないか確認してください。「フィルターをリセット」を押すとすべての利用者が表示されます。</p>
+`
+},
+{
+  tab:"qa",
+  category:"データ・利用者",
+  title:"これまでの録音・チャットのデータを別のGoogleフォルダへ移動したい",
+  body:`
+<p>フォルダ階層の生成では、過去データは新しいフォルダへ自動移行されません。</p>
+<p>必要な場合は、Drive を開いて手動で移動してください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"エラー",
+  title:"組織ロゴ画像がアップロードできない",
+  body:`
+<p>ロゴは jpg／png 形式、2MB までです。ファイルの形式とサイズを確認してください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"エラー",
+  title:"Drive連携で「接続済み」にならない",
+  body:`
+<p>フォルダを <a href="mailto:share@hope-care.tech" target="_blank" rel="noopener">share@hope-care.tech</a> に「編集者」権限で共有できているか、貼り付けた URL が共有したフォルダのものかを確認してください。解決しない場合はお問い合わせください。</p>
+<p class="ref">👉 詳しくは「Drive連携を設定する」ページをご覧ください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"データ・利用者",
+  title:"事業所を削除できない",
+  body:`
+<p>利用者が紐づいている事業所は削除できません。</p>
+<p>先に対象の利用者の所属事業所を変更してから、削除してください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"アカウント",
+  title:"組織情報の編集ボタン（⚙）が表示されない",
+  body:`
+<p>組織情報の編集には組織オーナー権限が必要です。</p>
+<p>表示されない場合は、ご自身の権限をご確認ください。</p>
+<p class="ref">👉 詳しくは「組織情報を編集する」ページをご覧ください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"録音・記録",
+  title:"録音が途中で止まってしまう",
+  body:`
+<p>1回あたりの録音の上限は 1時間30分です。長時間の記録は、区切って録音してください。</p>
+`
+},
+{
+  tab:"qa",
+  category:"料金",
+  title:"月額料金はいくらですか？",
+  body:`
+<p>月額 <strong>50,000円（税抜）</strong> です。</p>
+<div class="note">💡 料金や契約内容の詳細については、担当営業またはお問い合わせフォームからお気軽にご確認ください。</div>
+`
+},
+{
+  tab:"trouble",
+  category:"スマホ",
+  title:"スマホのホーム画面アイコンをタップしても開かない・白画面になる",
+  body:`
+<h2>まず確認すること</h2>
+<h3>1. スマホのブラウザで直接開いて確認する</h3>
+<p>ホーム画面のアイコンではなく、ブラウザ（SafariやChrome）でHopeCareAIのURLに直接アクセスしてみてください。ブラウザでは正常に開ける場合、アイコン側の問題です。</p>
+<h3>2. インターネット接続を確認する</h3>
+<p>Wi-Fiまたはモバイルデータに接続されているか確認してください。</p>
+<h3>3. ホーム画面のアイコンを削除して追加し直す</h3>
+<ol>
+<li>ホーム画面のアイコンを長押しして削除する</li>
+<li>ブラウザで再度HopeCareAIを開く</li>
+<li>操作ガイド「毎回すぐ開けるようにする」の手順でホーム画面に追加し直す</li>
+</ol>
+<h3>4. iPhoneの場合：Safariで追加したか確認する</h3>
+<p>iPhoneでは<strong>Safari</strong>からホーム画面に追加する必要があります。ChromeなどのブラウザからはPWAとして追加できないため、Safariで追加し直してください。</p>
+`
+},
+{
+  tab:"trouble",
+  category:"表示・画面",
+  title:"画面が真っ白になる・ずっと読み込み中のまま先に進まない",
+  body:`
+<h2>まず確認すること</h2>
+<h3>1. インターネット接続を確認する</h3>
+<p>他のサイト（Googleなど）が開けるか確認してください。接続が切れている場合は、Wi-Fiまたはモバイルデータを確認してください。</p>
+<h3>2. ページを再読み込みする</h3>
+<p>ブラウザの再読み込みボタン（または F5キー・Ctrl+R）でページを更新してください。一時的な読み込みエラーはこれで解決することが多いです。</p>
+<h3>3. ブラウザのキャッシュをクリアする</h3>
+<p>古いデータが残っていると表示がおかしくなることがあります。</p>
+<p><strong>Chrome の場合</strong>：Ctrl+Shift+Delete → 「キャッシュされた画像とファイル」にチェック → 「データを削除」</p>
+<h3>4. 別のブラウザで試す</h3>
+<p>Chrome・Edge・Safariなど別のブラウザでアクセスして、同じ症状が出るか確認してください。</p>
+<h3>5. ブラウザの拡張機能を無効にして試す</h3>
+<p>広告ブロッカーなどの拡張機能が干渉している場合があります。シークレットモード（プライベートブラウズ）で開いて確認してください。</p>
+<h2>それでも解決しないとき</h2>
+<div class="note">⚠️ 上記を試しても解決しない場合は、お問い合わせフォームからご連絡ください。使用しているブラウザの種類とバージョン、OSもあわせてお知らせください。</div>
+`
+},
+{
+  tab:"trouble",
+  category:"録音",
+  title:"録音後に文字起こし結果が表示されない・空白になる",
+  body:`
+<h2>まず確認すること</h2>
+<h3>1. 録音時間が短すぎないか確認する</h3>
+<p>数秒以下の非常に短い録音は、文字起こしができない場合があります。10秒以上話した内容で再度お試しください。</p>
+<h3>2. 通信状況を確認する</h3>
+<p>文字起こしはサーバーで処理されるため、インターネット接続が必要です。接続が不安定な場所では処理が失敗することがあります。接続を確認してから再度お試しください。</p>
+<h3>3. しばらく待ってから再読み込みする</h3>
+<p>処理に時間がかかっている場合があります。1〜2分待ってからページを再読み込みしてください。</p>
+<h3>4. 録音をやり直す</h3>
+<p>上記を試しても表示されない場合は、一度録音を削除して録音し直してください。</p>
+<h2>それでも解決しないとき</h2>
+<div class="note">⚠️ 上記を試しても解決しない場合は、お問い合わせフォームからご連絡ください。録音した時間帯と大まかな録音時間（何分程度か）をあわせてお知らせいただくとスムーズです。</div>
+`
+},
+{
+  tab:"trouble",
+  category:"録音",
+  title:"マイクが反応しない・録音を押しても録音が始まらない",
+  body:`
+<h2>まず確認すること</h2>
+<h3>1. ブラウザのマイク許可を確認する</h3>
+<p>ブラウザがマイクへのアクセスを許可していないと録音できません。</p>
+<p><strong>Chrome（PC・Android）の場合</strong></p>
+<ol>
+<li>アドレスバー左の🔒アイコンまたは「サイトの情報」をクリック</li>
+<li>「マイク」が<strong>許可</strong>になっているか確認する</li>
+<li>「ブロック」になっている場合は「許可」に変更してページを再読み込み</li>
+</ol>
+<p><strong>Safari（iPhone）の場合</strong></p>
+<ol>
+<li>設定アプリ → Safari → 「マイク」を確認</li>
+<li>または設定アプリ → プライバシーとセキュリティ → マイク → Safariを確認</li>
+</ol>
+<h3>2. 他のアプリがマイクを使用中でないか確認する</h3>
+<p>通話中や別のアプリで録音中の場合、マイクが占有されて使えないことがあります。他のアプリを閉じてから再度お試しください。</p>
+<h3>3. ページを再読み込みする</h3>
+<p>ブラウザのページを再読み込み（リロード）してから、再度録音ボタンを押してください。</p>
+<h3>4. ブラウザを変えて試す</h3>
+<p>別のブラウザ（ChromeやEdgeなど）でアクセスして試してください。</p>
+<h2>それでも解決しないとき</h2>
+<div class="note">⚠️ 上記を試しても解決しない場合は、お問い合わせフォームからご連絡ください。使用しているデバイス（PC・iPhone・Androidなど）とブラウザの種類もあわせてお知らせください。</div>
+`
+},
+{
+  tab:"trouble",
+  category:"ログイン",
+  title:"ログインできない",
+  body:`
+<h2>まず確認すること</h2>
+<ol>
+<li><strong>インターネットに接続されているか</strong>確認します。他のサイトが開けるか試してください。</li>
+<li><strong>メールアドレスとパスワードが正しいか</strong>確認します。コピー＆ペーストで入力すると、余分なスペースが入ることがあります。</li>
+<li><strong>Caps Lock（大文字固定）がオフになっているか</strong>確認します。</li>
+</ol>
+<h2>Googleアカウントでログインしている場合</h2>
+<p>「Googleでログイン」を選んだとき、<strong>組織で指定されたGoogleアカウント</strong>を選んでいるか確認してください。個人のGoogleアカウントを選んだ場合はログインできません。</p>
+<h2>それでも解決しないとき</h2>
+<div class="note">⚠️ 上記を試しても解決しない場合は、お問い合わせフォームからご連絡ください。その際、<strong>どんなエラーメッセージが表示されたか</strong>を一緒にお知らせいただくとスムーズです。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"03音声記録",
+  order:3,
+  target:"現場スタッフ",
+  title:"どの記録様式を選べばいい？迷ったときは",
+  body:`
+<p>記録様式（マスタ）がいくつもあると、どれを選べばいいか迷ってしまいます。そんなときは、いきなり1つに決めず、AIのおすすめと手動選択を見比べて、現場に合うものを見つけるのがおすすめです。</p>
+<h2>やり方</h2>
+<ol>
+<li>音声を整形した後、「記録マスタに割り当て」を押します。</li>
+<li>画面に表示される「AIのおすすめ様式」をまず確認します。</li>
+<li>ドロップダウンから別の様式も選んで出力をプレビューし、一番しっくりくるものを採用します。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">よく使う様式が固まってきたら、それを「事業所の定番」としてみんなで共有しておくと、毎回迷わずスムーズに記録化できます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"03音声記録",
+  order:7,
+  target:"現場スタッフ",
+  title:"現場では時間がない。記録はいつ作ればいい？",
+  body:`
+<p>現場では、ゆっくり記録を作る時間はなかなか取れませんよね。そんなときは「その場ではメモだけ、記録化はあとで」と作業を分けるのが、負担を減らすコツです。</p>
+<h2>やり方</h2>
+<ol>
+<li>現場では、音声記録に短く要点だけを吹き込みます。</li>
+<li>事務所に戻って落ち着いてから「AI リライト」で整形します。</li>
+<li>その後、「記録マスタに割り当て」をしてしっかり記録化します。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">記録化していない録音やメモは「タスク」画面に残ります。1日の終わりにタスク画面を空にする運用にすれば、記録の溜め込みを防げます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"03音声記録",
+  order:4,
+  target:"現場スタッフ",
+  title:"様式が多すぎて選べない…どれから使う？",
+  body:`
+<p>記録様式がたくさんあると、最初は「どれを使えば…」と立ち止まってしまいます。そんなときは、AIの提案を出発点にすると安心です。</p>
+<h2>コツ</h2>
+<ul>
+<li>まずは「AIのおすすめ様式」を試す：内容から一番適した様式を、AIが自動で提案してくれます。</li>
+<li>合わなければ手動で選び直す：提案されたものが違うなと思ったら、ドロップダウンから選び直せます。</li>
+<li>よく使う様式を絞る：現場でよく使う様式を数個に絞っておくと、スタッフ全員が迷わなくなります。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「まずはAIのおすすめを見て、合わなければ手動」という順番を習慣にすると、様式選びで悩む時間が大幅に減ります。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"03音声記録",
+  order:2,
+  target:"現場スタッフ",
+  title:"AIの文章をもう少し直したいときは？",
+  body:`
+<p>AIが整えてくれた文章を「もう少し自分らしい書き方に近づけたい」というときも、一から書き直す必要はありません。「修正指示」で希望を伝えれば、AIがその場でパパッと整え直してくれます。</p>
+<h2>やり方</h2>
+<ol>
+<li>「AI リライト」で整形された文章を確認します。</li>
+<li>「修正指示」を押し、直したい方向を伝えます（例：「もっと簡潔に」「敬体に」「専門用語を減らして」）。</li>
+<li>AIが指示を反映して作り直します。納得いくまで何度でも繰り返せます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">大きく方向性を変えたいときは「修正指示」、細かい言い回しの微調整は「直接手入力」と使い分けると、もっとも効率よく仕上がります。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"03音声記録",
+  order:5,
+  target:"現場スタッフ",
+  title:"あとで記録を探しやすくするには？",
+  body:`
+<p>記録が増えてくると、後から目的の記録を探すのに手間取ることがあります。タイトルの付け方を少し工夫するだけで、ぐっと探しやすくなります。</p>
+<h2>コツ</h2>
+<ul>
+<li>タイトルは20字以内の「短い要点」にする</li>
+<li>「日付＋利用者名＋キーワード」の順にする（例：「7/8 青木 食事拒否」のようにすると一覧で見分けやすいです）</li>
+<li>迷ったら、後で検索しそうな言葉を入れる</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">タイトルは記録一覧やキーワード検索の対象になります。「未来の自分が探すときの気持ち」で付けておくと、後々とても助かりますよ。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"02チャット",
+  order:7,
+  target:"現場スタッフ",
+  title:"一度の質問でうまくいかないときは？",
+  body:`
+<p>一回の質問で思い通りの答えが出なくても、大丈夫です。AIは、追加の質問（対話）を重ねるほど精度が上がっていきます。</p>
+<h2>コツ</h2>
+<ul>
+<li>一度で完璧を狙わず、大まかに聞く：まずはざっくりと聞いて反応を見ます。</li>
+<li>返ってきた答えに「追加」で聞く：「もっと具体的にして」「この部分をさらに詳しく」と深掘りします。</li>
+<li>方向がずれたら条件を足す：「〇〇の視点を入れて書き直して」など、軌道修正の指示を出します。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">AIとのやり取りは「対話」です。同僚に相談するのと同じように、やりとりを重ねるほど欲しい答えに近づいていきます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"03音声記録",
+  order:8,
+  target:"現場スタッフ",
+  title:"話し方が下手でもAIは整えてくれる？",
+  body:`
+<p>「上手に話せないかも…」と心配しなくても大丈夫です。口ごもったり言い回しがラフでも、AIが記録向けのきれいな文体に整えてくれます。まずは思ったまま話してみてください。</p>
+<h2>コツ</h2>
+<ul>
+<li>言葉に詰まっても、そのまま続けてOK：「えーと」などの不要な言葉は、整形時に自動でカットされます。</li>
+<li>敬語やていねいな言い回しは気にしない：文体はAIが適切な形に整えるので、気にせず事実を話しましょう。</li>
+<li>方言や口語も大丈夫：AIが意味を汲み取って、標準的な記録文に直してくれます。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「うまく話そう」より「もれなく話そう」を優先してください。必要な事実さえ入っていれば、体裁はAIがしっかり仕上げてくれます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"03音声記録",
+  order:1,
+  target:"現場スタッフ",
+  title:"うまく話せなくても、ちゃんとした記録になる？",
+  body:`
+<p>文章としてしっかりまとめて話す必要はありません。音声入力では、思いついたことや残しておきたいメモ、後から「大事かも」と思ったことなどを、短く区切って話すだけで大丈夫です。AIが自動で読みやすい記録文に整えてくれるため、最初からきれいな文章を作ろうとしなくても問題ありません。</p>
+<h2>コツ</h2>
+<ul>
+<li>文章にしようとせず、事実を短く区切って話す（例：「朝食 全量摂取」「体温 36度8分」「歩行 ふらつきあり」など）</li>
+<li>順番はバラバラでもOK：後からAIが文脈を整理して並べ替えます。</li>
+<li>言い間違えたら、そのまま言い直す：「あ、さっきのは○○の間違い」とそのまま話せば、AIが意図を汲み取って整形時に反映させます。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">まずは「AI リライト」機能で整形結果を確認し、気になる部分があれば「修正指示」を出したり、直接手入力で直したりして仕上げるのがおすすめです。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"02チャット",
+  order:2,
+  target:"現場スタッフ",
+  title:"その人に合った答えをもらうには？",
+  body:`
+<p>同じ質問でも「誰について聞いているか」をAIに伝えると、回答の具体性が驚くほど変わります。質問の前に、まずは対象の利用者を指定しましょう。</p>
+<h2>やり方</h2>
+<ol>
+<li>チャット画面上部で、対象の利用者を選びます。</li>
+<li>その状態で質問すると、その人の情報に紐づいた回答が返ってきます。</li>
+<li>「蓄積参照」は基本オンのままでOK。過去の記録も踏まえた、より深い回答になります。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">利用者を選ばずに質問すると、どうしても一般論になりがちです。「まずは誰の話かを指定する」のが、的確な答えを引き出す一番の近道です。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"03音声記録",
+  order:9,
+  target:"現場スタッフ",
+  title:"録音、どう話せば文章が整理される？",
+  body:`
+<p>ざっくばらんに話してもAIはある程度きれいにまとめてくれますが、「より意図通りに、しっかり整理された文章に仕上げたい」という場合にはちょっとしたコツがあります。話し始めに「見出し」になる言葉を意識することと、事前の設定を少し工夫するだけで、AIの精度がグッと上がります。</p>
+<h2>コツ</h2>
+<ul>
+<li>「見出し」になるキーワード ＋ 内容 の順で短く話す（例：「体温、36度8分」「歩行、ふらつきあり」「ご家族対応、電話にて受診の件伝達」など）：頭にキーワードを置くことで、AIが話題の区切り（見出し）を正しく理解し、自動で読みやすく整理してくれます。</li>
+<li>よく使う項目は「テンプレート」に登録しておく：あらかじめテンプレートに項目名を登録しておくと、AIがそのフォーマットに沿って整形してくれやすくなります。</li>
+<li>施設名や利用者名は「カスタム固有名詞」に登録する：固有名詞を登録しておくことで、音声認識の際の変換ミスを大幅に減らすことができます。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「今から何の話をするか（見出しになる言葉）」を先に言ってから内容を話す。これは録音機能に限らず、チャットなどAI全般を思い通りに動かすための共通のコツです。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"02チャット",
+  order:1,
+  target:"現場スタッフ",
+  title:"AIが利用者のことを分かってくれない…を解決",
+  body:`
+<p>チャットは、利用者を選んで質問すると、その人の過去の記録や録音を踏まえた「その人らしい回答」を返してくれます。これは画面上部の「蓄積参照」が基本オンになっているおかげです。一般論ではなく、具体的で使えるアドバイスが欲しいときに役立ちます。</p>
+<h2>やり方</h2>
+<ol>
+<li>「蓄積参照」がオンになっていることを確認します（基本はオンのままでOKです）。</li>
+<li>対象の利用者を選んでから質問を入力します。</li>
+<li>AIが過去の記録を読み込み、状況を踏まえて回答してくれます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">蓄積参照は基本オンのままで問題ありません。その人の記録を踏まえてくれるぶん、回答がぐっと具体的になり、日々の支援に活かしやすくなります。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"02チャット",
+  order:3,
+  target:"現場スタッフ",
+  title:"過去のチャットが探せない…",
+  body:`
+<p>AIとの会話が増えてくると、過去の「良いやりとり」が埋もれてしまいがちです。会話に名前（タイトル）を付けておくと、後からすぐに呼び出せます。</p>
+<h2>やり方</h2>
+<ol>
+<li>会話画面の「タイトル/タグ編集」ボタンから、分かりやすい名前を付けます。</li>
+<li>後日、会話履歴の検索欄からその名前やキーワードで探します。</li>
+<li>「すべて／お気に入り／記録化済」のタブで絞り込むこともできます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">良い回答を引き出せた会話に名前を付けておくと、次に似たような相談をするときに使い回せます。毎回ゼロから聞き直す手間が省けますよ。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"02チャット",
+  order:5,
+  target:"現場スタッフ",
+  title:"専門用語を家族に分かる言葉にしたい",
+  body:`
+<p>ご家族への説明や報告では、専門用語をやさしい言葉に言い換える必要がありますよね。この「置き換え作業」は、実はAIが得意とすることのひとつです。</p>
+<h2>やり方</h2>
+<ol>
+<li>説明したい内容や記録の文章を、チャットに貼り付けます。</li>
+<li>「家族に分かるやさしい言葉に直して」と指示を出します。</li>
+<li>AIが専門用語を平易な表現に置き換えた下書きを返してくれます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">テンプレート機能の「家族向け説明」を使うと、毎回指示を打ち込まなくてもワンクリックで平易な文章に変換できます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"02チャット",
+  order:6,
+  target:"現場スタッフ",
+  title:"会議の議題を考えるのが大変",
+  body:`
+<p>月次会議などの議題をゼロから考えるのは、時間も手間もかかりますよね。利用者の状態をもとに、AIに議題の草案（たたき台）を作ってもらいましょう。</p>
+<h2>やり方</h2>
+<ol>
+<li>対象の利用者を選びます（「蓄積参照」は基本オンのままでOKです）。</li>
+<li>チャットに「○○さんの最近の状態から、会議の議題案を作って」と送信します。</li>
+<li>AIが最近の状態を踏まえた議題案を返すので、それをたたき台にします。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">出てきた草案をそのまま使うのではなく、現場の実感に合わせて足し引きするのがコツです。ゼロから白紙で考えるより、格段に早く仕上がります。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"03音声記録",
+  order:6,
+  target:"現場スタッフ",
+  title:"同じ人の記録を続けて何件も作りたい",
+  body:`
+<p>一人の利用者について、複数の場面をまとめて記録したいこと、ありますよね。そんなときは「保存して続けて作成」ボタンを使うと、様式や利用者を選び直す手間が省けます。</p>
+<h2>やり方</h2>
+<ol>
+<li>「記録マスタに割り当て」から、記録を追加する画面を開きます。</li>
+<li>内容を入力したら、画面下部の「保存して続けて作成」を押します。</li>
+<li>様式と利用者が保持されたまま次の入力画面に移るので、サクサク続けて記録できます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">1件ずつ「保存」して一覧に戻る手間が省けます。同じ人の記録を一気に片付けたいときに、ぜひ使ってみてください。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"07記録",
+  order:3,
+  target:"現場スタッフ",
+  title:"事例記録や会議録だけ見たい",
+  body:`
+<p>「記録の種類ごと」に絞って表示させることができます。見たい区分だけをまとめて確認したいときに使いましょう。</p>
+<h2>やり方</h2>
+<ol>
+<li>「区分」フィルタを開きます。</li>
+<li>事例記録・会議録・個別支援・チーム支援などの種類から選びます。</li>
+<li>その区分の記録だけが一覧に表示されます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「会議録だけ振り返りたい」「個別支援の記録だけまとめて確認したい」といったときにとても便利です。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"08利用者",
+  order:9,
+  target:"管理者",
+  title:"利用終了した人を一覧から隠したい",
+  body:`
+<p>利用が終了した人を一覧に残したままにしておくと、現役の利用者が探しにくくなってしまいます。「アーカイブ」機能で一覧を整理しましょう。</p>
+<h2>やり方</h2>
+<ol>
+<li>対象の利用者を「アーカイブ」に設定します。</li>
+<li>通常の一覧からは外れ、表示されなくなります。</li>
+<li>「アーカイブ」フィルタを使えば、後から確認したり、現役に復帰させたりすることも可能です。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「削除」ではなく「アーカイブ」なので、過去の記録などの情報は安全に残ります。利用再開時にはフィルタからすぐ戻せるので安心です。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"09管理者設定",
+  order:5,
+  target:"管理者",
+  title:"料金や支払い方法を確認した",
+  body:`
+<p>現在のプランや請求情報は、管理者設定からいつでも確認できます。</p>
+<h2>やり方</h2>
+<ol>
+<li>管理者設定の「支払い方法を確認・変更」を開きます。</li>
+<li>現在のプランや請求情報を確認します。</li>
+</ol>
+`
+},
+{
+  tab:"knowledge",
+  category:"08利用者",
+  order:7,
+  target:"現場スタッフ",
+  title:"紙資料も利用者に紐づけたい",
+  body:`
+<p>紙の書類や写真も、利用者のデジタル情報として一緒に取り込めます。バラバラに管理せず、その人に紐づけて一元管理しておきましょう。</p>
+<h2>やり方</h2>
+<ol>
+<li>利用者詳細の「添付資料」タブを開きます。</li>
+<li>写真やPDFファイルを添付します。</li>
+<li>その利用者の関連情報として、蓄積・参照できるようになります。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">紙の書類は、スマホでサッと撮影してそのまま添付するのが一番手軽です。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"08利用者",
+  order:4,
+  target:"現場スタッフ",
+  title:"利用者ごとの記録・録音をまとめて見たい",
+  body:`
+<p>ひとりの利用者に関するすべての情報を、まとめて確認できます。あちこちの画面を探し回る必要はありません。</p>
+<h2>やり方</h2>
+<ol>
+<li>利用者詳細ページを開きます。</li>
+<li>「記録／録音／チャット／添付資料」のタブを切り替えます。</li>
+<li>その人に紐づく情報を、一覧で確認できます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">モニタリングや申し送りの前に、この画面で「その人の最近の状況」をまとめて把握しておくと、業務がとてもスムーズに進みます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"09管理者設定",
+  order:3,
+  target:"管理者",
+  title:"記録をGoogle Driveに残したい",
+  body:`
+<p>Drive連携を設定すると、記録や資料が組織のGoogle Driveに自動で保存されるようになります。情報の共有や、万が一のバックアップに役立ちます。</p>
+<h2>やり方</h2>
+<ol>
+<li>管理者設定の「Drive連携」を開きます。</li>
+<li>画面の案内に従って連携を設定します。</li>
+<li>以降、記録や資料が組織のDriveに自動保存されます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">Driveに残しておくと、HopeCareAIを開いていなくても資料を確認・共有できて便利です。バックアップとしても安心です。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"08利用者",
+  order:6,
+  target:"管理者",
+  title:"Drive連携のフォルダがない利用者は？",
+  body:`
+<p>Google Drive連携をしていると、利用者ごとに保存フォルダが自動で作られます。「まだフォルダが作られていない人」をフィルタで確認できます。</p>
+<h2>やり方</h2>
+<ol>
+<li>利用者一覧の「DRIVE状態」フィルタを開きます。</li>
+<li>「未生成」を選びます。</li>
+<li>フォルダが未作成の利用者が表示されます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">フォルダ未生成の人を把握しておくと、「資料の保存先がない」という状況を防げます。見つけたら管理者と連携して設定を整えましょう。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"07記録",
+  order:2,
+  target:"現場スタッフ",
+  title:"目的の記録を早く探すには？",
+  body:`
+<p>記録の数が増えても、いくつかの「フィルタ」を組み合わせれば、目的のものにすぐ辿り着けます。</p>
+<h2>やり方</h2>
+<ol>
+<li>区分・期間・利用者属性などのフィルタを選びます。</li>
+<li>複数のフィルタを組み合わせて、探す範囲をグッと狭めます。</li>
+<li>検索欄（フリーワード）と併用すると、さらに早く見つかります。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「今月 ＋ 個別支援 ＋ 担当利用者」のように、条件を重ねれば重ねるほど、目的の記録に素早く辿り着けます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"08利用者",
+  order:5,
+  target:"現場スタッフ",
+  title:"大勢の中から目的の利用者を探すには？",
+  body:`
+<p>登録している利用者が多くても、検索やフィルタを使えば、すぐに目的の人に辿り着けます。</p>
+<h2>やり方</h2>
+<ol>
+<li>氏名やカナで検索します。</li>
+<li>事業所や介護度などの「フィルタ」で絞り込みます。</li>
+<li>「お気に入り登録」した人は、一覧の上部からすぐに開けます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">毎日関わる人は「お気に入り」に、たまに探す人は「検索とフィルタ」で、と使い分けると迷わずアクセスできます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"09管理者設定",
+  order:7,
+  target:"管理者",
+  title:"新しく入ったスタッフの立ち上げは？",
+  body:`
+<p>新しく入ったスタッフには、決まった順番で案内をすると、迷わず早く使えるようになります。</p>
+<h2>おすすめの順番</h2>
+<ol>
+<li>招待メールを送り、実際にログインできるか一緒に確認する</li>
+<li>操作ガイドのURLを共有し、基本操作を覚えてもらう</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">最初の「ログイン」までは一緒に確認しておくと、初期のつまずきが減ります。操作ガイドのリンクを渡しておけば、スタッフ自身で自習もしやすくなります。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"08利用者",
+  order:1,
+  target:"現場スタッフ",
+  title:"利用者情報、まず何を見ればいい？",
+  body:`
+<p>利用者の基本情報を確認したいとき、まず見るべきは詳細ページの「概要」タブです。必要な情報がここにしっかりまとまっています。</p>
+<h2>概要で分かること</h2>
+<ul>
+<li>基本情報（生年月日・所属事業所など）</li>
+<li>区分情報（介護度・障害区分など）</li>
+<li>関連事業所・医療機関、およびAI同意の状況</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">迷ったらまずは「概要」を開きましょう。ここを起点にして、記録・録音・チャット・添付資料の各タブへ進むと情報把握がスムーズです。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"07記録",
+  order:4,
+  target:"管理者",
+  title:"記録の傾向をまとめて把握したい",
+  body:`
+<p>記録の入力状況を、数字やグラフでまとめて確認することができます。日々の記録業務が適切に行われているか、ひと目で把握できます。</p>
+<h2>分析で分かること</h2>
+<ul>
+<li>記録数の推移：記録の件数が極端に減っていないか（抜け漏れがないか）。</li>
+<li>区分別の分布：どの種類の記録が多く作られているか。</li>
+<li>リスク分析：対応が必要そうな利用者がいないか。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「分析」ボタンから開けます。月末のまとめ作業や、記録の偏り・漏れがないかの定期チェックにぜひご活用ください。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"09管理者設定",
+  order:4,
+  target:"管理者",
+  title:"事業所名や組織情報を直したい",
+  body:`
+<p>組織名や事業所の情報は、設定後もいつでも変更・修正が可能です。</p>
+<h2>やり方</h2>
+<ol>
+<li>管理者設定の「組織情報を編集」を開きます。</li>
+<li>事業所名などの修正したい項目を直します。</li>
+<li>保存すると、システム内の表示に反映されます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">事業所の名称変更や体制の変更があったときは、ここを忘れずに更新しておきましょう。記録上での表記の食い違いを防げます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"08利用者",
+  order:8,
+  target:"現場スタッフ",
+  title:"利用者の登録内容を最新に保ちたい",
+  body:`
+<p>介護度や関連機関などの情報は、変更があったときに随時更新しておくと、記録やAIの精度が保てます。</p>
+<h2>やり方</h2>
+<ol>
+<li>利用者詳細ページの「編集」を開きます。</li>
+<li>介護度や関連事業所などの項目を、最新の情報に更新します。</li>
+<li>保存すると、すぐに最新情報が反映されます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">情報が古いままだと、絞り込みがうまくいかなかったり、AIの回答が現状とずれたりする原因になります。変更があったら、早めに更新しましょう。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"07記録",
+  order:6,
+  target:"現場スタッフ",
+  title:"録音がないとき、記録を手入力したい",
+  body:`
+<p>録音機能を使わず、直接手入力で記録を作ることももちろん可能です。電話対応やちょっとしたメモなど、録音しない場面で便利です。</p>
+<h2>やり方</h2>
+<ol>
+<li>記録一覧の「記録を追加」ボタンを押します。</li>
+<li>記録様式（フォーマット）を選びます。</li>
+<li>フォームに沿って直接テキストを入力し、保存します。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「録音するほどでもない、ごく短い記録」は、手入力してしまった方が早いこともあります。場面に応じて、録音と手入力を賢く使い分けましょう。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"07記録",
+  order:1,
+  target:"現場スタッフ",
+  title:"記録一覧、見やすい表示に変えたい",
+  body:`
+<p>記録一覧画面は、見やすさに合わせて3つの表示方法を切り替えられます。目的に合わせて選ぶと、画面がぐっと見やすくなりますよ。</p>
+<h2>3つの表示</h2>
+<ul>
+<li>リスト：たくさんの記録をコンパクトに一覧表示します。</li>
+<li>カード：1件ずつが見やすく、内容の冒頭部分も確認しやすいです。</li>
+<li>詳細：各記録の中身を、一覧画面のまましっかり読みたいときに便利です。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「ざっと探すときはリスト、内容を読みたいときは詳細」など、今の作業に合わせて切り替えると効率よく情報を見つけられます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"09管理者設定",
+  order:9,
+  target:"管理者",
+  title:"組織のルールを決めておきたい",
+  body:`
+<p>システムの使い方を各自の裁量に任せてしまうと、記録の質やAIの使い方がスタッフ間でばらついてしまいます。事業所としてのルールを決めて、共有しておきましょう。</p>
+<h2>決めておくとよいこと</h2>
+<ul>
+<li>テンプレの作成権限（誰が作れるか、勝手に作っていいか）</li>
+<li>記録の書き方の基準（どの様式を使うかなど）</li>
+<li>録音同意の取り方の手順（いつ、誰が説明するか）</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">ルールを最初に共有しておくと、スタッフによる品質のばらつきや、同意の取り漏れといったトラブルを防げます。運用が早く安定します。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"08利用者",
+  order:2,
+  target:"管理者",
+  title:"AI同意がまだの人を探したい",
+  body:`
+<p>AIを使うには、利用者ごとの同意が必要です。同意がまだの人を、フィルタで一覧化できます。</p>
+<h2>やり方</h2>
+<ol>
+<li>利用者一覧の「AI同意」フィルタを開きます。</li>
+<li>「未取得あり」を選びます。</li>
+<li>同意が済んでいない利用者が一覧に表示されます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">システムの利用開始前に、全員分の同意を取っておくと安心です。利用者カードに表示される⚠️（注意マーク）も、未取得の目印になります。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"09管理者設定",
+  order:6,
+  target:"管理者",
+  title:"AI導入をスムーズに進めるには？",
+  body:`
+<p>AIを現場にスムーズに定着させるには、すべての機能を開放する前に「誰が何をするか」というルールを決めておくのが効果的です。</p>
+<h2>コツ</h2>
+<ul>
+<li>テンプレの編集は担当者に集約し、現場スタッフは「選んで使うだけ」にする</li>
+<li>権限と役割を先に決めておく</li>
+<li>少数の定番の使い方から始めて、慣れてきたら徐々に広げる</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「役割を分けて、小さくシンプルに始める」のが、定着を早める一番の近道です。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"09管理者設定",
+  order:1,
+  target:"管理者",
+  title:"最初に何を設定すればいい？",
+  body:`
+<p>システムを導入したら、まずは基本設定を整えましょう。おすすめの順番で進めると、現場への展開がスムーズに始められます。</p>
+<h2>おすすめの順番</h2>
+<ol>
+<li>組織を登録する</li>
+<li>メンバーを招待する</li>
+<li>Drive連携を設定する</li>
+<li>支払い方法を登録する</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">この順番で進めると、途中で「あ、あの設定がまだだった」と手戻りする手間が減ります。まずは土台作りからしっかり整えましょう。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"07記録",
+  order:5,
+  target:"現場スタッフ",
+  title:"キーワードで記録を探したい",
+  body:`
+<p>探したい言葉（単語）がはっきり分かっているなら、「キーワード検索」が一番早い方法です。</p>
+<h2>やり方</h2>
+<ol>
+<li>記録一覧の検索欄を開きます。</li>
+<li>タイトル・内容・利用者名のいずれかのキーワードを入力します。</li>
+<li>該当する記録が横断的に検索され、表示されます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">記録を作る際、タイトルに「後から探しそうなキーワード」を入れておくと、この検索機能がさらに効果を発揮します。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"09管理者設定",
+  order:8,
+  target:"管理者",
+  title:"誰がどの利用者を担当するか整理したい",
+  body:`
+<p>利用者ごとに「担当スタッフ」を設定しておくと、日々のタスク画面や記録一覧がぐっと使いやすくなります。</p>
+<h2>ポイント</h2>
+<ul>
+<li>利用者ごとに担当を設定しておきます。</li>
+<li>設定すると、「タスク」や「記録一覧」の担当フィルタが正しく機能するようになります。</li>
+<li>各スタッフが、自分の担当利用者だけに絞って効率よく作業できるようになります。</li>
+</ul>
+`
+},
+{
+  tab:"knowledge",
+  category:"08利用者",
+  order:3,
+  target:"現場スタッフ",
+  title:"声紋登録すると何が良い？",
+  body:`
+<p>声紋を登録しておくと、会議の録音などで「誰が発言したか」をAIが見分けやすくなります。複数人の会話記録が、整理されやすくなります。</p>
+<h2>ポイント</h2>
+<ul>
+<li>声紋登録により、会議録音の「話者（誰が話したか）」を識別しやすくなります。</li>
+<li>発言者ごとに整理された、読みやすい記録が作りやすくなります。</li>
+<li>「声紋登録：未登録」フィルタで、まだ登録していない利用者を探せます。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「会議モード」での録音をよく使うなら、参加者の声紋を事前に登録しておくと、文字起こし・記録の精度が格段に上がります。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"05録音履歴",
+  order:7,
+  target:"現場スタッフ",
+  title:"期間を指定して振り返りたい",
+  body:`
+<p>「特定の時期」の録音だけを抜き出して見たいときは、期間を指定して絞り込むことができます。</p>
+<h2>やり方</h2>
+<ol>
+<li>録音履歴画面で、探したい「開始日」と「終了日」を指定します。</li>
+<li>その期間内に録音されたものだけが表示されます。</li>
+<li>これを利用者やキーワード検索と組み合わせると、さらに絞り込めます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「先月分だけまとめて確認したい」「この面談期間中のものだけ見たい」といったときに便利です。月次のまとめ作業がスムーズに進みますよ。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"04録音",
+  order:7,
+  target:"現場スタッフ",
+  title:"同じ録音から用途別の記録を作りたい",
+  body:`
+<p>1本の録音から、用途に合わせて複数の記録を作れます。録り直す必要はありません。</p>
+<h2>やり方</h2>
+<ol>
+<li>録音を停止し、文字起こし結果を用意します。</li>
+<li>別の整形プロンプトを選んで整え直します。</li>
+<li>申し送り用・報告用など、それぞれの用途に合った記録を複数作成できます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「会議の録音を、申し送りにも月次報告にも使う」といった賢い活用ができます。一度の録音を、無駄なくフル活用しましょう。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"01タスク",
+  order:8,
+  target:"現場スタッフ",
+  title:"直近で自分が何を書いたか見返したい",
+  body:`
+<p>「さっき、どんな記録を書いたっけ？」と見返したいときも、タスク画面からすぐにアクセスできます。</p>
+<h2>やり方</h2>
+<ol>
+<li>タスク画面の「直近の自分の記録」を見ます。</li>
+<li>自分が最近作成した記録が、新しい順に並んでいます。</li>
+<li>クリックするだけで、その記録を開いて確認や修正ができます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">書いた直後の見直しや、続きの記録を書き足すときの起点として非常に便利です。自分の記録だけが表示されるので、迷わず探せます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"01タスク",
+  order:4,
+  target:"現場スタッフ",
+  title:"自分が担当する人だけ見たい",
+  body:`
+<p>利用者が多いと全員分が並んでしまい、画面が見づらくなることがあります。「担当フィルタ」を使えば、自分が対応する人だけに絞ってスッキリ表示できます。</p>
+<h2>やり方</h2>
+<ol>
+<li>タスク画面上部の「担当」フィルタを選びます。</li>
+<li>自分の担当利用者だけが表示されます。</li>
+<li>その中から、未記録の人を優先して対応します。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">この機能は、事前の「担当」設定が正しくされていることが前提です。もし絞り込めない場合は、管理者に設定をお願いしておきましょう。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"04録音",
+  order:5,
+  target:"現場スタッフ",
+  title:"長い会議はどこまで録れる？",
+  body:`
+<p>長時間の会議でももちろん録音できますが、時間の上限があります。事前に知っておけば「途中で切れてしまった！」という心配がありません。</p>
+<h2>目安</h2>
+<ul>
+<li>1回の録音の上限は「120分」です</li>
+<li>長くなりそうなときは、区切って複数回に分けて録音します。</li>
+<li>区切った録音は、後からそれぞれ整形して記録化できます。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">長い会議は「休憩のタイミングで区切る」と管理しやすくなります。上限に達して録り逃す失敗を防ぐためにもおすすめです。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"05録音履歴",
+  order:6,
+  target:"現場スタッフ",
+  title:"特定の利用者の録音だけ振り返りたい",
+  body:`
+<p>「この利用者の録音だけをまとめて見たい」というとき、利用者で絞り込めます。</p>
+<h2>やり方</h2>
+<ol>
+<li>録音履歴画面の「利用者フィルタ」を開きます。</li>
+<li>対象の利用者を選びます。</li>
+<li>その人の録音データだけが一覧に表示されます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">面談の経過をじっくり振り返りたいとき等、期間の絞り込みと合わせると、さらに探しやすくなります。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"01タスク",
+  order:3,
+  target:"現場スタッフ",
+  title:"録音したのに記録化を忘れてない？",
+  body:`
+<p>録音して文字起こしまでしたのに、うっかり記録化を忘れてしまうこと、ありますよね。タスク画面を見れば、そんなやり残しが一目で分かります。</p>
+<h2>やり方</h2>
+<ol>
+<li>タスク画面の「記録化待ちの録音・メモ」を確認します。</li>
+<li>まだ記録にしていないものが一覧で並んでいます。</li>
+<li>開いて文章を整形・様式に割り当てて記録化します。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「記録化待ちを毎日空にする」を目標にすると、仕事の溜め込みを防げます。1日の終わりの最終チェックに活用するのがおすすめです。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"01タスク",
+  order:6,
+  target:"現場スタッフ",
+  title:"朝いちばんに何をすればいい？",
+  body:`
+<p>朝の業務の始め方に迷わないための、おすすめの順番があります。タスク画面を起点に動くことで、その日の抜け漏れをしっかり防げます。</p>
+<h2>おすすめの順番</h2>
+<ol>
+<li>まずは「タスク」画面を開く</li>
+<li>「本日未記録の利用者」を確認する</li>
+<li>「記録化待ちの録音・メモ」を片付ける</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">この3ステップを毎朝のルーティンにすると、記録が後回しになりにくくなります。まずは1週間、騙されたと思って続けてみてください！</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"05録音履歴",
+  order:5,
+  target:"現場スタッフ",
+  title:"新しい順・古い順を切り替えたい",
+  body:`
+<p>録音履歴の並び順は、見やすいように自由に変えられます。確認したい順番に並べ替えると、目的のものがパッと見つけやすくなります。</p>
+<h2>やり方</h2>
+<ol>
+<li>録音履歴画面の「並び替え」を開きます。</li>
+<li>「新しい順」「古い順」など、見たい順番を選びます。</li>
+<li>一覧が指定した順番に並び替わります。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「直近の録音」を確認したいなら新しい順、「過去の経過」を順番に振り返りたいなら古い順と、目的に合わせて使い分けてみてください。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"05録音履歴",
+  order:4,
+  target:"現場スタッフ",
+  title:"昔の面談をもう一度整形したい",
+  body:`
+<p>過去の録音データを、後から「別の形の記録」として整形し直すことができます。当時とは違う用途でも、データを再活用できるんです。</p>
+<h2>やり方</h2>
+<ol>
+<li>録音履歴から、対象の録音データを開きます。</li>
+<li>別の整形プロンプト（テンプレ）を選び直します。</li>
+<li>新しい形の記録としてAIが作り直してくれます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「以前の面談内容を、今の報告書のフォーマットでまとめ直したい」といったときにとても便利です。録音さえ残っていれば、何度でも再利用できます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"05録音履歴",
+  order:3,
+  target:"現場スタッフ",
+  title:"録音がまだ使えない・処理中のまま",
+  body:`
+<p>録音した直後は、まだ整形結果が見られないことがあります。これはAIが裏側で「処理中」の状態なので、少し待てば表示されます。</p>
+<h2>確認すること</h2>
+<ul>
+<li>ステータスが「処理済み」になっているか確認します。</li>
+<li>処理中の場合は、少し時間を置いてから再度開いてみてください。</li>
+<li>長時間ステータスが変わらない場合は、通信環境（Wi-Fiなど）が不安定になっていないか確認します。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">長い録音ほど、AIの処理に時間がかかります。停止してすぐ結果が出なくてもあわてず、他の作業をしながら少し待ってみてください。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"04録音",
+  order:1,
+  target:"現場スタッフ",
+  title:"面談の録音、どう文字起こしされるの？",
+  body:`
+<p>録音した音声は、ボタンを止めるだけで自動的に文字になります。「裏側でどう動いているか」を知っておくと、安心して使えますよ。</p>
+<h2>処理の流れ</h2>
+<ol>
+<li>録音を停止すると、自動で処理が始まります。</li>
+<li>「文字起こし → 日本語補正 → 整形」の順にAIが作業を進めます。</li>
+<li>処理が終わると、記録の下書きができあがります。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">録音を始める前に「整形プロンプト」を選んでおくと、停止後にそのままきれいな記録の形まで自動で仕上がります。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"01タスク",
+  order:2,
+  target:"現場スタッフ",
+  title:"記録し忘れている利用者を素早く知りたい",
+  body:`
+<p>「今日、誰の記録がまだだっけ？」と迷う時間をなくせます。タスク画面の未記録リストを見れば、対応が必要な人がすぐに分かります。</p>
+<h2>やり方</h2>
+<ol>
+<li>タスク画面を開きます。</li>
+<li>「本日未記録の利用者」リストを上から確認します。</li>
+<li>対応した人から順番に記録を作成していきます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「担当」フィルタと組み合わせると、自分が対応すべき未記録者だけにサクッと絞り込めます。チームで手分けするときにも便利です。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"01タスク",
+  order:1,
+  target:"全員",
+  title:"「タスク」って何を見る画面？",
+  body:`
+<p>「タスク」は、その日にやるべきことがひと目でまとまる便利な画面です。毎朝ここを開くだけで、記録のやり残しにサッと気づくことができます。</p>
+<h2>この画面で分かること</h2>
+<ul>
+<li>本日未記録の利用者：今日まだ記録が作成されていない人の一覧です。</li>
+<li>記録化待ちの録音・メモ：文字起こしは終わったけれど、まだ記録として保存していないものが並びます。</li>
+<li>直近の自分の記録：最近自分が作成した記録をすぐに見返せます。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「出勤したらまずタスク画面を開く」を習慣にすると、記録の抜け漏れを自然と防げます。毎日の業務のスタート地点としてご活用ください。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"04録音",
+  order:2,
+  target:"現場スタッフ",
+  title:"録音前に整形の型を決めておきたい",
+  body:`
+<p>録音の後にどんな形の記録にしたいか、あらかじめ決まっていることも多いですよね。「整形プロンプト」を先に選んでおけば、停止後に自動でその型に整ってくれます。</p>
+<h2>やり方</h2>
+<ol>
+<li>録音画面で「クイック整形プロンプト」（申し送り要約・モニタリング報告など）を選びます。</li>
+<li>選んだ状態で、録音を開始します。</li>
+<li>停止すると、選んだ型に沿って整形された記録ができあがります。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「この面談は申し送り用」「これはモニタリング用」と、録音前に用途を決めておくと、後から手直しする手間がグッと減ります。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"01タスク",
+  order:5,
+  target:"現場スタッフ",
+  title:"よく対応する利用者にすぐ辿り着きたい",
+  body:`
+<p>毎日関わる利用者には、できるだけ素早くアクセスしたいですよね。「お気に入り登録」を使えば、探す手間が省けて導線がグッと短くなります。</p>
+<h2>やり方</h2>
+<ol>
+<li>対象の利用者を「お気に入り（★）」に登録します。</li>
+<li>タスク画面や一覧で、お気に入りだけに絞って表示します。</li>
+<li>よく見る人の情報へ、迷わずすぐに辿り着けます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">毎日見る数名だけを厳選してお気に入りにしておくと、探す手間が減ってさらに快適です。担当が変わったタイミングで見直すようにしましょう。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"04録音",
+  order:6,
+  target:"現場スタッフ",
+  title:"録音の精度を上げるコツは？",
+  body:`
+<p>文字起こしの精度は、録音の環境や話し方で大きく変わります。ちょっとした工夫をするだけで、後から修正する手間が劇的に減りますよ。</p>
+<h2>コツ</h2>
+<ul>
+<li>静かな環境で録る：周囲の雑音が少ないほど、AIが声を正確に拾ってくれます。</li>
+<li>マイクに近づいて、はっきり話す</li>
+<li>専門用語や固有名詞は「マスタ」に登録する：事前に登録しておくと、正しく変換されやすくなります。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">施設名・利用者名・薬剤名などは特にAIが間違えやすい言葉です。よく使うものを登録しておけば、毎回の面倒な手直しを減らせます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"05録音履歴",
+  order:2,
+  target:"現場スタッフ",
+  title:"目的の録音が見つからない",
+  body:`
+<p>日々録音をしていると、数が増えて目的のものが見つけにくくなることがあります。「絞り込み」を上手に使えば、一発で見つかりますよ。</p>
+<h2>やり方</h2>
+<ol>
+<li>検索欄に、思い出せるキーワード（フリーワード）を入力して探します。</li>
+<li>「利用者」や「期間」のフィルタで絞り込みます。</li>
+<li>複数の条件を組み合わせると、さらにピンポイントで探せます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「いつ頃・誰の面談だったか」がうろ覚えでも、期間や利用者でざっくり範囲を狭めるだけで、お目当ての録音が格段に見つけやすくなります。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"04録音",
+  order:3,
+  target:"現場スタッフ",
+  title:"オンライン会議の音声も録りたい",
+  body:`
+<p>Zoomなどのオンライン会議の音声も、相手の声と自分の声をまとめて録音・文字起こしできます。その際は「PC音声＋マイク」モードを使います。</p>
+<h2>やり方</h2>
+<ol>
+<li>録音画面で「PC音声＋マイク」モードを選びます。</li>
+<li>画面共有の許可を求められたら、案内（？マーク）の通りに許可します。</li>
+<li>録音を開始すると、相手の声と自分の声の両方がしっかり記録されます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">このモードは、PCのChromeブラウザでの利用がおすすめです。使い方の詳細は画面の「？」マークに説明があるので、初回は必ず確認してみてください。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"05録音履歴",
+  order:1,
+  target:"現場スタッフ",
+  title:"過去に録った音声はどこで見られる？",
+  body:`
+<p>録音した音声は「録音履歴」にすべて残ります。後から聞き直したり、整形し直したりできます。</p>
+<h2>やり方</h2>
+<ol>
+<li>メニューから「録音履歴」を開きます。</li>
+<li>過去の録音が日付順に一覧で並んでいます。</li>
+<li>「処理済み」になっているものは、そのまま開いて整形結果を確認できます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「あの面談、ちゃんと記録に残したっけ？」と思ったら、まずは録音履歴をチェック。録りっぱなしで忘れてしまうのを防げます。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"04録音",
+  order:4,
+  target:"現場スタッフ",
+  title:"整形プロンプトを選ばないとどうなる？",
+  body:`
+<p>「整形プロンプト」は、必ずしも録音前に選ぶ必要はありません。「とりあえず録音だけしたい」場合の動きを知っておくと安心です。</p>
+<h2>こうなります</h2>
+<ul>
+<li>文字起こし結果だけが保存される：記録の形に整える処理は行われず、話した内容のテキストだけが残ります。</li>
+<li>あとから整形できる：落ち着いたタイミングで、後からテンプレートを選んで記録の形に整形できます。</li>
+</ul>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">「とりあえず録っておいて、後で整える」という使い方も大歓迎です。急いでいるときはまず録音だけして、後でゆっくり整えましょう。</div>
+`
+},
+{
+  tab:"knowledge",
+  category:"01タスク",
+  order:7,
+  target:"現場スタッフ",
+  title:"特定の利用者の今日の状況をすぐ探したい",
+  body:`
+<p>「あの人の今日の状況をパッと確認したい」というときは、名前で検索するのが一番の近道です。</p>
+<h2>やり方</h2>
+<ol>
+<li>タスク画面の検索欄に、利用者名を入力します。</li>
+<li>その人に関する「今日のやること」が表示されます。</li>
+<li>そこから直接、記録や録音の画面に進めます。</li>
+</ol>
+<div class="note">💡 <strong>ポイント</strong></div>
+<div class="note">申し送りや急な電話対応で、特定の人の状況をすぐに知りたいときに大活躍します。名前の一部（苗字だけなど）でも探せますよ。</div>
+`
+}
+];
+
+/* ====== 描画 ====== */
+const targetClass = {"全員":"t-all","現場スタッフ":"t-staff","管理者":"t-admin"};
+
+// フィルター・検索の状態管理
+let guideFilter = "all";
+
+function renderGuide(filter, search){
+  if(filter !== undefined) guideFilter = filter;
+  const q = (search !== undefined ? search : document.getElementById("guide-search").value).toLowerCase().trim();
+
+  const list = document.getElementById("guide-list");
+  let items = articles
+    .filter(a=>a.tab==="guide")
+    .filter(a=>{
+      if(guideFilter==="all") return true;
+      if(guideFilter==="全員") return a.target==="全員";
+      // 現場スタッフ／管理者を選んだときは、対象「全員」の記事もあわせて表示
+      return a.target===guideFilter || a.target==="全員";
+    });
+
+  if(q) items = items.filter(a=>
+    a.title.toLowerCase().includes(q) ||
+    a.category.toLowerCase().includes(q) ||
+    a.body.toLowerCase().includes(q)
+  );
+
+  if(items.length===0){
+    list.innerHTML = emptyHTML(q ? `「${q}」に一致する記事はありません。` : "この条件に合う公開記事はありません。");
+    document.getElementById("guide-cat-jump").innerHTML="";
+    return;
+  }
+  list.innerHTML = groupByCategory(items, "guide-cat-jump");
+}
+
+function renderSimple(tab, containerId, catJumpId, searchId, emptyMsg){
+  const list = document.getElementById(containerId);
+  const searchEl = document.getElementById(searchId);
+  const q = searchEl ? searchEl.value.toLowerCase().trim() : "";
+
+  let items = articles.filter(a=>a.tab===tab);
+  if(q) items = items.filter(a=>
+    a.title.toLowerCase().includes(q) ||
+    a.category.toLowerCase().includes(q) ||
+    a.body.toLowerCase().includes(q)
+  );
+
+  if(items.length===0){
+    list.innerHTML = emptyHTML(q ? `「${q}」に一致する記事はありません。` : emptyMsg);
+    if(catJumpId) document.getElementById(catJumpId).innerHTML="";
+    return;
+  }
+  list.innerHTML = groupByCategory(items, catJumpId);
+}
+
+function splitCategory(cat, idx){
+  const m = String(cat).match(/^\s*(\d+)\s*(.*)$/);
+  if(m) return {num:m[1], title:m[2]};
+  return {num:String(idx+1).padStart(2,"0"), title:cat};
+}
+
+function groupByCategory(items, catJumpId){
+  const cats = [...new Set(items.map(a=>a.category))].sort();
+
+  // カテゴリカードグリッドを生成（2カテゴリ以上のとき表示）
+  if(catJumpId){
+    const jumpEl = document.getElementById(catJumpId);
+    if(jumpEl){
+      if(cats.length > 1){
+        const cards = cats.map((cat,i)=>{
+          const c = splitCategory(cat,i);
+          const count = items.filter(a=>a.category===cat).length;
+          return `<button class="cat-card" onclick="jumpToCategory('${catJumpId}-cat-${i}')">
+            <span class="card-num">${c.num}</span>
+            <span class="card-title">${c.title}</span>
+            <span class="card-count">${count}件</span>
+          </button>`;
+        }).join("");
+        jumpEl.innerHTML = `<div class="cat-grid">${cards}</div>`;
+      } else {
+        jumpEl.innerHTML="";
+      }
+    }
+  }
+
+  let html = "";
+  cats.forEach((cat,i)=>{
+    const c = splitCategory(cat,i);
+    const catId = catJumpId ? `${catJumpId}-cat-${i}` : `cat-${i}`;
+    const articleItems = items.filter(a=>a.category===cat)
+      .sort((a,b)=>(a.order||0)-(b.order||0));
+
+    let articlesHtml = "";
+    articleItems.forEach(a=>{
+      const badge = a.target ? `<span class="badge ${targetClass[a.target]||""}">${a.target}</span>` : "";
+      articlesHtml += `<details class="article">
+        <summary>${badge}<span>${a.title}</span><span class="chev">▾</span></summary>
+        <div class="article-body">${a.body}
+          <div class="article-close-wrap">
+            <button class="article-close-btn" onclick="this.closest('details').removeAttribute('open')">▲ 閉じる</button>
+          </div>
+        </div>
+      </details>`;
+    });
+
+    html += `<details class="cat-section" id="${catId}">
+      <summary class="cat-head">
+        <span class="cat-num">${c.num}</span>
+        <span class="cat-title">${c.title}</span>
+        <span class="cat-count">${articleItems.length}件</span>
+        <span class="cat-chev">▾</span>
+      </summary>
+      <div class="cat-articles">${articlesHtml}</div>
+    </details>`;
+  });
+  return html;
+}
+
+function jumpToCategory(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  // カテゴリセクションを開いてからスクロール
+  if(el.tagName === "DETAILS") el.open = true;
+  const bar = document.querySelector("header.appbar");
+  const offset = bar ? bar.offsetHeight : 0;
+  requestAnimationFrame(()=>{
+    const y = el.getBoundingClientRect().top + window.pageYOffset - offset - 12;
+    window.scrollTo({top:y, behavior:"smooth"});
+  });
+}
+
+function emptyHTML(msg){
+  return `<div class="empty"><span class="big">🗒️</span>${msg}<br>準備ができしだい、こちらに表示されます。</div>`;
+}
+
+/* ====== タブ切り替え ====== */
+function switchTab(tab){
+  document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+  document.getElementById("panel-"+tab).classList.add("active");
+  // ヒーローの下（コンテンツの先頭）が、固定バーのすぐ下にくるようスクロール
+  const bar = document.querySelector("header.appbar");
+  const main = document.querySelector("main");
+  const y = main.offsetTop - bar.offsetHeight - 8;
+  window.scrollTo({top:Math.max(0,y),behavior:"smooth"});
+}
+document.querySelectorAll("#tabs button").forEach(btn=>{
+  btn.addEventListener("click",()=>switchTab(btn.dataset.tab));
+});
+
+/* ====== ヒーローのボタンからタブへ移動 ====== */
+document.querySelectorAll(".hero-chip").forEach(chip=>{
+  chip.addEventListener("click",()=>switchTab(chip.dataset.jump));
+});
+
+/* ====== 対象者フィルター ====== */
+document.querySelectorAll("#guide-filter button").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll("#guide-filter button").forEach(b=>b.classList.toggle("active",b===btn));
+    renderGuide(btn.dataset.target);
+  });
+});
+
+/* ====== 検索 ====== */
+document.getElementById("guide-search").addEventListener("input",()=>renderGuide());
+document.getElementById("qa-search").addEventListener("input",()=>
+  renderSimple("qa","qa-list","qa-cat-jump","qa-search","よくある質問の公開記事はまだありません。")
+);
+document.getElementById("trouble-search").addEventListener("input",()=>
+  renderSimple("trouble","trouble-list","trouble-cat-jump","trouble-search","トラブルシューティングの公開記事はまだありません。")
+);
+document.getElementById("knowledge-search").addEventListener("input",()=>
+  renderSimple("knowledge","knowledge-list","knowledge-cat-jump","knowledge-search","活用ナレッジの公開記事はまだありません。")
+);
+
+/* ====== 記事アコーディオン：開いたら同カテゴリ内の他の記事を閉じ、先頭へスクロール ====== */
+document.addEventListener("toggle", function(e){
+  const el = e.target;
+  if(!el.classList.contains("article") || !el.open) return;
+  // 同カテゴリ内の他の記事を閉じる
+  el.parentElement.querySelectorAll("details.article").forEach(d=>{
+    if(d !== el) d.removeAttribute("open");
+  });
+  // 開いた記事の先頭が固定バーのすぐ下に来るようスクロール
+  const bar = document.querySelector("header.appbar");
+  const offset = bar ? bar.offsetHeight : 0;
+  requestAnimationFrame(()=>{
+    const y = el.getBoundingClientRect().top + window.pageYOffset - offset - 8;
+    window.scrollTo({top:y, behavior:"smooth"});
+  });
+}, true);
+
+/* ====== 初期描画 ====== */
+renderGuide("all");
+renderSimple("qa","qa-list","qa-cat-jump","qa-search","よくある質問の公開記事はまだありません。");
+renderSimple("trouble","trouble-list","trouble-cat-jump","trouble-search","トラブルシューティングの公開記事はまだありません。");
+renderSimple("knowledge","knowledge-list","knowledge-cat-jump","knowledge-search","活用ナレッジの公開記事はまだありません。");
+</script>
+</body>
+</html>
