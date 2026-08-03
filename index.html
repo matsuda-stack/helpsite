@@ -701,6 +701,433 @@
 const articles = [
 {
   tab:"guide",
+  category:"06記録管理",
+  order:66,
+  target:"管理者",
+  title:"記録をCSVでまとめてインポートする",
+  body:`
+<h2>このページでできること</h2>
+<p>複数の記録データをCSVファイルから一括でインポートできます。既存システムからのデータ移行や、まとめて記録を登録したいときに使います。</p>
+<h2>手順</h2>
+<ol>
+<li>左メニューから<strong>「記録」</strong>を開きます。</li>
+</ol>
+<figure class="shot"><img src="images/3b1f8c48-7db6-80b8-9ef2-caf33dc8e5ea.png" alt=""></figure>
+<ol>
+<li>右上の<strong>「…」（メニュー）</strong>をタップします。</li>
+</ol>
+<figure class="shot"><img src="images/3b1f8c48-7db6-803a-821e-ffaa0f066553.png" alt=""></figure>
+<ol>
+<li><strong>「CSVインポート」</strong>を選択します。</li>
+</ol>
+<figure class="shot"><img src="images/3b1f8c48-7db6-80f9-a160-d9506da8d364.png" alt=""></figure>
+<ol>
+<li>CSVファイルを選択してアップロードします。</li>
+</ol>
+<figure class="shot"><img src="images/3b1f8c48-7db6-80f8-9d38-e0afcbe87faf.png" alt=""></figure>
+<figure class="shot"><img src="images/3b1f8c48-7db6-802b-af1b-f49fcb2c2086.png" alt=""></figure>
+<div class="note">💡 CSVファイルに関しましては、「利用者用テンプレCSVをダウンロード」からダウンロードしてご利用ください</div>
+<h2>こうなれば成功です</h2>
+<p>記録一覧に取り込んだ記録が追加されていれば成功です。</p>
+`
+},
+{
+  tab:"guide",
+  category:"08管理者設定",
+  order:80,
+  target:"管理者",
+  title:"はじめてのセットアップ（組織登録・Drive連携・サービス種別）",
+  body:`
+<p>招待を受けた管理者（オーナー）が、はじめてログインしてから使い始めるまでのセットアップ手順を説明します。</p>
+<p>セットアップは全部で <strong>5つのステップ</strong> です。初回のみ必要な作業で、完了後は通常のアプリ画面に移行します。</p>
+<hr>
+<h2>STEP 1｜招待メールから「事前許可済み」画面を開く</h2>
+<p>運営から届いた招待メールの<strong>招待リンク</strong>をクリックすると、「ホープケア AI へようこそ」という画面が表示されます。</p>
+<p><strong>「事前許可済み」</strong>と緑のチェックマークが表示されていることを確認し、<strong>「→ 組織登録へ進む」</strong>をクリックします。</p>
+<div class="note">⚠️ 招待メールを受け取った <strong>Google アカウント</strong> でログインしてください。別のアカウントでは進めません。</div>
+<figure class="shot"><img src="images/3b1f8c48-7db6-80f3-9ae3-c479d53afa89.jpg" alt=""></figure>
+<hr>
+<h2>STEP 2｜組織を登録する</h2>
+<p>組織の情報を4つのステップで入力します。</p>
+<h3>① 組織基本情報</h3>
+<ul>
+<li><strong>組織名</strong>：法人の正式名称を入力します（例：メディラボ）</li>
+<li><strong>業種</strong>：介護保険 / 障害福祉 / 医療 / 児童福祉 / 複合型 から選択します</li>
+</ul>
+<figure class="shot"><img src="images/3b1f8c48-7db6-801a-a614-e4d908b0ab07.jpg" alt=""></figure>
+<p>「次へ」をクリックして進みます。</p>
+<h3>② 法人情報</h3>
+<p>法人形態・都道府県などを入力します。</p>
+<h3>③ 組織代表者情報</h3>
+<ul>
+<li><strong>代表者氏名</strong>：代表者のお名前を入力します</li>
+<li><strong>代表者 email</strong>：ログインに使用する Google アカウントのメールアドレスを入力します</li>
+<li><strong>連絡先電話</strong>：任意</li>
+</ul>
+<figure class="shot"><img src="images/3b1f8c48-7db6-8035-a961-e8a157e79cc6.jpg" alt=""></figure>
+<h3>④ 確認・同意</h3>
+<p>入力内容の確認と利用規約・個人情報取扱いへの同意を行います。</p>
+<p>内容を確認し、<strong>「利用規約に同意します」</strong> にチェックを入れて、<strong>「組織を登録する」</strong> をクリックします。</p>
+<figure class="shot"><img src="images/3b1f8c48-7db6-8025-a681-e941bee4f8bb.jpg" alt=""></figure>
+<hr>
+<h2>STEP 3｜事業所を登録する</h2>
+<p>組織登録が完了したら、次は事業所の情報を入力します。</p>
+<ul>
+<li><strong>事業所名</strong>：事業所の名称を入力します（例：益山クリニック）</li>
+<li><strong>所在地</strong>：住所を入力します</li>
+<li><strong>電話番号</strong>：事業所の電話番号を入力します</li>
+<li><strong>医療機関コード</strong>：医療機関の場合は10桁のコードを入力します（介護・障害福祉の場合は不要）</li>
+</ul>
+<figure class="shot"><img src="images/3b1f8c48-7db6-807a-a702-c2ba8df95885.jpg" alt=""></figure>
+<p>入力後「次へ」→ 確認画面で「登録する」をクリックすると、<strong>「組織登録が完了しました」</strong> と表示されます。</p>
+<figure class="shot"><img src="images/3b1f8c48-7db6-80f2-8d24-cbd76e75112e.jpg" alt=""></figure>
+<div class="note">💡 デモ用のサンプル利用者が自動で登録されます。録音・チャット・記録の動作確認にお使いください（削除可能）。</div>
+<hr>
+<h2>STEP 4｜Google Drive を連携する</h2>
+<p>アプリのデータ保存先となる Google Drive フォルダを設定します。</p>
+<p><strong>「→ Drive 連携に進む」</strong> をクリックすると、Drive 連携画面が表示されます。</p>
+<h3>自動設定（推奨）</h3>
+<p><strong>「Google に許可して自動設定する」</strong> をクリックします。</p>
+<figure class="shot"><img src="images/3b1f8c48-7db6-80f9-b2eb-d6c943bf9318.jpg" alt=""></figure>
+<p>Googleの許可画面が表示されたら「許可」をクリックします。すると自動で以下の処理が行われます：</p>
+<ol>
+<li>権限の確認</li>
+<li>フォルダ作成（マイドライブ内に <code>hopecareAI</code> フォルダが自動生成）</li>
+<li>共有設定</li>
+<li>設定保存</li>
+<li>接続確認</li>
+</ol>
+<p>完了すると <strong>「生成が完了しました」</strong> と表示されます。事業所・利用者フォルダが自動で作成されます。</p>
+<figure class="shot"><img src="images/3b1f8c48-7db6-8085-b7a4-c47e84ebb0b3.jpg" alt=""></figure>
+<p>「閉じる」をクリックして次へ進みます。</p>
+<div class="note">💡 Google Drive を確認すると、マイドライブ内に <code>hopecareAI</code> フォルダが作成され、その中に事業所フォルダ・スタッフフォルダが入っています。</div>
+<hr>
+<h2>STEP 5｜サービス種別を設定する</h2>
+<p>事業所で使うサービス種別を選択します。選択したサービス種別に対応したテンプレートが一覧に表示されるようになります。</p>
+<p>一覧から<strong>使用するサービス種別のトグルをオン</strong>にして、<strong>「選択して完了」</strong> をクリックします。</p>
+<figure class="shot"><img src="images/3b1f8c48-7db6-8058-8ebc-c32b87be233d.jpg" alt=""></figure>
+<div class="note">💡 サービス種別はあとから管理者設定画面で変更できます。</div>
+<hr>
+<h2>セットアップ完了！</h2>
+<p><strong>利用者一覧画面</strong> が表示されたら、セットアップは完了です。アプリが使用できる状態になりました。</p>
+<figure class="shot"><img src="images/3b1f8c48-7db6-806a-bc49-fd4ce5917296.jpg" alt=""></figure>
+<h3>次にやること</h3>
+<ul>
+<li>利用者を登録する → 「利用者を追加する」</li>
+<li>スタッフを招待する → 「メンバー（スタッフ）を招待する」</li>
+<li>録音で記録をつくってみる → 「録音して記録を自動でつくる」</li>
+</ul>
+`
+},
+{
+  tab:"guide",
+  category:"08管理者設定",
+  order:84,
+  target:"管理者",
+  title:"スタッフのアカウントを無効化する",
+  body:`
+<p>退職・移動などでシステムを使わなくなったスタッフのアカウントを無効化できます。</p>
+<div class="note">🔒 この機能は <strong>オーナー・管理者</strong> のみ操作できます。</div>
+<h2>アカウントを無効化する</h2>
+<h3>1. アカウント管理を開く</h3>
+<p>右上のメニューから<strong> ユーザー管理</strong> を開きます。</p>
+<figure class="shot"><img src="images/3aef8c48-7db6-8083-bafd-eb9be65a6502.png" alt=""></figure>
+<h3>2. 対象のスタッフを選ぶ</h3>
+<p>メンバー一覧から無効化したいスタッフの行を選び、<strong>「無効化」</strong> ボタンをクリックします。</p>
+<figure class="shot"><img src="images/3aef8c48-7db6-8024-818d-db0fce54578b.png" alt=""></figure>
+<h3>3. 確認して完了</h3>
+<p>確認ダイアログが表示されます。内容を確認して実行すると、対象スタッフのログインができなくなります。</p>
+<figure class="shot"><img src="images/3aef8c48-7db6-801a-989b-eac7db009cda.png" alt=""></figure>
+`
+},
+{
+  tab:"guide",
+  category:"06記録管理",
+  order:64,
+  target:"現場スタッフ",
+  title:"記録フォームでテンプレートを使ってAI整形する",
+  body:`
+<p>記録の入力画面で、事前に登録したテンプレートを選んでAI整形することができます。</p>
+<h2>操作手順</h2>
+<h3>1. 記録の入力画面を開く</h3>
+<p>新規記録の作成または既存記録の編集画面を開きます。</p>
+<figure class="shot"><img src="images/3aef8c48-7db6-8068-94c9-c0b8845fe920.png" alt=""></figure>
+<h3>2. フリー記入欄にメモを入力する</h3>
+<p>わかったこと・対応内容などを簡単に打ち込みます。入力は箇条書きでもOKです。</p>
+<figure class="shot"><img src="images/3aef8c48-7db6-808c-afe4-cbdecf135b14.png" alt=""></figure>
+<h3>3. 「AIで整形」をタップ</h3>
+<p>入力欄の近くにある <strong>「AIで整形」</strong> ボタンをタップします。</p>
+<figure class="shot"><img src="images/3aef8c48-7db6-8018-9b08-d1e13ca6da5a.png" alt=""></figure>
+<h3>4. テンプレートを選択する</h3>
+<p>登録済みのテンプレート一覧が表示されます。使いたいテンプレートを選びます。</p>
+<ul>
+<li><strong>検索</strong>で絞り込みもできます</li>
+</ul>
+<figure class="shot"><img src="images/3aef8c48-7db6-808a-83b9-f258b1022cc7.png" alt=""></figure>
+<h3>5. Before / Afterプレビューを確認</h3>
+<p>AI整形後の文章がプレビュー表示されます。元のメモ（Before）と整形後（After）を並べて確認できます。</p>
+<figure class="shot"><img src="images/3b1f8c48-7db6-80e5-ad2d-ec309bdabaa6.png" alt=""></figure>
+<h3>6. 「適用」して保存</h3>
+<p>内容が良ければ <strong>「適用」</strong> をタップします。入力欄に整形後の文章がそのまま保存できます。</p>
+<p>修正したい場合は、適用後に編集します。</p>
+<figure class="shot"><img src="images/3b1f8c48-7db6-80df-8097-d03a65fd51e6.png" alt=""></figure>
+<h2>テンプレートの登録方法</h2>
+<p>テンプレートはあらかじめ登録が必要です。登録済みテンプレートの作成・編集方法については、「テンプレートを登録・編集する」をご覧ください。</p>
+`
+},
+{
+  tab:"guide",
+  category:"02録音で記録",
+  order:25,
+  target:"現場スタッフ",
+  title:"音声ファイルを取り込んで文字起こしする",
+  body:`
+<p>録音機能の画面から、スマートファンやPCに保存してある音声ファイルをアップロードして、自動で文字起こし・AI整形まで行うことができます。</p>
+<p>会議の録音・外部ボイスレコーダーの音源・他アプリで録った音声などをそのまま取り込めます。</p>
+<h2>対応しているファイル形式</h2>
+<table>
+<tr><th>形式</th><th>拡張子</th></tr>
+<tr><td>MP3</td><td>.mp3</td></tr>
+<tr><td>M4A（iOSボイスメモ）</td><td>.m4a</td></tr>
+<tr><td>WebM</td><td>.webm</td></tr>
+<tr><td>FLAC</td><td>.flac</td></tr>
+<tr><td>OGG</td><td>.ogg / .oga</td></tr>
+<tr><td>Opus</td><td>.opus</td></tr>
+<tr><td>AMR</td><td>.amr</td></tr>
+<tr><td>3GP</td><td>.3gp / .3gpp</td></tr>
+</table>
+<div class="note">⚠️ 上記以外の形式（CAF、WMAなど）は現在非対応です。</div>
+<h2>ファイルサイズ・時間の上限</h2>
+<ul>
+<li>1ファイルあたり <strong>最大150MB</strong></li>
+<li>組織に設定されている <strong>録音上限時間</strong> を超えるファイルは取り込めません</li>
+</ul>
+<h2>操作手順</h2>
+<h3>1. 取り込みボタンをタップ</h3>
+<p>録音画面（AI記録アシスタント）を開き、画面内の <strong>「音声ファイルを取り込む」</strong> ボタンをタップします。</p>
+<figure class="shot"><img src="images/3aef8c48-7db6-803b-9fe4-cd85411830ce.png" alt=""></figure>
+<h3>2. 利用者を選ぶ</h3>
+<p>対象の利用者を選択します。</p>
+<figure class="shot"><img src="images/3aef8c48-7db6-8023-8687-ee1096d557ec.png" alt=""></figure>
+<h3>3. ファイルを選択してアップロード</h3>
+<p>ファイル選択画面が開きます。取り込みたい音声ファイルを選択すると、アップロードが始まります。</p>
+<figure class="shot"><img src="images/3aef8c48-7db6-80e6-b4fe-cf9b9dca424a.png" alt=""></figure>
+<h3>4. 文字起こし・AI整形を待つ</h3>
+<p>アップロード完了後、自動で文字起こしが行われます。</p>
+<p>完了すると、AI整形後のテキストが自動的に記録入力欄に投入されます。</p>
+<figure class="shot"><img src="images/3b1f8c48-7db6-8069-b4c5-e0a00ffebe4a.png" alt=""></figure>
+<h3>5. 内容を確認して保存</h3>
+<p>AI整形後の文章を確認・修正し、「保存」します。</p>
+<figure class="shot"><img src="images/3b1f8c48-7db6-8037-8e2d-eef7961bbf72.png" alt=""></figure>
+<h2>取り込み中に画面を離れてしまったら</h2>
+<p>取り込み・文字起こしは <strong>バックグラウンドで継続</strong> されます。</p>
+<p>再度画面を開くと、完了バナーが表示されます。バナーをタップするとワンタップで結果を記録欄に投入できます。</p>
+<p>音声認識が失敗した場合は、失敗バナーが表示されます。</p>
+`
+},
+{
+  tab:"guide",
+  category:"07利用者管理",
+  order:73,
+  target:"全員",
+  title:"利用者の活動ボードを確認する",
+  body:`
+<h2>このページでできること</h2>
+<p>利用者ごとの記録・録音・チャットの履歴を、<strong>グラフ・カレンダー・TODO</strong>の3つのビューで可視化できます。支援の傾向をひと目で把握したり、やること（TODO）の管理に活用できます。</p>
+<h2>手順</h2>
+<ol>
+<li>左メニューから<strong>「利用者」</strong>を開き、確認したい利用者を選択します。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-8060-a3e0-e556d1803866.png" alt=""></figure>
+<ol>
+<li>利用者詳細画面の<strong>「概要」</strong>タブをタップします。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-8066-a178-d4b38704b737.png" alt=""></figure>
+<ol>
+<li>画面上部のボタンで<strong>グラフ / カレンダー / TODO</strong>のビューを切り替えます。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-8020-a680-defb3a5cbaca.png" alt=""></figure>
+<h2>各ビューの使い方</h2>
+<h3>グラフビュー</h3>
+<ul>
+<li>記録・録音・チャットの件数を棒グラフで確認できます。</li>
+<li>ヘッダのフィルタで<strong>記録区分（複数選択可）</strong>を絞り込めます。</li>
+<li>フィルタは記録・録音・チャット・添付の各タブと連動しています。</li>
+</ul>
+<figure class="shot"><img src="images/3aef8c48-7db6-8091-8c19-ef8892dbc338.png" alt=""></figure>
+<h3>カレンダービュー</h3>
+<ul>
+<li>Google カレンダー風のレイアウトで、日付ごとに記録の有無が一目でわかります。</li>
+<li>TODO カードも同じカレンダー上に表示されます。</li>
+<li><strong>日表示・週表示・月表示・全期間表示</strong>を切り替えられます。</li>
+</ul>
+<figure class="shot"><img src="images/3aef8c48-7db6-8047-aa89-c2c1537161bb.png" alt=""></figure>
+<h3>TODOビュー</h3>
+<ul>
+<li>利用者に紐づくTODOを一覧で管理できます。</li>
+<li>タスクを完了したら<strong>完了フラグ</strong>にチェックを入れます。</li>
+</ul>
+<figure class="shot"><img src="images/3aef8c48-7db6-8010-968d-f48eebf0d3f9.png" alt=""></figure>
+<h2>こうなれば成功です</h2>
+<p>活動ボードに記録・録音・チャットの履歴やグラフが表示されれば成功です。</p>
+`
+},
+{
+  tab:"guide",
+  category:"06記録管理",
+  order:65,
+  target:"全員",
+  title:"記録区分（事例記録・会議録・個別支援・チーム支援）について",
+  body:`
+<h2>このページでできること</h2>
+<p>HopeCareAIの記録には<strong>記録区分</strong>を設定できます。現在は「事例記録」・「会議録」・「個別支援」・「チーム支援」の4種類があり、記録の種類を整理・絞り込みに使えます。</p>
+<h2>記録区分の種類</h2>
+<table>
+<tr><th>区分名</th><th>使いどころ</th></tr>
+<tr><td><strong>事例記録</strong></td><td>利用者への支援内容、面談記録など個別支援に関する記録</td></tr>
+<tr><td><strong>会議録</strong></td><td>スタッフ会議、担当者会議、サービス担当者会議などの記録</td></tr>
+<tr><td> <strong>個別支援</strong></td><td>利用者ひとりに対する支援の記録</td></tr>
+<tr><td><strong>チーム支援</strong></td><td>チーム/組織全体での支援の記録</td></tr>
+</table>
+<figure class="shot"><img src="images/3aef8c48-7db6-80d5-99e4-de6f46171535.png" alt=""></figure>
+<h2>記録区分を設定する手順</h2>
+<ol>
+<li>記録を新規作成または編集画面を開きます。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-8049-b110-eff76e8b1f81.png" alt=""></figure>
+<ol>
+<li><strong>「記録区分」</strong>から選択します。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-802e-acd2-cbbe232e4d8c.png" alt=""></figure>
+<ol>
+<li>保存します。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-8069-bb0d-e8f994ca8b48.png" alt=""></figure>
+<h2>記録区分で絞り込む</h2>
+<ul>
+<li>活動ボードのフィルタや記録一覧で、記録区分を指定して絞り込みができます。</li>
+<li>複数の区分を同時に選択して絞り込むことも可能です。</li>
+</ul>
+<figure class="shot"><img src="images/3aef8c48-7db6-8092-9e9f-f36031a512ce.png" alt=""></figure>
+<h2>こうなれば成功です</h2>
+<p>記録に区分が設定され、一覧やフィルタで種類ごとに確認できれば成功です。</p>
+<figure class="shot"><img src="images/3aef8c48-7db6-809d-9480-c1ac71b8de3a.png" alt=""></figure>
+`
+},
+{
+  tab:"guide",
+  category:"07利用者管理",
+  order:74,
+  target:"管理者",
+  title:"利用者をまとめて登録する（CSVインポート・AI書類読み取り）",
+  body:`
+<h2>このページでできること</h2>
+<p>複数の利用者を一度にまとめて登録できます。CSVファイルからのインポートと、書類の画像・PDFをAIが読み取って登録する2つの方法があります。</p>
+<h2><strong>はじめに「取込ルールの説明」を確認してください</strong></h2>
+<p>CSVインポート画面の<strong>右上にある「？」ボタン</strong>をタップすると「利用者CSVの取込ルール」が表示されます。操作を始める前に必ず確認してください。</p>
+<figure class="shot"><img src="images/3b1f8c48-7db6-8088-ade4-c0a6e8a89898.png" alt=""></figure>
+<h2>手順（CSVインポート）</h2>
+<ol>
+<li>左メニューから<strong>「利用者」</strong>を開きます。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-8012-af3a-e08acd244df7.png" alt=""></figure>
+<ol>
+<li>右上の<strong>「…」（メニュー）</strong>をタップします。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-802b-a0c5-cf3c3fe711e1.png" alt=""></figure>
+<ol>
+<li><strong>「CSVインポート」</strong>を選択します。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-8011-afe0-f711420000b6.png" alt=""></figure>
+<ol>
+<li>CSVファイルを選択してアップロードします。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-804e-b4a7-ff99693f1fd1.png" alt=""></figure>
+<div class="note">💡 CSVファイルに関しましては、「利用者用テンプレCSVをダウンロード」からダウンロードしてご利用ください</div>
+<h2>手順（AI書類読み取りで追加）</h2>
+<ol>
+<li>左メニューから<strong>「利用者」</strong>を開きます。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-80cc-b266-c4cad5ce0360.png" alt=""></figure>
+<ol>
+<li>右上の<strong>「…」（メニュー）</strong>をタップします。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-80ee-9166-f0be6089071d.png" alt=""></figure>
+<ol>
+<li><strong>「AI書類読み取りで追加」</strong>を選択します。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-8084-8ea3-cd045aa5b92c.png" alt=""></figure>
+<ol>
+<li>書類（画像・PDF）を選択すると、AIが内容を読み取って利用者情報を自動入力します。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-80d7-9916-d72c04d5c892.png" alt=""></figure>
+<ol>
+<li>内容を確認して<strong>「保存」</strong>をタップします。</li>
+</ol>
+<h2>こうなれば成功です</h2>
+<p>利用者一覧に新しく追加された利用者が表示されれば成功です。</p>
+`
+},
+{
+  tab:"guide",
+  category:"04AIチャット",
+  order:44,
+  target:"全員",
+  title:"チャットにGoogle Driveの資料を読み込む・ファイルを添付する",
+  body:`
+<h2>このページでできること</h2>
+<p>Google Driveに保存した資料（PDFなど）をAIチャットに読み込ませて、内容について質問したり記録作成に活用できます。また、利用者の添付資料タブや記録詳細にファイルを保存することもできます。</p>
+<h2>①　チャットからDriveの資料を読み込む</h2>
+<ol>
+<li>左メニューから<strong>「チャット」</strong>を開き、対象の利用者を選択します。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-805a-8163-fd71ed673147.png" alt=""></figure>
+<ol>
+<li>入力欄の下部にある<strong>人アイコン（Driveから選択）</strong>をタップします。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-80e3-ae46-e36526cbab93.png" alt=""></figure>
+<ol>
+<li>Google Driveから読み込みたいファイルを選択します（最大10点まで同時選択可）。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-8056-9867-db3da997e8c3.png" alt=""></figure>
+<ol>
+<li>ファイルが添付された状態で、AIへの質問や指示を入力して送信します。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-8052-b57b-ed853ffde17e.png" alt=""></figure>
+<div class="note">💡 読み込んだ資料の内容をAIが参照して回答します。「この書類の内容をもとに記録を作成して」などの指示が使えます。</div>
+<h2>②　利用者の「添付資料」タブにファイルを保存する</h2>
+<ol>
+<li>利用者詳細画面を開き、<strong>「添付資料」</strong>タブをタップします。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-8087-a6b0-c13b7be963df.png" alt=""></figure>
+<ol>
+<li>右上の<strong>「添付を追加」</strong>をタップします。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-80f2-a8ba-c2d6caf413d2.png" alt=""></figure>
+<ol>
+<li>ファイルを選択してアップロードします。</li>
+</ol>
+<h2>③　記録詳細にファイルを添付する</h2>
+<ol>
+<li>記録詳細画面を開きます。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-802c-8494-d5b765acda4d.png" alt=""></figure>
+<ol>
+<li><strong>「添付」</strong>セクションの<strong>「＋ファイル追加」</strong>をタップします。</li>
+</ol>
+<figure class="shot"><img src="images/3aef8c48-7db6-801b-b313-d96f3135c5ba.png" alt=""></figure>
+<ol>
+<li>ファイルを選択してアップロードします。</li>
+</ol>
+<h2>こうなれば成功です</h2>
+<ul>
+<li><strong>チャット</strong>: ファイルが添付されてAIが内容を参照できる状態になれば成功です。</li>
+<li><strong>添付資料タブ・記録詳細</strong>: ファイルが一覧に表示されれば成功です。</li>
+</ul>
+`
+},
+{
+  tab:"guide",
   category:"07利用者管理",
   order:72,
   target:"管理者",
@@ -761,6 +1188,14 @@ const articles = [
 <tr><td>🎙️ <strong>マイクのみ</strong></td><td>対面での面談・会議（標準）</td></tr>
 <tr><td>🖥️ <strong>PC音声＋マイク</strong></td><td>Zoom・Teams などオンライン会議</td></tr>
 </table>
+<h2>LIVE字幕（リアルタイム字幕）について</h2>
+<p>録音画面上部には<strong>「LIVE字幕」</strong>トグルがあります。マイクのみ・PC音声＋マイクのどちらのモードでも共通して使えます。</p>
+<table>
+<tr><th>設定</th><th>動作</th></tr>
+<tr><td><strong>ON</strong></td><td>録音しながらリアルタイムで字幕が画面に表示されます（通信量が増えます）</td></tr>
+<tr><td><strong>OFF</strong></td><td>録音中の字幕表示はなし。停止後に文字起こしが行われます（通信量を抑えたい場合）</td></tr>
+</table>
+<div class="note">💡 トグルボタンにカーソルを合わせると案内が表示されます。切り替えは<strong>録音を始める前</strong>に行ってください。</div>
 <h2>PC音声＋マイクの使い方</h2>
 <ol>
 <li>録音画面を開く</li>
@@ -856,7 +1291,7 @@ const articles = [
 {
   tab:"guide",
   category:"06記録管理",
-  order:65,
+  order:63,
   target:"管理者",
   title:"記録の状況を分析する",
   body:`
@@ -1077,7 +1512,7 @@ const articles = [
 {
   tab:"guide",
   category:"08管理者設定",
-  order:85,
+  order:83,
   target:"管理者",
   title:"支払い方法を確認・変更する",
   body:`
@@ -1104,61 +1539,13 @@ const articles = [
   category:"08管理者設定",
   order:81,
   target:"管理者",
-  title:"Drive連携を設定する",
-  body:`
-<h2>このページでできること</h2>
-<p>アプリのデータ保管先となる Google Drive を連携します。</p>
-<div class="note">🔑 この操作には <strong>管理者（組織オーナー）権限</strong> が必要です。</div>
-<div class="callout">アプリのデータは、組織情報を登録された管理者の Google Drive に保管されます。連携が完了するまで一部の機能は利用できません（画面右上の「後でやる（24h）」で一時的に後回しにもできます）。</div>
-<h2>STEP1：Drive にフォルダを作成する</h2>
-<div class="callout"><ol>
-<li><strong>「Drive を開く」</strong> を押して Google Drive（マイドライブ）を開きます。</li>
-<li>推奨名 <strong>「hopecareAI」</strong> で新規フォルダを作成します。</li>
-</ol>
-</div>
-<figure class="shot"><img src="images/381f8c48-7db6-80e6-80f3-f736485ef94c.jpg" alt=""></figure>
-<h2>STEP2：サービスアカウントに編集権限を共有する</h2>
-<p>作成したフォルダを、下記のアドレスに <strong>「編集者」</strong> として共有します。</p>
-<div class="callout">📧 <strong>共有先アドレス：</strong><a href="mailto:share@hope-care.tech" target="_blank" rel="noopener"><strong>share@hope-care.tech</strong></a></div>
-<figure class="shot"><img src="images/381f8c48-7db6-80b1-b243-f0aff55a1bbf.jpg" alt=""></figure>
-<ol>
-<li>Google Drive で作成したフォルダを右クリックします。</li>
-<li>「共有」をクリックします。</li>
-<li>入力欄に <a href="mailto:share@hope-care.tech" target="_blank" rel="noopener">share@hope-care.tech</a> を貼り付け、送信を押します。</li>
-</ol>
-<div class="note">⚠️ 権限を「編集者」として必ず設定してください。</div>
-<figure class="shot"><img src="images/381f8c48-7db6-805f-848f-e76224b58fb2.jpg" alt=""></figure>
-<h2>STEP3：フォルダURLを貼り付けて検証する</h2>
-<ol>
-<li>作成したフォルダを右クリックし、「共有」→「リンクをコピー」をクリックします。</li>
-<li>Hope Care AI の画面に戻り、「フォルダURLを貼り付け」欄にコピーしたURLを貼り付けます。</li>
-<li><strong>「検証して確定」</strong> を押します。</li>
-<li><strong>「接続済み」</strong> と表示されれば、このステップは完了です。</li>
-</ol>
-<figure class="shot"><img src="images/381f8c48-7db6-80b5-bb56-e1e6e21eaf88.jpg" alt=""></figure>
-<h2>STEP4：フォルダ階層を生成して接続を確認する</h2>
-<ol>
-<li><strong>「フォルダ階層を自動生成しますか？」</strong> と表示されたら、<strong>「許可して生成」</strong> を押します。事業所・利用者のフォルダがまとめて作成されます。</li>
-<li><strong>「接続テスト実行」</strong> を押します（テストファイルの作成・削除で、書き込みできるかを確認します）。</li>
-<li><strong>「接続を確認しました」</strong> と表示されたら、<strong>「ホームへ」</strong> を押して完了です。</li>
-</ol>
-<figure class="shot"><img src="images/381f8c48-7db6-804f-a8d7-f2ad2b44a64c.jpg" alt=""></figure>
-<figure class="shot"><img src="images/381f8c48-7db6-80db-a860-d3463469a8c0.jpg" alt=""></figure>
-<div class="note">⚠️ 既存データの自動移行は行われません。録音・チャット履歴などの過去データは、新しいフォルダへ自動では移動されません。必要な場合は、生成後に表示されるリンクから Drive を開き、手動で移してください。</div>
-`
-},
-{
-  tab:"guide",
-  category:"08管理者設定",
-  order:82,
-  target:"管理者",
   title:"組織情報を編集する",
   body:`
 <h2>このページでできること</h2>
-<p>組織名・事業所・Drive連携の設定を編集します。</p>
+<p>組織名・事業所・Drive連携・声紋登録・AI洞察の各設定を編集します。</p>
 <div class="note">🔑 この操作は <strong>組織オーナーのみ</strong> 表示されます。</div>
 <h2>開き方</h2>
-<div class="callout">画面左上のロゴエリアにある <strong>⚙ 編集ボタン</strong> をクリックすると、「組織の編集」画面が開きます。<strong>組織情報／事業所／Drive</strong> の3つのタブで管理します。編集後は <strong>「保存」</strong> を押してください。</div>
+<div class="callout">画面左上のロゴエリアにある <strong>三本線</strong> をクリックすると、「組織の編集」があります。<strong>組織情報／事業所等の</strong>管理が可能です。編集後は <strong>「保存」</strong> を押してください。</div>
 <h2>タブ1：組織情報</h2>
 <p>組織の基本情報を登録・編集します。</p>
 <div class="callout"><ul>
@@ -1184,54 +1571,52 @@ const articles = [
 </ul>
 <figure class="shot"><img src="images/387f8c48-7db6-804d-be36-c44783b5504c.png" alt=""></figure>
 <p class="ref">👉 詳しい手順は「Drive連携を設定する」ページをご覧ください。</p>
-<h2>こうなれば成功です</h2>
-<p>編集した組織名・事業所・Drive連携の内容が保存され、画面に反映されていれば成功です。</p>
-`
-},
-{
-  tab:"guide",
-  category:"08管理者設定",
-  order:80,
-  target:"管理者",
-  title:"はじめてログインして組織を登録する",
-  body:`
-<h2>このページでできること</h2>
-<p>はじめてご利用になる際の、ログインから組織登録までの手順です。</p>
-<div class="note">🔑 この操作には <strong>管理者（組織オーナー）権限</strong> が必要です。</div>
-<div class="callout">初期設定は <strong>ログイン → 組織登録 → Drive 連携</strong> の順で設定します。Drive 連携まで完了すると、すべての機能が使えるようになります。</div>
-<h2>STEP1：ログインする</h2>
-<p>ログイン画面で <strong>「Google でログイン」</strong> を選び、組織で案内されたアカウントでログインします（メールアドレスとパスワードでのログインも利用できます）。</p>
-<figure class="shot"><img src="images/381f8c48-7db6-8093-bf86-e2aa289403ac.png" alt=""></figure>
-<h2>STEP2：組織登録へ進む</h2>
-<div class="callout">運営による事前のご案内が済んでいる場合、<strong>「組織登録へ進む」</strong> が表示されます。ボタンを押して登録を開始します。</div>
-<h2>STEP3：組織情報を登録する</h2>
-<p>画面の案内に沿って、4つのステップで入力します。</p>
-<div class="callout"><ol>
-<li><strong>組織基本情報</strong>：組織名（法人格を含めた正式名称）・業種を入力します。</li>
-<li><strong>法人情報</strong> を入力します〔要確認：実際の入力項目〕。法人番号・設立年月日・本部所在地など、登記上の情報を入力します。</li>
-<li><strong>組織代表者</strong> を入力します〔要確認：実際の入力項目〕。代表者の氏名・役職・連絡先（メール／電話）などを入力します。</li>
-<li><strong>確認＋同意</strong>：内容を確認し、利用規約・プライバシーポリシーに同意します。</li>
-</ol>
+<h2>タブ4：声紋登録</h2>
+<p>職員・利用者それぞれの<strong>声紋登録機能の有効・無効</strong>を切り替えられます。</p>
+<div class="callout"><ul>
+<li><strong>職員の声紋登録を有効にする</strong>：ON（既定）を切り替えると、録音画面の職員向け声紋登録の案内が非表示になります。</li>
+<li><strong>利用者の声紋登録を有効にする</strong>：OFFにすると、利用者詳細の声紋登録ボタンが非表示になります。</li>
+</ul>
 </div>
-<figure class="shot"><img src="images/381f8c48-7db6-8037-b966-d96d982bd71e.png" alt=""></figure>
-<h2>STEP4：組織登録の完了</h2>
-<p><strong>「組織登録が完了しました」</strong> と表示されます。続いて <strong>「Drive 連携を完了してください」</strong> に進みます。</p>
-<figure class="shot"><img src="images/381f8c48-7db6-804a-ae89-c4cb93ee1e7f.png" alt=""></figure>
-<figure class="shot"><img src="images/381f8c48-7db6-8037-8b0b-d32723e3cdb0.jpg" alt=""></figure>
-<h2>次にやること</h2>
-<p class="ref">👉 続けて「Drive連携を設定する」ページに進んでください。</p>
+<div class="note">⚠️ OFFにしても<strong>登録済みの声紋データは削除されません</strong>。再度 ONにすれば声紋認識は復活します。</div>
+<figure class="shot"><img src="images/3b1f8c48-7db6-801c-b9a0-d96fdc0cebda.png" alt=""></figure>
+<h2>タブ5：AI洞察</h2>
+<p>分析画面に表示される<strong>AI洞察（記録傾向の自動コメント）</strong>の表示を切り替えられます。</p>
+<div class="callout"><ul>
+<li><strong>AI洞察を有効にする</strong>：ONにすると、分析カードに「記録数が増加偉向 / 減少傾向 / 横ばい」などが表示されます。</li>
+<li>OFF（既定）の場合、分析カードにコメントは表示されません。</li>
+</ul>
+</div>
+<figure class="shot"><img src="images/3b1f8c48-7db6-803f-b371-ccb66d81527b.png" alt=""></figure>
+<h2>こうなれば成功です</h2>
+<p>編集した各タブの内容が保存され、画面に反映されていれば成功です。</p>
 `
 },
 {
   tab:"guide",
   category:"08管理者設定",
-  order:84,
+  order:82,
   target:"管理者",
   title:"メンバーを招待する",
   body:`
 <h2>このページでできること</h2>
 <p>組織にメンバー（職員）を招待します。</p>
 <div class="note">🔑 この操作には <strong>管理者権限</strong> が必要です。</div>
+<h2>事前準備：Google Workspace でメンバーのアカウントを作成する</h2>
+<p>Hope Care AI のログインは <strong>Google アカウント</strong> で行うため、招待前に先に Google Workspace（GWS）の管理画面でメンバーのアカウントを追加する必要があります。</p>
+<div class="note">🔑 この手順は <strong>GWSの管理者権限</strong>が必要です。</div>
+<div class="callout"><ol>
+<li>ブラウザで <a href="http://admin.google.com/" target="_blank" rel="noopener"><strong>admin.google.com</strong></a> を開きます。</li>
+<li>左メニューから <strong>「ユーザー」</strong> をクリックします。
+<figure class="shot"><img src="images/3b1f8c48-7db6-8053-92a0-e8d2947bd69f.png" alt=""></figure>
+</li>
+<li><strong>「ユーザーの追加/（新しいユーザーの追加）」</strong> をクリックします。<figure class="shot"><img src="images/3b1f8c48-7db6-80e3-a771-d7da96ac3cf6.png" alt=""></figure>
+</li>
+<li>追加するメンバーの氏名・メールアドレスを入力してアカウントを追加します。</li>
+<li><strong>追加したアドレス</strong>を控えておきます（次の手順で使います）。</li>
+</ol>
+</div>
+<div class="note">⚠️ すでに個人の アカウントを持っているメンバーは、そのアカウントで招待できます。GWS での作成は不要です。</div>
 <h2>手順</h2>
 <p>メンバーの管理は <strong>「ユーザー管理」画面</strong> で行います。画面上部で、<strong>契約席数・利用中・招待中・残りの席数</strong> を確認できます。</p>
 <div class="callout"><ol>
@@ -1470,15 +1855,30 @@ const articles = [
 <p>利用者やご家族との面談を、その場で<strong>まるごと録音</strong>して、全体を文字起こしします。30分〜1時間ほどの面談の記録に向いています。</p>
 <div class="note">💡 短いメモを声で残したいだけなら、「録音」ではなく「音声記録」が便利です。</div>
 <h2>手順</h2>
-<p>1.　左メニューから<strong>「録音」</strong>を開きます。</p>
+<ol>
+<li>左メニューから<strong>「録音」</strong>を開きます。</li>
+</ol>
 <div class="callout">初めて使うときは<strong>「マイクを許可しますか？」</strong>と出た際は、<strong>「許可する」</strong>を選んでください（「ブロック」や「拒否」を選ぶと録音できません）。</div>
 <figure class="shot"><img src="images/382f8c48-7db6-80b4-91db-f4dbda3bb2be.jpg" alt=""></figure>
-<p>2.　必要に応じて、画面左側の<strong>「クイック整形プロンプト」</strong>から、仕上げたい形を選びます。
-複数選ぶこともできます。選ばなければ、整形なしで文字起こしだけが保存されます。</p>
-<p>3.　画面右下の<strong>赤い録音ボタン</strong>を押して、録音を開始します。</p>
+<ol>
+<li>必要に応じて、画面左側の<strong>「クイック整形プロンプト」</strong>から、仕上げたい形を選びます。
+複数選ぶこともできます。選ばなければ、整形なしで文字起こしだけが保存されます。</li>
+<li>必要に応じて、画面上部の<strong>「LIVE字幕」</strong>トグルをON/OFFします。</li>
+</ol>
+<table>
+<tr><th>設定</th><th>動作</th></tr>
+<tr><td><strong>ON</strong></td><td>録音中にリアルタイムで字幕が画面に表示されます（通信量が増えます）</td></tr>
+<tr><td><strong>OFF</strong></td><td>録音中の字幕表示はなし。録音停止後に文字起こしが行われます（通信量を抑えたい場合）</td></tr>
+</table>
+<div class="note">💡 トグルボタンにカーソルを合わせると案内が表示されます。切り替えは<strong>録音を始める前</strong>に行ってください。</div>
+<ol>
+<li>画面右下の<strong>赤い録音ボタン</strong>を押して、録音を開始します。</li>
+</ol>
 <div class="note">⏱️ 1回あたりの録音時間には上限の目安があります（画面に「上限」として表示されます）。長い面談は、区切って録音してください。</div>
-<p>4.　面談が終わったら、もう一度ボタンを押して録音を停止します。</p>
-<p>5.　録音を止めると、<strong>文字起こしが自動で始まります</strong>。</p>
+<ol>
+<li>面談が終わったら、もう一度ボタンを押して録音を停止します。</li>
+<li>録音を止めると、<strong>文字起こしが自動で始まります</strong>。</li>
+</ol>
 <figure class="shot"><img src="images/382f8c48-7db6-8095-a857-d5c13277fbe2.png" alt=""></figure>
 <h2>録音を停止したあとの自動処理</h2>
 <p>録音を止めると、画面右側の「文字起こしパイプライン」に沿って、次の順で自動的に処理されます。</p>
@@ -1492,10 +1892,14 @@ const articles = [
 <hr>
 <h2>さらに一歩：あとから整形する</h2>
 <p>録音時に整形プロンプトを選ばなかった場合でも、あとから整形できます。</p>
-<p>1.　録音結果の画面で、画面左側の<strong>「クイック整形プロンプト」</strong>から、使いたいプロンプトを選びます（複数選択可）。</p>
+<ol>
+<li>録音結果の画面で、画面左側の<strong>「クイック整形プロンプト」</strong>から、使いたいプロンプトを選びます（複数選択可）。</li>
+</ol>
 <figure class="shot"><img src="images/382f8c48-7db6-809f-b7f5-d30038de4afc.jpg" alt=""></figure>
 <p>2.<strong>　「整形を実行」</strong>を押すと、選んだ形にまとめた文章が画面中央に表示されます。</p>
-<p>3.　内容を確認して<strong>「記録へ追加」</strong>を押すと、記録に反映できます。</p>
+<ol>
+<li>内容を確認して<strong>「記録へ追加」</strong>を押すと、記録に反映できます。</li>
+</ol>
 <figure class="shot"><img src="images/382f8c48-7db6-80b5-bee0-cb387a11082a.jpg" alt=""></figure>
 <div class="note">ℹ️ 「再整形」で内容をやり直したり、プロンプトを変えて再度実行することもできます。</div>
 <hr>
