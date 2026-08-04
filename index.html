@@ -776,7 +776,7 @@ const articles = [
 <li><strong>事業所名</strong>：事業所の名称を入力します（例：益山クリニック）</li>
 <li><strong>所在地</strong>：住所を入力します</li>
 <li><strong>電話番号</strong>：事業所の電話番号を入力します</li>
-<li><strong>医療機関コード</strong>：医療機関の場合は10桁のコードを入力します（介護・障害福祉の場合は不要）</li>
+<li><strong>機関コード</strong>：それぞれの機関のコードを入力します</li>
 </ul>
 <figure class="shot"><img src="images/3b1f8c48-7db6-807a-a702-c2ba8df95885.jpg" alt=""></figure>
 <p>入力後「次へ」→ 確認画面で「登録する」をクリックすると、<strong>「組織登録が完了しました」</strong> と表示されます。</p>
@@ -797,20 +797,32 @@ const articles = [
 <li>設定保存</li>
 <li>接続確認</li>
 </ol>
-<p>完了すると <strong>「生成が完了しました」</strong> と表示されます。事業所・利用者フォルダが自動で作成されます。</p>
+<p>「フォルダ階層を自動生成しますか？」と表示されたら「許可して生成」をクリックします。
+完了すると <strong>「生成が完了しました」</strong> と表示されます。事業所・利用者フォルダが自動で作成されます。</p>
 <figure class="shot"><img src="images/3b1f8c48-7db6-8085-b7a4-c47e84ebb0b3.jpg" alt=""></figure>
 <p>「閉じる」をクリックして次へ進みます。</p>
 <div class="note">💡 Google Drive を確認すると、マイドライブ内に <code>hopecareAI</code> フォルダが作成され、その中に事業所フォルダ・スタッフフォルダが入っています。</div>
 <hr>
 <h2>STEP 5｜サービス種別を設定する</h2>
-<p>事業所で使うサービス種別を選択します。選択したサービス種別に対応したテンプレートが一覧に表示されるようになります。</p>
-<p>一覧から<strong>使用するサービス種別のトグルをオン</strong>にして、<strong>「選択して完了」</strong> をクリックします。</p>
+<p>事業所で使うサービス種別を選択します。選択したサービス種別に対応したテンプレートが一覧に表示されるようになります。
+</p>
+<p>左下の「サービス種別を選ぶ」を選択すると、サービス種別の設定へ進みます。
+一覧から<strong>使用するサービス種別のトグルをオン</strong>にして、<strong>「選択して完了」</strong> をクリックします。</p>
 <figure class="shot"><img src="images/3b1f8c48-7db6-8058-8ebc-c32b87be233d.jpg" alt=""></figure>
 <div class="note">💡 サービス種別はあとから管理者設定画面で変更できます。</div>
 <hr>
 <h2>セットアップ完了！</h2>
 <p><strong>利用者一覧画面</strong> が表示されたら、セットアップは完了です。アプリが使用できる状態になりました。</p>
 <figure class="shot"><img src="images/3b1f8c48-7db6-806a-bc49-fd4ce5917296.jpg" alt=""></figure>
+<h3>🔰 ご利用開始前の確認ステップ</h3>
+<p>まずは、初期設定されている<strong>3名分の利用者デモデータ</strong>を使って、以下の動作確認をお願いいたします。（※デモデータが不要になった場合は、いつでもアーカイブして構いません）</p>
+<figure class="shot"><img src="images/3b2f8c48-7db6-8049-81cf-d64895369b65.jpg" alt=""></figure>
+<p><strong>【STEP 1】 Drive連携の確認</strong>
+まず、「Driveフォルダを開く」「資料アップロード」が<strong>グレー表示になっていないか</strong>を確認し、「Driveフォルダを開く」を押して対象者のフォルダが開くかテストしてください。
+⚠️ ドライブ未作成やURL未セットが原因でグレー表示になります。その場合はシステム側へご連絡ください。</p>
+<p><strong>【STEP 2】 AI機能の利用同意（グレー表示の解除）</strong>
+「録音開始」「音声記録」「チャット開始」の3つのボタンは、初期状態ではグレー表示（仕様）になっています。
+💡 <strong>解除方法：</strong> AI機能を使うための同意が必要なため、どれか1つのボタンを押すと「利用同意画面」へ遷移します。同意が完了するとグレー表示が消え、機能が使い始められるようになります。STEP 1のグレー表示とは異なりますのでご安心ください。</p>
 <h3>次にやること</h3>
 <ul>
 <li>利用者を登録する → 「利用者を追加する」</li>
@@ -1196,6 +1208,7 @@ const articles = [
 <tr><td><strong>OFF</strong></td><td>録音中の字幕表示はなし。停止後に文字起こしが行われます（通信量を抑えたい場合）</td></tr>
 </table>
 <div class="note">💡 トグルボタンにカーソルを合わせると案内が表示されます。切り替えは<strong>録音を始める前</strong>に行ってください。</div>
+<figure class="shot"><img src="images/3b2f8c48-7db6-8023-bc13-f0551e16b343.png" alt=""></figure>
 <h2>PC音声＋マイクの使い方</h2>
 <ol>
 <li>録音画面を開く</li>
@@ -1859,11 +1872,11 @@ const articles = [
 <li>左メニューから<strong>「録音」</strong>を開きます。</li>
 </ol>
 <div class="callout">初めて使うときは<strong>「マイクを許可しますか？」</strong>と出た際は、<strong>「許可する」</strong>を選んでください（「ブロック」や「拒否」を選ぶと録音できません）。</div>
-<figure class="shot"><img src="images/382f8c48-7db6-80b4-91db-f4dbda3bb2be.jpg" alt=""></figure>
+<figure class="shot"><img src="images/3b2f8c48-7db6-806f-b18f-ed0fb600ffce.png" alt=""></figure>
 <ol>
 <li>必要に応じて、画面左側の<strong>「クイック整形プロンプト」</strong>から、仕上げたい形を選びます。
 複数選ぶこともできます。選ばなければ、整形なしで文字起こしだけが保存されます。</li>
-<li>必要に応じて、画面上部の<strong>「LIVE字幕」</strong>トグルをON/OFFします。</li>
+<li>必要に応じて、録音前に、画面上部の<strong>「LIVE字幕」</strong>トグルをON/OFFします。</li>
 </ol>
 <table>
 <tr><th>設定</th><th>動作</th></tr>
