@@ -1147,13 +1147,35 @@ const articles = [
   body:`
 <p>HopeCareAI では、利用者の個人データ（音声・チャット内容）をAIサービスに送信する前に、<strong>利用者本人または家族からの同意</strong>を取得・記録できます。同意を取得しておくことで、コンプライアンス対応と記録の透明性が確保されます。</p>
 <h2>AI同意が必要なサービス</h2>
-<p>同意の取得が必要なAIサービスは以下の4種類です。</p>
+<p>同意の取得が必要なAIサービスは、大きく4つのグループに分かれた<strong>全12種類</strong>です。ふだんは日本国内（東京）やシンガポールで処理しますが、混雑や不具合のときは予備として米国の回線に切り替わることがあります。米国の回線を使う場合も、その場の処理のためだけで、<strong>入力内容がAIの学習に使われることはありません</strong>。</p>
+<h3><strong>AIチャット（4種類）</strong></h3>
 <table>
 <tr><th>サービス</th><th>用途</th><th>サーバー所在地</th></tr>
-<tr><td>AIチャット (Gemini)</td><td>チャット機能</td><td>東京（日本国内）</td></tr>
-<tr><td>音声文字起こし (Chirp)</td><td>録音の文字起こし（主回路）</td><td>シンガポール</td></tr>
-<tr><td>音声文字起こし (Deepgram)</td><td>文字起こし予備2</td><td>米国</td></tr>
-<tr><td>音声文字起こし (Whisper)</td><td>文字起こし予備3</td><td>米国</td></tr>
+<tr><td>AIチャット (Gemini)</td><td>チャットで通常使う回線</td><td>東京（日本国内）</td></tr>
+<tr><td>AIチャット (OpenAI GPT-4o)</td><td>通常の回線が使えないときの予備</td><td>シンガポール</td></tr>
+<tr><td>AIチャット (Anthropic Claude)</td><td>さらにその予備</td><td>米国</td></tr>
+<tr><td>画像解析 (Anthropic Claude)</td><td>添付写真の解析の予備</td><td>米国</td></tr>
+</table>
+<p>💡 AIチャットは、ふだんは東京（日本国内）で処理しますが、<strong>混雑・不具合のときは予備として米国のOpenAI / Anthropicに切り替わることがあります</strong>。同意はこの予備の回線ぶんも含めてお願いしています。</p>
+<h3><strong>音声文字起こし（3種類）</strong></h3>
+<table>
+<tr><th>サービス</th><th>用途</th><th>サーバー所在地</th></tr>
+<tr><td>音声文字起こし (Chirp)</td><td>文字起こしで通常使う回線</td><td>シンガポール</td></tr>
+<tr><td>音声文字起こし (Whisper)</td><td>通常の回線が使えないときの予備</td><td>米国</td></tr>
+<tr><td>音声文字起こし (Deepgram)</td><td>さらにその予備</td><td>米国</td></tr>
+</table>
+<h3><strong>声紋識別（1種類）</strong></h3>
+<table>
+<tr><th>サービス</th><th>用途</th><th>サーバー所在地</th></tr>
+<tr><td>声紋識別</td><td>録音から話者を識別する</td><td>東京（日本国内）</td></tr>
+</table>
+<h3><strong>共通・補助（4種類）</strong></h3>
+<table>
+<tr><th>サービス</th><th>用途</th><th>サーバー所在地</th></tr>
+<tr><td>レイヤー2 整形処理</td><td>文字起こし結果を見出し・要約に整える</td><td>シンガポール</td></tr>
+<tr><td>チャット 専門用語集の注入</td><td>組織・共通の用語集を添えて精度を上げる</td><td>米国</td></tr>
+<tr><td>音声認識ヒント（専門用語の送信）</td><td>登録した専門用語・固有名詞（<strong>人名を含む場合があります</strong>）を認識ヒントとして送る</td><td>米国</td></tr>
+<tr><td>PII フィルタ有効化</td><td>氏名・電話番号などを、AIに渡す前に自動でマスク（伏字化）する</td><td>送信前に処理</td></tr>
 </table>
 <p>⚠️ いずれのサービスも、入力データがAIの学習に使われることはありません。</p>
 <h2>同意状況の確認方法</h2>
@@ -1395,7 +1417,6 @@ const articles = [
 <li>左メニューから<strong>「テンプレ」</strong>を開きます。登録されているテンプレートの一覧が表示されます。</li>
 <li><strong>「全て／チャット／個人／標準」</strong>のタブで種類を絞り込めます。検索欄でキーワード検索もできます。</li>
 </ol>
-<div class="note">📷 スクリーンショット挿入位置：テンプレート一覧画面</div>
 <h2>テンプレートを編集する</h2>
 <ol>
 <li>編集したいテンプレートを選びます。</li>
@@ -1698,7 +1719,7 @@ const articles = [
 <li><strong>「添付」</strong>セクション右の <strong>「＋ファイル追加」</strong> を押します。</li>
 <li>添付したいファイルを選びます。</li>
 </ol>
-<div class="note">📄 添付できるファイル：1ファイル 10MB 以内（jpg／png／pdf／docx／xlsx／heic／webp／txt／csv）</div>
+<div class="note">📄 添付できるファイル：1ファイル 30MB 以内（jpg／png／pdf／docx／xlsx／heic／webp／txt／csv）</div>
 <figure class="shot"><img src="images/383f8c48-7db6-80ea-a781-e3f9331e84ce.jpg" alt=""></figure>
 <figure class="shot"><img src="images/383f8c48-7db6-80a6-b1c0-d5ef75006f08.jpg" alt=""></figure>
 <h2>こうなれば成功です</h2>
@@ -2134,7 +2155,7 @@ const articles = [
 <ul>
 <li><strong>ブラウザ</strong> … インターネットを見るためのソフトです。「Chrome（クローム）」「Edge（エッジ）」「Safari（サファリ）」などがこれにあたります。</li>
 <li><strong>アドレスバー</strong> … ブラウザの上のほうにある、ホームページのアドレス（URL）を入力する白い横長の枠です。</li>
-<li><strong>URL（ユーアールエル）</strong> … ホームページの住所にあたる文字列です。「<a href="https://xn--26j7hobwfa5e9912b./" target="_blank" rel="noopener">https://」で始まります。</a></li>
+<li><strong>URL（ユーアールエル）</strong> … ホームページの住所にあたる文字列です。「https://」で始まります。</li>
 <li><strong>ログイン</strong> … IDやアカウントを使って、自分専用の画面に入ることです。</li>
 <li><strong>ログアウト</strong> … ログインした状態から出る（自分の画面を閉じる）ことです。</li>
 <li><strong>アカウント</strong> … サービスを使うための、自分専用の登録情報です。Hope Care AI では Google アカウントを使います。</li>
@@ -2210,7 +2231,7 @@ const articles = [
   title:"録音は何分まで対応していますか？",
   body:`
 <h2>回答</h2>
-<p>目安は<strong>1時間半（90分）</strong>です。それを超える場合は、一度録音を停止し、新たに録音を開始してください。</p>
+<p>目安は<strong>標準120分</strong>です。それを超える場合は、一度録音を停止し、新たに録音を開始してください。</p>
 <div class="note">💡 長時間の会議や研修などは、区切りのよいところで停止・再開することをおすすめします。</div>
 `
 },
@@ -2459,7 +2480,7 @@ const articles = [
   category:"録音・記録",
   title:"録音が途中で止まってしまう",
   body:`
-<p>1回あたりの録音の上限は 1時間30分です。長時間の記録は、区切って録音してください。</p>
+<p>1回あたりの録音の上限は標準 120 分です。長時間の記録は、区切って録音してください。</p>
 `
 },
 {
@@ -2467,7 +2488,7 @@ const articles = [
   category:"料金",
   title:"月額料金はいくらですか？",
   body:`
-<p>月額 <strong>50,000円（税抜）</strong> です。</p>
+<p>料金は、ご利用の人数やご契約内容によって異なります。具体的な金額は、担当営業またはお問い合わせフォームからご案内しております。</p>
 <div class="note">💡 料金や契約内容の詳細については、担当営業またはお問い合わせフォームからお気軽にご確認ください。</div>
 `
 },
