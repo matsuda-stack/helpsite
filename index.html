@@ -701,40 +701,111 @@
 const articles = [
 {
   tab:"guide",
-  category:"00はじめに",
-  order:0,
+  category:"5. 毎日の確認(タスク)",
+  order:501,
   target:"全員",
-  title:"HopeCareAIをはじめて使う方へ",
+  title:"「タスク」画面で今日やることを確認する",
   body:`
-<h2>まずこれだけ！3ステップではじめられます</h2>
-<p>むずかしい設定は不要です。以下の3ステップで、今日からHopeCareAIを使い始められます。</p>
-<div class="callout"><strong>STEP 1｜まず動画で全体像をつかむ（約10分）</strong><p>HopeCareAIでできることを動画でご確認ください。テキストより断然わかりやすいのでこちらから始めるのがおすすめです。</p>
-<p class="ref">👉 <a href="https://hope-care-ai-help.web.app/guide/" target="_blank" rel="noopener">動画チュートリアルを見る</a></p>
-</div>
-<div class="callout"><strong>STEP 2｜利用者を登録する</strong><p>AIチャットを活用するには、まず利用者の情報を登録します。登録した情報がAIの回答に活かされます。</p>
-<p class="ref">👉 <a href="https://hope-care-ai-help.web.app/guide/" target="_blank" rel="noopener">利用者の登録手順を見る</a></p>
-</div>
-<div class="callout"><strong>STEP 3｜AIチャットを使ってみる</strong><p>利用者を選択してチャット画面を開き、AIに質問してみましょう。まずは「○○さんの次回の面談で確認すべきことは？」などと聞いてみてください。</p>
-<p class="ref">👉 <a href="https://hope-care-ai-help.web.app/guide/" target="_blank" rel="noopener">チャットの使い方を見る</a></p>
-</div>
-<hr>
-<h2>この3ステップの先へ</h2>
-<p>使い始めたら、以下も少しずつ覚えると便利です。</p>
+<h2>このページでできること</h2>
+<p><strong>「タスク」</strong>画面（旧「今日」）は、出勤したらまず開く画面です。その日に記録が必要な利用者や、記録にし忘れている録音などを、1つの画面でまとめて確認できます。</p>
+<h2>開き方</h2>
+<p>左メニューから<strong>「タスク」</strong>を開きます。上部に<strong>「タスクリスト」</strong>という見出しと、その下に日付が表示されます。</p>
+<h2>画面に並ぶもの</h2>
+<p>その日の状況に応じて、次のまとまり（カード）が表示されます。0件のものは表示されません。</p>
 <ul>
-<li><strong>記録をつける</strong> → 支援記録をHopeCareAIに蓄積することで、AIの回答がより的確になります</li>
-<li><strong>音声記録・録音を使う</strong> → 面談や会議の内容を声で記録できます</li>
-<li><strong>テンプレートを登録する</strong> → よく使う質問・指示を保存しておくと毎回の入力が不要になります</li>
+<li><strong>中断された録音</strong>：途中で終わってしまった録音があるときに表示されます。押すと録音画面が開き、再開するか破棄するかを選べます。</li>
+<li><strong>本日未記録の利用者</strong>：お気に入り・担当の利用者のうち、その日にまだ記録が無い方が並びます。名前を押すと、<strong>「音声記録」</strong>か<strong>「記録を作成」</strong>のどちらで記録するかを選べます。</li>
+<li><strong>記録化待ちの録音</strong>：文字起こしは済んでいるが、まだ記録にしていない録音が並びます。押すと整形結果の画面が開き、そこから記録に追加できます。右下の<strong>「録音履歴へ」</strong>から一覧も開けます。</li>
+<li><strong>直近の自分の記録</strong>：自分が最近作成した記録が並びます。押すと記録の詳細が開きます。</li>
 </ul>
-<div class="note">ℹ️ 各機能の詳しい手順は、左メニューの「使い方」から確認できます。わからないことがあれば<a href="https://hope-care-ai-help.web.app/faq/" target="_blank" rel="noopener">よくある質問</a>もご覧ください。</div>
-<hr>
-<h2>困ったときは</h2>
-<p>設定や操作でわからないことがあれば、お気軽にサポートまでご連絡ください。ZOOMでの操作サポートも対応しています。</p>
+<div class="note">ℹ️ 表示中の項目の右上に付く数字は、その項目の件数です。すべて片付くと、画面中央に<strong>「今日の未処理はありません」</strong>と表示されます。</div>
+<h2>日付を切り替える</h2>
+<p>日付の左右にある<strong>「‹（前の日）」「›（次の日）」</strong>で、表示する日を切り替えられます。日付そのものを押すと、カレンダーから直接選べます。今日以外を表示しているときは<strong>「今日に戻る」</strong>が出ます。</p>
+<h2>利用者をしぼり込む</h2>
+<ul>
+<li>日付の右にある<strong>検索欄</strong>に利用者名を入れると、その利用者だけを表示できます。</li>
+<li><strong>「すべて／お気に入り／担当」</strong>のチップで、「本日未記録の利用者」に出す範囲を切り替えられます。選んだ状態は次回も引き継がれます。</li>
+</ul>
+<h2>こうなれば成功です</h2>
+<p>出勤後にこの画面を開き、「本日未記録の利用者」や「記録化待ちの録音」から、その場で記録づくりに移れれば成功です。</p>
 `
 },
 {
   tab:"guide",
-  category:"00はじめに",
-  order:1,
+  category:"2. 利用者を登録する",
+  order:202,
+  target:"現場スタッフ",
+  title:"利用者を追加する",
+  body:`
+<h2>このページでできること</h2>
+<p>新しい利用者を登録します。登録すると、その方の録音・AIチャット・記録づくりができるようになります。</p>
+<h2>手順</h2>
+<ol>
+<li>左メニューから<strong>「利用者」</strong>を開きます。</li>
+<li>画面右上の<strong>「利用者を追加」</strong>ボタンを押します（スマートフォンでは画面右下の<strong>「追加」</strong>ボタンです）。「利用者を追加」の入力画面が開きます。</li>
+<li><strong>所属事業所</strong>を選びます。表示された事業所の中から、その利用者が所属する事業所を押して選択します（事業所が1つだけの場合は自動で選ばれています）。</li>
+<li><strong>姓</strong>と<strong>名</strong>を入力します。入力すると、下に<strong>「表示名：〇〇」</strong>というプレビューが出ます。この表示名が一覧に表示される名前になります。</li>
+<li><strong>姓カナ</strong>・<strong>名カナ</strong>を入力します（読みがなでの検索・並び替えに使われます）。</li>
+<li>画面右下の<strong>「保存」</strong>ボタンを押します。</li>
+</ol>
+<div class="note">ℹ️ <strong>姓か名のどちらかは必ず入力してください。</strong>空のままだと「氏名を入力してください」と表示され、保存できません。</div>
+<h2>任意で入力できること</h2>
+<p>必要に応じて、次の項目も入力できます。分からない項目は空のままで問題ありません。</p>
+<ul>
+<li><strong>担当スタッフ</strong>：この利用者を担当するスタッフ（メイン担当・サブ担当）を選べます。</li>
+<li><strong>ミドルネーム（任意）</strong>：折りたたみを開くと入力できます。</li>
+<li><strong>旧姓カナ（任意）</strong>：旧姓がある場合に入力します。</li>
+<li><strong>区分情報</strong>：該当する制度がある場合のみ選びます。「介護度（介護保険）」「障害支援区分（総合支援）」「医療区分（療養）」から、対象の制度だけを選びます（対象外は「未設定」のままにします）。</li>
+<li><strong>居宅</strong>：住まいや居宅に関するメモを入力できます。</li>
+<li><strong>生年月日</strong>：<strong>「選択」</strong>を押してカレンダーから選びます。</li>
+<li><strong>関連事業所・医療機関（任意）</strong>：折りたたみを開くと、居宅支援・相談支援・かかりつけクリニック・かかりつけ医を選べます。</li>
+</ul>
+<h2>こうなれば成功です</h2>
+<p>保存すると「〇〇さんを追加しました」と表示され、利用者の一覧に新しい利用者が追加されれば成功です。</p>
+<div class="note">💡 登録した内容をあとから直したいときは、利用者の詳細画面から編集できます。</div>
+`
+},
+{
+  tab:"guide",
+  category:"6. AIを活用する",
+  order:606,
+  target:"現場スタッフ",
+  title:"テンプレートを新規作成する",
+  body:`
+<h2>このページでできること</h2>
+<p>よく使う依頼（プロンプト）を、自分でテンプレートとして新しく登録します。一度作っておくと、AIチャットや録音の整形で、選ぶだけで同じ形の依頼を呼び出せます。</p>
+<h2>手順</h2>
+<ol>
+<li>左メニューから<strong>「テンプレ」</strong>を開きます。</li>
+<li>画面右上の<strong>「新規作成」</strong>ボタンを押します。「新規テンプレート」の入力画面が開きます。</li>
+<li><strong>名前</strong>を入力します（一覧に表示される見出しです。必須）。</li>
+<li><strong>使う場面</strong>を選びます。このテンプレートをどの画面で使うかを決めます。<ul>
+<li><strong>チャットで使う</strong>：AIチャットの質問テンプレートになります。</li>
+<li><strong>録音の文字起こし整形で使う</strong>：録音の整形プロンプトになります。</li>
+<li><strong>記録フォームで使う</strong>：記録の入力を整えるのに使います。</li>
+</ul>
+</li>
+<li><strong>プロンプト本文</strong>に、AIへの指示文を入力します（必須）。例：「直近の申し送り事項を、項目ごとにまとめてください。」</li>
+<li>画面右下の<strong>「保存」</strong>ボタンを押します。</li>
+</ol>
+<div class="note">ℹ️ <strong>使う場面に応じた合言葉が自動で入ります。</strong>保存すると、本文の末尾に「文字起こし」や「対象の記録」を差し込むための合言葉（例：<code>{transcript}</code>、<code>{records}</code>、<code>{note}</code>）が自動で追加されます。差し込む位置を変えたいときは、本文の中に自分でその合言葉を書いておきます。</div>
+<h2>任意で設定できること</h2>
+<ul>
+<li><strong>説明</strong>：テンプレートの用途をメモしておけます。</li>
+<li><strong>AIモデルの品質</strong>：実行時に使うAIの品質帯です。迷ったら<strong>「標準(速さ重視)」</strong>のままで問題ありません。</li>
+<li><strong>サービス種別・タグ</strong>：あとで探しやすいように分類を付けられます。</li>
+<li><strong>可視範囲</strong>：<strong>「個人専用」</strong>（自分だけが使える）と<strong>「組織共通」</strong>（同じ組織の全員が使える）から選びます。「組織共通」は全社の管理者のみ選べます。一般スタッフは「個人専用」で保存されます。</li>
+<li><strong>プロンプト補正</strong>：本文を入力してから<strong>「プロンプト補正」</strong>ボタンを押すと、AIが本文を読みやすく整えた案を提案します。確認して、良ければ反映できます。</li>
+</ul>
+<h2>こうなれば成功です</h2>
+<p>保存すると「〇〇 を保存しました」と表示され、テンプレートの一覧に追加されれば成功です。「使う場面」で選んだ画面（チャットなど）のテンプレート一覧にも表示されます。</p>
+<div class="note">⚠️ あらかじめ用意されている<strong>標準テンプレート</strong>は編集・削除できません。近い内容の標準テンプレートを、複製して自分用に作り替えることもできます（→「テンプレートを確認・編集する」を参照）。</div>
+`
+},
+{
+  tab:"guide",
+  category:"1. はじめる",
+  order:109,
   target:"全員",
   title:"HopeCareAIのメニュー一覧",
   body:`
@@ -774,8 +845,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"06記録管理",
-  order:66,
+  category:"4. 記録をつくる・整理する",
+  order:407,
   target:"管理者",
   title:"記録をCSVでまとめてインポートする",
   body:`
@@ -806,8 +877,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"08管理者設定",
-  order:80,
+  category:"1. はじめる",
+  order:101,
   target:"管理者",
   title:"はじめてのセットアップ（組織登録・Drive連携・サービス種別）",
   body:`
@@ -906,8 +977,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"08管理者設定",
-  order:84,
+  category:"7. 管理・分析",
+  order:703,
   target:"管理者",
   title:"スタッフのアカウントを無効化する",
   body:`
@@ -927,8 +998,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"06記録管理",
-  order:64,
+  category:"4. 記録をつくる・整理する",
+  order:405,
   target:"現場スタッフ",
   title:"記録フォームでテンプレートを使ってAI整形する",
   body:`
@@ -962,8 +1033,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"02録音で記録",
-  order:25,
+  category:"3. 録音・文字起こし",
+  order:306,
   target:"現場スタッフ",
   title:"音声ファイルを取り込んで文字起こしする",
   body:`
@@ -1012,8 +1083,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"07利用者管理",
-  order:73,
+  category:"2. 利用者を登録する",
+  order:205,
   target:"全員",
   title:"利用者の活動ボードを確認する",
   body:`
@@ -1059,8 +1130,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"06記録管理",
-  order:65,
+  category:"4. 記録をつくる・整理する",
+  order:406,
   target:"全員",
   title:"記録区分（事例記録・会議録・個別支援・チーム支援）について",
   body:`
@@ -1101,8 +1172,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"07利用者管理",
-  order:74,
+  category:"2. 利用者を登録する",
+  order:203,
   target:"管理者",
   title:"利用者をまとめて登録する（CSVインポート・AI書類読み取り）",
   body:`
@@ -1155,8 +1226,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"04AIチャット",
-  order:44,
+  category:"6. AIを活用する",
+  order:604,
   target:"全員",
   title:"チャットにGoogle Driveの資料を読み込む・ファイルを添付する",
   body:`
@@ -1213,8 +1284,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"07利用者管理",
-  order:72,
+  category:"2. 利用者を登録する",
+  order:204,
   target:"管理者",
   title:"利用者のAI利用同意を確認・登録する",
   body:`
@@ -1282,8 +1353,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"02録音で記録",
-  order:24,
+  category:"3. 録音・文字起こし",
+  order:305,
   target:"現場スタッフ",
   title:"PC音声とマイクを同時に録音する",
   body:`
@@ -1323,8 +1394,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"04AIチャット",
-  order:43,
+  category:"6. AIを活用する",
+  order:603,
   target:"現場スタッフ",
   title:"FASTモードで素早くチャットする",
   body:`
@@ -1360,8 +1431,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"06記録管理",
-  order:62,
+  category:"4. 記録をつくる・整理する",
+  order:404,
   target:"現場スタッフ",
   title:"音声記録の整形結果を正式な記録に割り当てる",
   body:`
@@ -1398,8 +1469,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"06記録管理",
-  order:63,
+  category:"7. 管理・分析",
+  order:701,
   target:"管理者",
   title:"記録の状況を分析する",
   body:`
@@ -1432,8 +1503,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"01ログイン",
-  order:13,
+  category:"1. はじめる",
+  order:107,
   target:"全員",
   title:"ログアウトする",
   body:`
@@ -1452,8 +1523,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"01ログイン",
-  order:14,
+  category:"1. はじめる",
+  order:108,
   target:"全員",
   title:"パスワードを忘れたとき（Googleアカウントを再設定する）",
   body:`
@@ -1476,8 +1547,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"05テンプレート",
-  order:50,
+  category:"6. AIを活用する",
+  order:605,
   target:"現場スタッフ",
   title:"テンプレートを確認・編集する",
   body:`
@@ -1507,8 +1578,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"02録音で記録",
-  order:23,
+  category:"3. 録音・文字起こし",
+  order:304,
   target:"現場スタッフ",
   title:"AIに上手に録音・文字起こしさせるコツ",
   body:`
@@ -1534,8 +1605,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"02録音で記録",
-  order:22,
+  category:"3. 録音・文字起こし",
+  order:303,
   target:"現場スタッフ",
   title:"個別モードと会議モードを使い分ける",
   body:`
@@ -1559,8 +1630,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"02録音で記録",
-  order:19,
+  category:"3. 録音・文字起こし",
+  order:301,
   target:"現場スタッフ",
   title:"音声記録で短いメモを清書する",
   body:`
@@ -1618,8 +1689,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"08管理者設定",
-  order:83,
+  category:"7. 管理・分析",
+  order:704,
   target:"管理者",
   title:"支払い方法を確認・変更する",
   body:`
@@ -1643,8 +1714,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"08管理者設定",
-  order:81,
+  category:"7. 管理・分析",
+  order:702,
   target:"管理者",
   title:"組織情報を編集する",
   body:`
@@ -1701,8 +1772,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"08管理者設定",
-  order:82,
+  category:"1. はじめる",
+  order:102,
   target:"管理者",
   title:"スタッフをHopeCareAIに招待する",
   body:`
@@ -1784,8 +1855,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"04AIチャット",
-  order:41,
+  category:"6. AIを活用する",
+  order:602,
   target:"現場スタッフ",
   title:"蓄積参照を使ってAIの回答を改善する",
   body:`
@@ -1807,8 +1878,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"06記録管理",
-  order:61,
+  category:"4. 記録をつくる・整理する",
+  order:403,
   target:"現場スタッフ",
   title:"記録にファイルを添付する",
   body:`
@@ -1829,8 +1900,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"04AIチャット",
-  order:40,
+  category:"6. AIを活用する",
+  order:601,
   target:"現場スタッフ",
   title:"AIチャットで質問する",
   body:`
@@ -1862,8 +1933,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"06記録管理",
-  order:60,
+  category:"4. 記録をつくる・整理する",
+  order:402,
   target:"現場スタッフ",
   title:"記録を作成する",
   body:`
@@ -1898,8 +1969,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"07利用者管理",
-  order:70,
+  category:"2. 利用者を登録する",
+  order:201,
   target:"現場スタッフ",
   title:"利用者を探す・絞り込む",
   body:`
@@ -1958,8 +2029,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"03録音履歴",
-  order:30,
+  category:"3. 録音・文字起こし",
+  order:307,
   target:"現場スタッフ",
   title:"過去の録音を見る",
   body:`
@@ -1981,8 +2052,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"02録音で記録",
-  order:20,
+  category:"3. 録音・文字起こし",
+  order:302,
   target:"現場スタッフ",
   title:"録音して記録を自動でつくる",
   body:`
@@ -2042,8 +2113,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"02録音で記録",
-  order:21,
+  category:"4. 記録をつくる・整理する",
+  order:401,
   target:"現場スタッフ",
   title:"整形プロンプトで記録を整える",
   body:`
@@ -2067,8 +2138,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"00はじめに",
-  order:1,
+  category:"1. はじめる",
+  order:103,
   target:"全員",
   title:"Hope Care AI を開いてログインする",
   body:`
@@ -2116,8 +2187,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"00はじめに",
-  order:2,
+  category:"1. はじめる",
+  order:104,
   target:"全員",
   title:"毎回すぐ開けるようにする（ブックマーク・ホーム画面に追加）",
   body:`
@@ -2176,8 +2247,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"00はじめに",
-  order:3,
+  category:"1. はじめる",
+  order:105,
   target:"全員",
   title:"画面の見方（どこに何があるか）",
   body:`
@@ -2243,8 +2314,8 @@ const articles = [
 },
 {
   tab:"guide",
-  category:"00はじめに",
-  order:4,
+  category:"1. はじめる",
+  order:106,
   target:"全員",
   title:"用語集（よく使う言葉の意味）",
   body:`
