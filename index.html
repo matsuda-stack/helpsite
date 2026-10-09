@@ -769,7 +769,7 @@ const articles = [
 {
   tab:"guide",
   category:"6. AIを活用する",
-  order:606,
+  order:605,
   target:"現場スタッフ",
   title:"テンプレートを新規作成する",
   body:`
@@ -818,7 +818,7 @@ const articles = [
 <h3>🗂 タスク</h3>
 <p>スタッフ間でタスクを確認・共有できます。対応漏れの防止や業務の引き継ぎに活用できます。</p>
 <h3>💬 チャット</h3>
-<p>AI に質問・相談・確認ができる画面です。利用者を選択してチャットすると、その利用者の記録・資料をもとにした回答が得られます。</p>
+<p>AI に質問・相談・確認ができる画面です。利用者を選択してチャットすると、その利用者の記録・録音などをもとにした回答が得られます。</p>
 <div class="note">ℹ️ 画面上部で利用者を選択してからチャットすると、その方の情報を踏まえた回答になります。利用者を選択しない場合は一般的な回答になります。</div>
 <h3>🎙 音声記録</h3>
 <p>声で話した内容をAIがメモとして整形します。
@@ -834,12 +834,13 @@ const articles = [
 <p>利用者ごとの支援記録を登録・閲覧できます。
 ここに記録した内容は、チャットでAIが参照する情報のひとつになります。</p>
 <h3>👤 利用者</h3>
-<p>利用者の基本情報・計画書・資料などを登録・管理します。ここに登録した情報がAIチャットの回答に活用されます。</p>
+<p>利用者の基本情報・計画書・資料などを登録・管理します。チャットで利用者を選んで「蓄積参照」をオンにすると、この利用者の基本情報や過去の記録・録音などを参考にAIが回答します。「添付資料」タブに入れたファイルは、アップロードしただけではAIは読みません（チャットで選んだときだけ読まれます）。
+※ ファイルの扱いは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a> をご覧ください。</p>
 <hr>
 <h2>各メニューとAIチャットの関係</h2>
 <table>
 <tr><th>メニュー</th><th>AIチャットへの影響</th></tr>
-<tr><td>利用者</td><td>登録した情報・資料をAIが参照する</td></tr>
+<tr><td>利用者</td><td>登録した基本情報などをAIが参照する（「添付資料」タブのファイルは、チャットで選んだときだけ）</td></tr>
 <tr><td>記録</td><td>支援記録をAIが参照する</td></tr>
 <tr><td>チャット</td><td>上記の情報をもとにAIが回答する</td></tr>
 <tr><td>音声記録・録音</td><td>チャットとは独立した機能（参照はされない）</td></tr>
@@ -863,10 +864,8 @@ const articles = [
 <figure class="shot"><img src="images/3b1f8c48-7db6-803a-821e-ffaa0f066553.png" alt=""></figure>
 <p>3.<strong>　「CSVインポート」</strong>を選択します。</p>
 <figure class="shot"><img src="images/3b1f8c48-7db6-80f9-a160-d9506da8d364.png" alt=""></figure>
-<ol>
-<li>取り込み方法を選ぶ画面が開きます。<strong>「利用者を選択して取り込む（推奨）」</strong>（取込先の利用者を先に選び、CSVの全記録をその利用者に紐づけます）か、<strong>「リスト形式のファイルで取り込む」</strong>（複数の利用者分を氏名で照合して取り込みます）のどちらかを選びます。</li>
-<li>CSVファイルを選択してアップロードします。</li>
-</ol>
+<p>①取り込み方法を選ぶ画面が開きます。<strong>「利用者を選択して取り込む（推奨）」</strong>（取込先の利用者を先に選び、CSVの全記録をその利用者に紐づけます）か、<strong>「リスト形式のファイルで取り込む」</strong>（複数の利用者分を氏名で照合して取り込みます）のどちらかを選びます。</p>
+<p>②CSVファイルを選択してアップロードします。</p>
 <figure class="shot"><img src="images/3b1f8c48-7db6-80f8-9d38-e0afcbe87faf.png" alt=""></figure>
 <figure class="shot"><img src="images/3b1f8c48-7db6-802b-af1b-f49fcb2c2086.png" alt=""></figure>
 <div class="note">💡 CSVファイルに関しましては、「記録用テンプレCSVをダウンロード」（記録様式を選んだ後は「この様式のテンプレCSVをダウンロード」）からダウンロードしてご利用ください</div>
@@ -947,6 +946,8 @@ const articles = [
 <figure class="shot"><img src="images/3b1f8c48-7db6-8085-b7a4-c47e84ebb0b3.jpg" alt=""></figure>
 <p>「閉じる」をクリックして次へ進みます。</p>
 <div class="note">💡 Google Drive を確認すると、マイドライブ内に <code>hopecareAI</code> フォルダが作成され、その中に事業所フォルダ・スタッフフォルダが入っています。</div>
+<div class="note">⚠️ 専用フォルダは削除しないでください。
+Google Drive に作られた HopeCareAI 用のフォルダ(「hopecareAI」など)には、録音や添付ファイルなどが保存されています。削除や移動をすると、アプリから開けなくなったり、「Driveから選択」に出なくなったりします。</div>
 <hr>
 <h2>STEP 5｜サービス種別を設定する</h2>
 <p>事業所で使うサービス種別を選択します。選択したサービス種別に対応したテンプレートが一覧に表示されるようになります。
@@ -965,7 +966,8 @@ const articles = [
 <p><strong>【STEP 1】 Drive連携の確認</strong>
 まず、利用者の行・カードにある「Drive」ボタンを押して、対象者のフォルダが開くかテストしてください。
 ⚠️ 「Drive」ボタンがグレー表示のときは、その利用者の Drive フォルダがまだ未作成です。ボタンを押すと、フォルダが生成されて開きます。
-「添付」ボタン（旧「資料アップロード」）は、Drive フォルダが未作成でも押せます。グレー表示になるのは、閲覧のみの権限など一部の場合だけです。</p>
+「添付」ボタン（旧「資料アップロード」）は、Drive フォルダが未作成でも押せます。グレー表示になるのは、閲覧のみの権限など一部の場合だけです。
+※ 「添付」で入れたファイルは保存されるだけで、AIは読みません。チャットで選んだときに読まれます。詳しくは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a>。</p>
 <p><strong>【STEP 2】 AI機能の利用同意（グレー表示の解除）</strong>
 「録音開始」「音声記録」「チャット開始」の3つのボタンは、初期状態ではグレー表示（仕様）になっています。
 💡 <strong>解除方法：</strong> AI機能を使うための同意が必要なため、どれか1つのボタンを押すと「利用同意画面」へ遷移します。同意が完了するとグレー表示が消え、機能が使い始められるようになります。STEP 1のグレー表示とは異なりますのでご安心ください。</p>
@@ -1186,43 +1188,25 @@ const articles = [
 <p>CSVインポート画面の<strong>右上にある「？」ボタン</strong>をタップすると「利用者CSVの取込ルール」が表示されます。操作を始める前に必ず確認してください。</p>
 <figure class="shot"><img src="images/3b1f8c48-7db6-8088-ade4-c0a6e8a89898.png" alt=""></figure>
 <h2>手順（CSVインポート）</h2>
-<ol>
-<li>左メニューから<strong>「利用者」</strong>を開きます。</li>
-</ol>
+<p>1.　左メニューから<strong>「利用者」</strong>を開きます。</p>
 <figure class="shot"><img src="images/3aef8c48-7db6-8012-af3a-e08acd244df7.png" alt=""></figure>
-<ol>
-<li>右上の<strong>「…」（メニュー）</strong>をタップします。</li>
-</ol>
+<p>2.　右上の<strong>「…」（メニュー）</strong>をタップします。</p>
 <figure class="shot"><img src="images/3aef8c48-7db6-802b-a0c5-cf3c3fe711e1.png" alt=""></figure>
-<ol>
-<li><strong>「CSVインポート」</strong>を選択します。</li>
-</ol>
+<p>3.　<strong>「CSVインポート」</strong>を選択します。</p>
 <figure class="shot"><img src="images/3aef8c48-7db6-8011-afe0-f711420000b6.png" alt=""></figure>
-<ol>
-<li>CSVファイルを選択してアップロードします。</li>
-</ol>
+<p>4.　CSVファイルを選択してアップロードします。</p>
 <figure class="shot"><img src="images/3aef8c48-7db6-804e-b4a7-ff99693f1fd1.png" alt=""></figure>
 <div class="note">💡 CSVファイルに関しましては、「利用者用テンプレCSVをダウンロード」からダウンロードしてご利用ください</div>
 <h2>手順（AI書類読み取りで追加）</h2>
-<ol>
-<li>左メニューから<strong>「利用者」</strong>を開きます。</li>
-</ol>
+<p>1.　左メニューから<strong>「利用者」</strong>を開きます。</p>
 <figure class="shot"><img src="images/3aef8c48-7db6-80cc-b266-c4cad5ce0360.png" alt=""></figure>
-<ol>
-<li>右上の<strong>「…」（メニュー）</strong>をタップします。</li>
-</ol>
+<p>2.　右上の<strong>「…」（メニュー）</strong>をタップします。</p>
 <figure class="shot"><img src="images/3aef8c48-7db6-80ee-9166-f0be6089071d.png" alt=""></figure>
-<ol>
-<li><strong>「AI 書類読み取りで追加」</strong>を選択します（組織でこの機能が有効になっている場合にだけメニューに表示されます）。</li>
-</ol>
+<p>3.<strong>　「AI 書類読み取りで追加」</strong>を選択します（組織でこの機能が有効になっている場合にだけメニューに表示されます）。</p>
 <figure class="shot"><img src="images/3aef8c48-7db6-8084-8ea3-cd045aa5b92c.png" alt=""></figure>
-<ol>
-<li>書類（PDF・画像・Excel・CSV、7MB 以内）を選び、<strong>「内容を確認して解析に同意します」</strong>にチェックを入れて、<strong>「AI で読み取る」</strong>をタップします。読み取りが終わったら<strong>「この内容でフォームを開く」</strong>をタップすると、読み取った内容が入力された利用者追加フォームが開きます。</li>
-</ol>
+<p>4.　書類（PDF・画像・Excel・CSV、7MB 以内）を選び、<strong>「内容を確認して解析に同意します」</strong>にチェックを入れて、<strong>「AI で読み取る」</strong>をタップします。読み取りが終わったら<strong>「この内容でフォームを開く」</strong>をタップすると、読み取った内容が入力された利用者追加フォームが開きます。</p>
 <figure class="shot"><img src="images/3aef8c48-7db6-80d7-9916-d72c04d5c892.png" alt=""></figure>
-<ol>
-<li>フォームの内容を確認して<strong>「保存」</strong>をタップします。</li>
-</ol>
+<p>5.　フォームの内容を確認して<strong>「保存」</strong>をタップします。</p>
 <h2>こうなれば成功です</h2>
 <p>利用者一覧に新しく追加された利用者が表示されれば成功です。</p>
 `
@@ -1230,23 +1214,23 @@ const articles = [
 {
   tab:"guide",
   category:"6. AIを活用する",
-  order:604,
+  order:603,
   target:"全員",
   title:"チャットにGoogle Driveの資料を読み込む・ファイルを添付する",
   body:`
 <h2>このページでできること</h2>
-<p>Google Driveに保存した資料（PDFなど）をAIチャットに読み込ませて、内容について質問したり記録作成に活用できます。また、利用者の添付資料タブや記録詳細にファイルを保存することもできます。</p>
+<p>Google Driveに保存した資料（PDFなど）をAIチャットに読み込ませて、内容について質問したり記録作成に活用できます。また、利用者の添付資料タブや記録詳細にファイルを保存することもできます。（保存しただけではAIは読みません。AIが読むのは、チャットで質問を送るときに選んだファイルだけです。）</p>
 <h2>①　チャットからDriveの資料を読み込む</h2>
 <ol>
 <li>左メニューから<strong>「チャット」</strong>を開き、対象の利用者を選択します。</li>
 </ol>
 <figure class="shot"><img src="images/3aef8c48-7db6-805a-8163-fd71ed673147.png" alt=""></figure>
 <ol>
-<li>入力欄の下部にある<strong>人アイコン（Driveから選択）</strong>をタップします。</li>
+<li>入力欄の下部にある<strong>フォルダのアイコン（マウスを合わせると「Driveから選択」と表示）</strong>をタップします。</li>
 </ol>
 <figure class="shot"><img src="images/3aef8c48-7db6-80e3-ae46-e36526cbab93.png" alt=""></figure>
 <ol>
-<li>Google Driveから読み込みたいファイルを選択します（最大10点まで同時選択可）。</li>
+<li>その利用者の「添付ファイル」フォルダにあるファイルから、読み込みたいものにチェックを付けます（最大10点まで同時選択可）。チェックを付けたファイルだけがAIに渡されます。</li>
 </ol>
 <figure class="shot"><img src="images/3aef8c48-7db6-8056-9867-db3da997e8c3.png" alt=""></figure>
 <ol>
@@ -1254,6 +1238,8 @@ const articles = [
 </ol>
 <figure class="shot"><img src="images/3aef8c48-7db6-8052-b57b-ed853ffde17e.png" alt=""></figure>
 <div class="note">💡 読み込んだ資料の内容をAIが参照して回答します。「この書類の内容をもとに記録を作成して」などの指示が使えます。</div>
+<p>パソコンやスマートフォンから直接添付するときは、入力欄の「ファイル添付」を使います（1回の質問で5点まで、1ファイル10MBまで。パソコンでは「メッセージを入力」欄へドラッグ＆ドロップ、スマートフォンでは「画像を選択」）。</p>
+<p>選んだファイルは新しい会話には引き継がれません。新しい会話では、もう一度選んでください。</p>
 <h2>②　利用者の「添付資料」タブにファイルを保存する</h2>
 <ol>
 <li>利用者詳細画面を開き、<strong>「添付資料」</strong>タブをタップします。</li>
@@ -1263,17 +1249,16 @@ const articles = [
 <li>右上の<strong>「添付を追加」</strong>をタップします。</li>
 </ol>
 <figure class="shot"><img src="images/3aef8c48-7db6-80f2-a8ba-c2d6caf413d2.png" alt=""></figure>
-<ol>
-<li>ファイルを選択してアップロードします。</li>
-</ol>
+<p>ファイルを選択してアップロードします。</p>
+<p>※ 「添付資料」タブに入れただけでは、AIはそのファイルを読みません。チャットの「Driveから選択」で選んだときに読まれます。</p>
+<div class="note">⚠️ 専用フォルダは削除しないでください。
+Google Drive に作られた HopeCareAI 用のフォルダ(「hopecareAI」など)には、録音や添付ファイルなどが保存されています。削除や移動をすると、アプリから開けなくなったり、「Driveから選択」に出なくなったりします。</div>
 <h2>③　記録詳細にファイルを添付する</h2>
 <ol>
 <li>記録詳細画面を開きます。</li>
 </ol>
 <figure class="shot"><img src="images/3aef8c48-7db6-802c-8494-d5b765acda4d.png" alt=""></figure>
-<ol>
-<li><strong>「添付」</strong>セクションの<strong>「＋ファイル追加」</strong>をタップします。</li>
-</ol>
+<p>2.<strong>　「添付」</strong>セクションの<strong>「＋ファイル追加」</strong>をタップします。</p>
 <figure class="shot"><img src="images/3aef8c48-7db6-801b-b313-d96f3135c5ba.png" alt=""></figure>
 <ol>
 <li>ファイルを選択してアップロードします。</li>
@@ -1283,6 +1268,7 @@ const articles = [
 <li><strong>チャット</strong>: ファイルが添付されてAIが内容を参照できる状態になれば成功です。</li>
 <li><strong>添付資料タブ・記録詳細</strong>: ファイルが一覧に表示されれば成功です。</li>
 </ul>
+<p>詳しい仕組みは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a> をご覧ください。</p>
 `
 },
 {
@@ -1360,43 +1346,6 @@ const articles = [
 <li>会議の参加者全員の音声を録音することになるため、事前に参加者の同意を得てください</li>
 </ul>
 <p>⚠️ PC音声の共有を許可しないと、マイクのみの録音になります。許可ダイアログが出たら「共有」を選んでください。</p>
-`
-},
-{
-  tab:"guide",
-  category:"6. AIを活用する",
-  order:603,
-  target:"現場スタッフ",
-  title:"FASTモードで素早くチャットする",
-  body:`
-<p>チャット画面の右上（画面が広いとき）には<strong>「FAST」</strong>の表示があり、通常の質問はFASTモード（応答速度優先）で回答します。より詳しい回答がほしいときは、AIの回答ごとに<strong>「SMART で再生成」</strong>で作り直せます。用途に合わせて使い分けることで、より快適にAIを活用できます。</p>
-<h2>FASTモードとSMARTモードの違い</h2>
-<table>
-<tr><th></th><th>FASTモード</th><th>SMARTモード</th></tr>
-<tr><td>速度</td><td>⚡ 速い</td><td>通常</td></tr>
-<tr><td>回答の深さ</td><td>シンプル・簡潔</td><td>詳細・丁寧</td></tr>
-<tr><td>向いている用途</td><td>素早い確認・簡単な質問</td><td>複雑な質問・詳しい回答が欲しいとき</td></tr>
-</table>
-<h2>FASTとSMARTの使い方</h2>
-<p>右上の<strong>「FAST」</strong>は現在の応答モードを示す表示で、クリックして切り替えるボタンではありません。質問を送ると、通常はFASTモードで回答します。SMARTモードで回答を作り直したいときは、AIの回答に付くメニューから<strong>「SMART で再生成」</strong>を選びます。</p>
-<ul>
-<li><strong>FAST</strong>：質問を送ったときの通常の回答モード</li>
-<li><strong>SMART</strong>：回答メニューの「SMART で再生成」で使うモード</li>
-</ul>
-<h2>こんな場面で使い分ける</h2>
-<p><strong>FASTモードが向いているとき</strong></p>
-<ul>
-<li>「この利用者の最新の記録は？」など短い確認をしたいとき</li>
-<li>テンプレートを素早く呼び出したいとき</li>
-<li>回答の速さを優先したいとき</li>
-</ul>
-<p><strong>SMARTモードが向いているとき</strong></p>
-<ul>
-<li>ケアプランの文案を詳しく作成してほしいとき</li>
-<li>複数の情報を整理・比較してほしいとき</li>
-<li>長文の説明や要約が必要なとき</li>
-</ul>
-<p>💡 迷ったときはFASTモードで試して、物足りなければその回答を「SMART で再生成」するのがおすすめです。</p>
 `
 },
 {
@@ -1520,7 +1469,7 @@ const articles = [
 {
   tab:"guide",
   category:"6. AIを活用する",
-  order:605,
+  order:604,
   target:"現場スタッフ",
   title:"テンプレートを確認・編集する",
   body:`
@@ -1615,23 +1564,13 @@ const articles = [
 <li>左メニューから<strong>「音声記録」</strong>を開きます。「音声記録アシスタント」という画面が出ます。</li>
 </ol>
 <figure class="shot"><img src="images/382f8c48-7db6-8072-9c77-e8034f667e15.jpg" alt=""></figure>
-<ol>
-<li>上部で<strong>事業所</strong>や<strong>利用者（任意）</strong>を選びます。
-選んでおくと、利用者の情報に結び付きます。利用者を指定しなくても使えます。</li>
-</ol>
+<p>2.　上部で<strong>事業所</strong>や<strong>利用者（任意）</strong>を選びます。
+選んでおくと、利用者の情報に結び付きます。利用者を指定しなくても使えます。</p>
 <p>3.<strong>　タイトル（必須）</strong>を入力します（20字程度の短い見出し）。</p>
-<ol>
-<li>左側の<strong>「入力メモ」</strong>欄に、内容を入れます。入れ方は2通りです。<ul>
-<li>欄の下にある<strong>マイクボタン</strong>を押して、声で吹き込む</li>
-<li>欄に直接キーボードで入力する</li>
-</ul>
-</li>
-</ol>
+<p>①左側の<strong>「入力メモ」</strong>欄に、内容を入れます。入れ方は2通りです。</p>
 <p>例：「○○さんと面談。体調は良さそうだったが、就労の件で少し不安がある様子。」</p>
-<ol>
-<li><strong>「AI リライト」</strong>ボタンを押します。</li>
-<li>右側の<strong>「AI 整形後」</strong>欄に、整えられた文章が表示されます。</li>
-</ol>
+<p>②<strong>「AI リライト」</strong>ボタンを押します。</p>
+<p>③右側の<strong>「AI 整形後」</strong>欄に、整えられた文章が表示されます。</p>
 <figure class="shot"><img src="images/382f8c48-7db6-8024-a865-e435fbb32155.jpg" alt=""></figure>
 <h2>仕上がりを直したいとき</h2>
 <p>整形後の文章を直したいときは、<strong>「修正指示」</strong>ボタンから「もっと簡潔に」「敬体にして」などの指示を出すと、AIが直してくれます。</p>
@@ -1648,7 +1587,7 @@ const articles = [
 <p>2.<strong>　「どの記録様式に割り当てますか？」</strong>というダイアログが開きます。
 ドロップダウンから様式を選びます。<strong>「この様式で割り当て」</strong>を押します。</p>
 <figure class="shot"><img src="images/382f8c48-7db6-80f0-a24d-cb1ffeeef163.jpg" alt=""></figure>
-<p>4.　選んだ様式の記録入力画面が開き、清書した内容が自動で入力項目に入ります。
+<p>3.　選んだ様式の記録入力画面が開き、清書した内容が自動で入力項目に入ります。
 赤い<strong>「＊」の付いた必須項目</strong>を入力し、内容を確認・修正して「保存」します。
 
 </p>
@@ -1847,6 +1786,7 @@ const articles = [
 </ol>
 <div class="note">ℹ️ <strong>蓄積参照とは</strong>：その利用者についてこれまでに記録・録音された情報をAIが読み込み、文脈をふまえて回答する機能です。オフのときは、いま送った質問文だけをもとに回答します。</div>
 <div class="note">💡 「蓄積参照」をオンにすると、その利用者の過去の記録・録音をもとに回答します。AIの回答が「思ったのと違う」ときは、このオン・オフを見直してみてください。</div>
+<p>※ 蓄積参照は、チャットで添付したファイルや「Driveから選択」したファイルとは別の機能です。ファイルを選んで送れば、蓄積参照がオフでも、その質問ではファイルが読まれます。詳しくは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a>。</p>
 <figure class="shot"><img src="images/382f8c48-7db6-80bc-8916-d23e7e9257c5.jpg" alt=""></figure>
 <h2>こうなれば成功です</h2>
 <p>蓄積参照をオンにすると、過去の記録を踏まえた、より具体的な回答が得られます。</p>
@@ -1979,7 +1919,7 @@ const articles = [
 <p>各利用者カードの下部のボタンから、その利用者の作業にすぐ移動できます。</p>
 <ul>
 <li><strong>Drive</strong>：関連する Drive フォルダを開きます（フォルダが未作成のときはグレー表示で、押すと生成して開きます）。</li>
-<li><strong>添付</strong>：資料（ファイル）を添付します。</li>
+<li><strong>添付</strong>：資料（ファイル）を添付します。「添付資料」タブに保存されるだけで、AIは読みません（チャットで選んだときに読まれます。詳しくは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a>）。</li>
 <li><strong>録音</strong>：録音画面を開きます。</li>
 <li><strong>AI記録</strong>：音声記録（音声記録アシスタント）を、その利用者を選んだ状態で開きます。</li>
 <li><strong>チャット</strong>：AIチャットを開きます。</li>
@@ -2039,30 +1979,22 @@ const articles = [
 <p>利用者やご家族との面談を、その場で<strong>まるごと録音</strong>して、全体を文字起こしします。30分〜1時間ほどの面談の記録に向いています。</p>
 <div class="note">💡 短いメモを声で残したいだけなら、「録音」ではなく「音声記録」が便利です。</div>
 <h2>手順</h2>
-<ol>
-<li>左メニューから<strong>「録音」</strong>を開きます。</li>
-</ol>
+<p>1.　左メニューから<strong>「録音」</strong>を開きます。</p>
 <div class="callout">初めて使うときは<strong>「マイクを許可しますか？」</strong>と出た際は、<strong>「許可する」</strong>を選んでください（「ブロック」や「拒否」を選ぶと録音できません）。</div>
 <figure class="shot"><img src="images/3b2f8c48-7db6-806f-b18f-ed0fb600ffce.png" alt=""></figure>
-<ol>
-<li>必要に応じて、画面左側の<strong>「クイック整形プロンプト」</strong>から、仕上げたい形を選びます。
-複数選ぶこともできます。選ばなければ、整形なしで文字起こしだけが保存されます。</li>
-<li>必要に応じて、録音前に、画面上部の<strong>「LIVE字幕」</strong>トグルをON/OFFします。</li>
-</ol>
+<p>2.　必要に応じて、画面左側の<strong>「クイック整形プロンプト」</strong>から、仕上げたい形を選びます。
+複数選ぶこともできます。選ばなければ、整形なしで文字起こしだけが保存されます。</p>
+<p>3.　必要に応じて、録音前に、画面上部の<strong>「LIVE字幕」</strong>トグルをON/OFFします。</p>
 <table>
 <tr><th>設定</th><th>動作</th></tr>
 <tr><td><strong>ON</strong></td><td>録音中にリアルタイムで字幕が画面に表示されます（通信量が増えます）</td></tr>
 <tr><td><strong>OFF</strong></td><td>録音中の字幕表示はなし。録音停止後に文字起こしが行われます（通信量を抑えたい場合）</td></tr>
 </table>
 <div class="note">💡 トグルボタンにカーソルを合わせると案内が表示されます。切り替えは<strong>録音を始める前</strong>に行ってください。</div>
-<ol>
-<li>画面右下の<strong>赤い録音ボタン</strong>を押して、録音を開始します。</li>
-</ol>
+<p>4.　画面右下の<strong>赤い録音ボタン</strong>を押して、録音を開始します。</p>
 <div class="note">⏱️ 1回あたりの録音時間には上限の目安があります（画面に「上限」として表示されます）。長い面談は、区切って録音してください。</div>
-<ol>
-<li>面談が終わったら、もう一度ボタンを押して録音を停止します。</li>
-<li>録音を止めると、<strong>文字起こしが自動で始まります</strong>。</li>
-</ol>
+<p>5.　面談が終わったら、もう一度ボタンを押して録音を停止します。</p>
+<p>6.　録音を止めると、<strong>文字起こしが自動で始まります</strong>。</p>
 <figure class="shot"><img src="images/382f8c48-7db6-8095-a857-d5c13277fbe2.png" alt=""></figure>
 <h2>録音を停止したあとの自動処理</h2>
 <p>録音を止めると、画面右側の「文字起こしパイプライン」に沿って、次の順で自動的に処理されます。</p>
@@ -2081,9 +2013,7 @@ const articles = [
 </ol>
 <figure class="shot"><img src="images/382f8c48-7db6-809f-b7f5-d30038de4afc.jpg" alt=""></figure>
 <p>2.<strong>　「整形を実行」</strong>を押すと、選んだ形にまとめた文章が画面中央に表示されます。</p>
-<ol>
-<li>内容を確認して<strong>「記録へ追加」</strong>を押すと、記録に反映できます。</li>
-</ol>
+<p>3.　内容を確認して<strong>「記録へ追加」</strong>を押すと、記録に反映できます。</p>
 <figure class="shot"><img src="images/382f8c48-7db6-80b5-bee0-cb387a11082a.jpg" alt=""></figure>
 <div class="note">ℹ️ 「再整形」で内容をやり直したり、プロンプトを変えて再度実行することもできます。</div>
 <hr>
@@ -2343,9 +2273,11 @@ const articles = [
 <li><strong>テンプレート（テンプレ）</strong> … よく使う依頼や書類の、決まった形（ひな形）です。</li>
 <li><strong>プロンプト</strong> … AIへの「指示文」のことです。「〜してください」という、指示文章です。</li>
 <li><strong>記録（きろく）</strong> … 支援記録など、できあがった文章のことです。「記録」メニューで管理します。</li>
-<li><strong>蓄積参照（ちくせきさんしょう）</strong> … AIが回答するときに、その利用者の過去の記録も参考にする設定です。オンにすると、より具体的な回答になります。</li>
+<li><strong>蓄積参照（ちくせきさんしょう）</strong> … AIが回答するときに、その利用者の過去の記録も参考にする設定です。オンにすると、より具体的な回答になります。
+※ 蓄積参照が読むのは過去の記録・録音などで、「添付資料」タブのファイルの中身は読みません。詳しくは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a>。</li>
 <li><strong>声紋登録（せいもんとうろく）</strong> … 声で誰の発言かを聞き分けるために、声の特徴を登録することです。</li>
-<li><strong>Drive（ドライブ）</strong> … Google Drive のことです。録音データや記録の保管先になります。</li>
+<li><strong>Drive（ドライブ）</strong> … Google Drive のことです。録音データや記録の保管先になります。
+※ 利用者のフォルダの中の「添付ファイル」フォルダのファイルは、チャットの「Driveから選択」で選べます。詳しくは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a>。</li>
 <li><strong>アーカイブ</strong> … 使わなくなった利用者などを、消さずにしまっておくことです。</li>
 </ul>
 <h2>テンプレート編集で出てくる言葉</h2>
@@ -2396,6 +2328,7 @@ const articles = [
 <p><strong>オンにすると</strong>、その利用者のこれまでのケア記録・プロフィールなどを参照した上でAIが回答を生成します。利用者の状況に即した、より具体的な回答が得られます。</p>
 <p><strong>オフにすると</strong>、入力した質問文のみをもとに回答します。利用者を指定せず一般的な質問をするときなどに向いています。</p>
 <div class="note">💡 事業所の運用に合わせて切り替えてご活用ください。</div>
+<p>※ 蓄積参照が読むのは、利用者の過去の記録・録音・チャットのやりとりなどです。「添付資料」タブのファイルは読みません。ファイルをAIに読ませるときは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a> をご覧ください。</p>
 <h2>関連ページ</h2>
 <p>操作ガイド「蓄積参照を使ってAIの回答を改善する」もあわせてご覧ください。</p>
 `
@@ -2422,11 +2355,12 @@ const articles = [
 <h2>回答</h2>
 <p>可能です。紙の書類を以下の方法でデータ化して添付してください。</p>
 <ul>
-<li><strong>写真撃影してJPEGで添付する</strong></li>
+<li><strong>写真撮影してJPEGで添付する</strong></li>
 <li><strong>スマホで撮影後、PDF変換アプリ等でPDF化して添付する</strong></li>
 </ul>
+<p>AIに読ませるには、チャットで質問を送るときに「ファイル添付」でそのファイルを選ぶか、利用者の「添付資料」タブに入れたファイルを「Driveから選択」で選びます。「添付資料」タブに入れただけでは、AIはそのファイルを読みません。（1回の質問で、「ファイル添付」は5点、「Driveから選択」は10点まで。1ファイル10MBまで。）</p>
 <h2>関連ページ</h2>
-<p>操作ガイド「記録にファイルを添付する」もあわせてご覧ください。</p>
+<p>操作ガイド「記録にファイルを添付する」と、<a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a> もあわせてご覧ください。</p>
 `
 },
 {
@@ -2500,6 +2434,7 @@ const articles = [
 <p>オフの場合：AIは入力された質問文だけを元に回答します。</p>
 <p>オンの場合：AIは「この利用者のこれまでの状況」を踏まえた上で回答できるため、より具体的で精度の高い回答が得られます。</p>
 <div class="note">💡 録音や記録の蓄積が少ないうちは効果が小さいですが、使い続けるほど回答の精度が向上します。</div>
+<p>※ 蓄積参照が読むのは、利用者の過去の記録・録音・チャットのやりとりなどです。「添付資料」タブのファイルは読みません。ファイルをAIに読ませるときは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a> をご覧ください。</p>
 <h2>関連ページ</h2>
 <p>操作ガイド「蓄積参照を使ってAIの回答を改善する」もあわせてご覧ください。</p>
 `
@@ -2598,7 +2533,9 @@ const articles = [
   title:"これまでの録音・チャットのデータを別のGoogleフォルダへ移動したい",
   body:`
 <p>フォルダ階層の生成では、過去データは新しいフォルダへ自動移行されません。</p>
-<p>必要な場合は、Drive を開いて手動で移動してください。</p>
+<p>必要な場合は、Drive を開いて、元のファイルは削除・移動せずにコピー（複製）し、コピーしたものを新しいフォルダへ移してください。</p>
+<div class="note">⚠️ 専用フォルダは削除しないでください。
+Google Drive に作られた HopeCareAI 用のフォルダ(「hopecareAI」など)には、録音や添付ファイルなどが保存されています。削除や移動をすると、アプリから開けなくなったり、「Driveから選択」に出なくなったりします。</div>
 `
 },
 {
@@ -2617,6 +2554,8 @@ const articles = [
 <p>フォルダを <a href="mailto:share@hope-care.tech" target="_blank" rel="noopener">share@hope-care.tech</a> に「編集者」権限で共有できているか、貼り付けた URL が共有したフォルダのものかを確認してください。解決しない場合は、画面右下の「しずく」にご相談ください。</p>
 <p class="ref">👉 詳しくは「はじめてのセットアップ（組織登録・Drive連携・サービス種別）」ページをご覧ください。
 Drive 連携の手順は、上記のページの STEP 4 をご覧ください。</p>
+<div class="note">⚠️ 専用フォルダは削除しないでください。
+Google Drive に作られた HopeCareAI 用のフォルダ(「hopecareAI」など)には、録音や添付ファイルなどが保存されています。削除や移動をすると、アプリから開けなくなったり、「Driveから選択」に出なくなったりします。</div>
 `
 },
 {
@@ -2920,6 +2859,7 @@ Drive 連携の手順は、上記のページの STEP 4 をご覧ください。
 </ol>
 <div class="note">💡 <strong>ポイント</strong></div>
 <div class="note">利用者を選ばずに質問すると、どうしても一般論になりがちです。「まずは誰の話かを指定する」のが、的確な答えを引き出す一番の近道です。</div>
+<p>※ 「蓄積参照」が読むのは、利用者の過去の記録・録音などです。「添付資料」タブのファイルは読みません。チャットでファイルを使うときは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a> をご覧ください。</p>
 `
 },
 {
@@ -2956,6 +2896,7 @@ Drive 連携の手順は、上記のページの STEP 4 をご覧ください。
 </ol>
 <div class="note">💡 <strong>ポイント</strong></div>
 <div class="note">蓄積参照は基本オンのままで問題ありません。その人の記録を踏まえてくれるぶん、回答がぐっと具体的になり、日々の支援に活かしやすくなります。</div>
+<p>※ 「蓄積参照」が読むのは、利用者の過去の記録・録音などです。「添付資料」タブのファイルは読みません。チャットでファイルを使うときは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a> をご覧ください。</p>
 `
 },
 {
@@ -3088,13 +3029,14 @@ Drive 連携の手順は、上記のページの STEP 4 をご覧ください。
   target:"現場スタッフ",
   title:"紙資料も利用者に紐づけたい",
   body:`
-<p>紙の書類や写真も、利用者のデジタル情報として一緒に取り込めます。バラバラに管理せず、その人に紐づけて一元管理しておきましょう。</p>
+<p>紙の書類や写真も、利用者のデジタル情報として一緒に取り込めます。バラバラに管理せず、その人に紐づけてまとめて保管しておきましょう。</p>
 <h2>やり方</h2>
 <ol>
 <li>利用者詳細の「添付資料」タブを開きます。</li>
 <li>写真やPDFファイルを添付します。</li>
-<li>その利用者の関連情報として、蓄積・参照できるようになります。</li>
+<li>Driveと連携している組織では、その利用者のDriveフォルダ（「添付ファイル」）に保存され、チャットの「Driveから選択」で選べるようになります。</li>
 </ol>
+<p>※ 「添付資料」タブに入れただけでは、AIはそのファイルを読みません。AIに読ませるときは、チャットで「Driveから選択」して質問を送ります。詳しくは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a>。</p>
 <div class="note">💡 <strong>ポイント</strong></div>
 <div class="note">紙の書類は、スマホでサッと撮影してそのまま添付するのが一番手軽です。</div>
 `
@@ -3124,15 +3066,18 @@ Drive 連携の手順は、上記のページの STEP 4 をご覧ください。
   target:"管理者",
   title:"記録をGoogle Driveに残したい",
   body:`
-<p>Drive連携を設定すると、記録や資料が組織のGoogle Driveに自動で保存されるようになります。情報の共有や、万が一のバックアップに役立ちます。</p>
+<p>Drive連携を設定すると、記録や、利用者に添付したファイルが、組織のGoogle Driveに自動で保存されるようになります。情報の共有や、万が一のバックアップに役立ちます。</p>
 <h2>やり方</h2>
 <ol>
 <li>オーナーが、メニューの「組織情報」を開き、「Drive」タブを選びます（初回はセットアップ時の「Drive 連携に進む」からも設定できます）。</li>
 <li>画面の案内に従って連携を設定します。</li>
-<li>以降、記録や資料が組織のDriveに自動保存されます。</li>
+<li>以降、記録や、利用者に添付したファイルが、組織のDriveに自動保存されます。</li>
 </ol>
 <div class="note">💡 <strong>ポイント</strong></div>
 <div class="note">Driveに残しておくと、HopeCareAIを開いていなくても資料を確認・共有できて便利です。バックアップとしても安心です。</div>
+<div class="note">⚠️ 専用フォルダは削除しないでください。
+Google Drive に作られた HopeCareAI 用のフォルダ(「hopecareAI」など)には、録音や添付ファイルなどが保存されています。削除や移動をすると、アプリから開けなくなったり、「Driveから選択」に出なくなったりします。</div>
+<p>※ Driveに保存されたファイルをAIが読むのは、チャットの「Driveから選択」で選んだときだけです。詳しくは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a>。</p>
 `
 },
 {
@@ -3151,6 +3096,9 @@ Drive 連携の手順は、上記のページの STEP 4 をご覧ください。
 </ol>
 <div class="note">💡 <strong>ポイント</strong></div>
 <div class="note">フォルダ未生成の人を把握しておくと、「資料の保存先がない」という状況を防げます。見つけたら管理者と連携して設定を整えましょう。</div>
+<div class="note">⚠️ 専用フォルダは削除しないでください。
+Google Drive に作られた HopeCareAI 用のフォルダ(「hopecareAI」など)には、録音や添付ファイルなどが保存されています。削除や移動をすると、アプリから開けなくなったり、「Driveから選択」に出なくなったりします。</div>
+<p>※ 利用者フォルダの中の「添付ファイル」フォルダにあるファイルは、チャットの「Driveから選択」で選べます。詳しくは <a href="https://app.notion.com/p/3f4f8c487db681f883b7eeba8c5107a0" target="_blank" rel="noopener">添付ファイルとDriveの資料が、どこにあってAIにどう使われるかを知る</a>。</p>
 `
 },
 {
